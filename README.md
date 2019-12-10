@@ -1,6 +1,12 @@
-# FlexiGIS
+# FlexiGIS: an open source GIS-based platform for modelling energy systems and flexibility options in urban areas.
 
-FlexiGIS is an open source GIS-based platform for the optimisation of flexibility options in urban areas.  
+Author: Dr.-Ing. Alaa Alhamwi alaa.alhamwi@dlr.de
+
+Organisation: German Aerospace Center (DLR) Institute of Networked Energy Systems https://www.dlr.de/ve/
+
+Date: 13.12.2019
+
+Copyright: FlexiGIS code is licensed under the 3-Clause BSD License https://opensource.org/licenses/BSD-3-Clause
 
 FlexiGIS stands for flexibilisation in Geographic Information Systems (GIS). It extracts, filters and clusters the geo-referenced urban energy infrastructure, simulates the local electricity consumption and power generation from on-site renewable energy resources, and allocates the required decentralised storage in urban settings. FlexiGIS investigates systematically different scenarios of self-consumption, it analyses the characteristics and roles of flexibilisation technologies in promoting higher autarky levels in cities. The extracted urban energy infrustructure are based mainly on OpenStreetMap data. 
 
