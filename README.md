@@ -118,20 +118,20 @@ The user guide includes detailed information about the FlexiGIS code structure, 
 *In case of any questions, comments or suggestions please do not hesitate to contact us by email via developers(at)FlexiGIS.de.*
 
 *If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to:
-news-subscribe(at)FlexiGIS.de.*
+flexigis-subscribe(at)dlr.de.*
 
 ## Contributors
 Project team:
 
 Dr. Wided Medjroubi (project leader)
 
-Dr. Alaa Alhamwi (FlexiGIS author)
+Dr. Alaa Alhamwi (FlexiGIS main author)
 
 MSc. Chinonso C. Unaichi
 
 ## Contact
 
-*Contact email: developers(at)FlexiGIS.de.*
+*Contact email: flexigis-developers(at)dlr.de.*
 
 
 
