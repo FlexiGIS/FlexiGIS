@@ -98,7 +98,7 @@ To run FlexiGIS execute the following steps:
 
 The available makefile options are:
 
-a. `make all` OR `make`
+a. `make all` or `make`
 
 b. `make download`
 
