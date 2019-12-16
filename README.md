@@ -16,12 +16,6 @@ The datasets can be redistributed and/or modified resulted by FlexiGIS under the
 
 The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License". Redistribution and use in source and binary forms, with or without modification, are permitted. For more information concerning the BSD-3C and the description of the terms under which you can use the FlexiGIS code, please visit https://opensource.org/licenses/BSD-3-Clause.
 
-# Add figure
-
-- building
-- Roads
-- Time series
-
 ## System requirements
 FlexiGIS is developed and tested on Linux (Ubuntu 16.04.6). The tools and software used in FlexiGIS and their versions are listed in the following:
 
@@ -104,7 +98,7 @@ To run FlexiGIS execute the following steps:
 
 The available makefile options are:
 
-a. `make all` or `make`
+a. `make all`
 
 b. `make download`
 
