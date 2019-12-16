@@ -8,7 +8,7 @@ Date: 13.12.2019
 
 Copyright: FlexiGIS code is licensed under the 3-Clause BSD License https://opensource.org/licenses/BSD-3-Clause
 
-FlexiGIS stands for flexibilisation in Geographic Information Systems (GIS). It extracts, filters and clusters the geo-referenced urban energy infrastructure, simulates the local electricity consumption and power generation from on-site renewable energy resources, and allocates the required decentralised storage in urban settings. FlexiGIS investigates systematically different scenarios of self-consumption, it analyses the characteristics and roles of flexibilisation technologies in promoting higher autarky levels in cities. The extracted urban energy infrustructure are based mainly on OpenStreetMap data. 
+FlexiGIS stands for flexibilisation in Geographic Information Systems (GIS). It extracts, filters and clusters the geo-referenced urban energy infrastructure, simulates the local electricity consumption and power generation from on-site renewable energy resources, and allocates the required decentralised storage in urban settings. FlexiGIS investigates systematically different scenarios of self-consumption, it analyses the characteristics and roles of flexibilisation technologies in promoting higher autarky levels in cities. The extracted urban energy infrustructure are based mainly on OpenStreetMap data.
 
 The OpenStreetMap data is available under the Open Database License (ODbL). A description of the ODbL license is available at the webpage http://opendatacommons.org/licenses/odbl.
 OpenStreetMap cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit the link http://www.openstreetmap.org/copyright. The OpenStreetMap data distributed is available under the Open Database License ODbL. For more information, please visit the OpenStreetMap web page openstreetmap.org.
@@ -16,6 +16,10 @@ The datasets can be redistributed and/or modified resulted by FlexiGIS under the
 
 The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License". Redistribution and use in source and binary forms, with or without modification, are permitted. For more information concerning the BSD-3C and the description of the terms under which you can use the FlexiGIS code, please visit https://opensource.org/licenses/BSD-3-Clause.
 
+
+![FlexiGIS Buildings](04_Visualisation/buildings.png)
+![FlexiGIS Highway](04_Visualisation/highway.png)
+![FlexiGIS Energy_requirements](04_Visualisation/Aggregated_Energy_Requirments_in_Oldenburg.png)
 ## System requirements
 FlexiGIS is developed and tested on Linux (Ubuntu 16.04.6). The tools and software used in FlexiGIS and their versions are listed in the following:
 
@@ -138,6 +142,3 @@ MSc. Chinonso C. Unaichi
 ## Contact
 
 *Contact email: flexigis-developers(at)dlr.de.*
-
-
-
