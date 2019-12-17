@@ -22,7 +22,10 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 This package establishes urban energy infrastructure. It deals with extracting, acquiring and processing urban georeferenced input data extracted from OpenStreetMap.
 
+![FlexiGIS Buildings](04_Visualisation/landuse.png)
+
 ![FlexiGIS Buildings](04_Visualisation/buildings.png)
+
 ![FlexiGIS Highway](04_Visualisation/highway.png)
 
 ## Module II: FlexiGIS temporal dimension
