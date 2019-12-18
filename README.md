@@ -22,18 +22,18 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 This package establishes urban energy infrastructure. It deals with extracting, acquiring and processing urban georeferenced input data extracted from OpenStreetMap.
 
-![FlexiGIS Buildings](04_Visualisation/landuse.png)
+![FlexiGIS Buildings](data/04_Visualisation/landuse.png)
 
-![FlexiGIS Buildings](04_Visualisation/buildings.png)
+![FlexiGIS Buildings](data/04_Visualisation/buildings.png)
 
-![FlexiGIS Highway](04_Visualisation/highway.png)
+![FlexiGIS Highway](data/04_Visualisation/highway.png)
 
 ## Module II: FlexiGIS temporal dimension
 
 It simulates urban energy requirments (consumption and generation). The spatio-temporal electricity consumption and renewable
 energy generation from PV and wind in the defined urban area are modelled.
 
-![FlexiGIS Energy_requirements](04_Visualisation/Aggregated_Energy_Requirments_in_Oldenburg.png)
+![FlexiGIS Energy_requirements](data/04_Visualisation/Aggregated_Energy_Requirments_in_Oldenburg.png)
 
 ## Module III: Optimisation of flexibility options
 
