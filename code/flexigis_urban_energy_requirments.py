@@ -11,9 +11,16 @@ import pandas as pd
 # import csv
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+from pathlib import Path
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Configuration
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if Path("../data/03_urban_energy_requirements/").exists():
+    pass
+else:
+    os.mkdir("../data/03_urban_energy_requirements/")
+
 Weather = True
 SLP = True
 EUIx = True
@@ -26,6 +33,7 @@ Hi = True
 load_all = True
 PV_all = True
 Plot = True
+
 input_destination_1 = "../data/01_raw_input_data/"
 input_destination_2 = "../data/02_urban_output_data/"
 output_destination = "../data/03_urban_energy_requirements/"

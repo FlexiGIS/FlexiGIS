@@ -5,6 +5,8 @@ Get Highway data from database and export result csv files.
 import pandas as pd
 from db_connect import dbconn_from_args
 import logging
+import os
+from pathlib import Path
 
 from flexigis_utils import (compute_area, data_to_csv)
 
@@ -12,6 +14,12 @@ from flexigis_utils import (compute_area, data_to_csv)
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="../code/log/flexigis_road.log",
                     level=logging.DEBUG)
+
+
+if Path("../data/02_urban_output_data/").exists():
+    pass
+else:
+    os.mkdir("../data/02_urban_output_data/")
 
 
 class Roads:
