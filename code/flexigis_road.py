@@ -17,9 +17,13 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
 
 
 if Path("../data/02_urban_output_data/").exists():
+    logging.info("directory {} already exists.".
+                 format("02_urban_output_datas"))
     pass
 else:
     os.mkdir("../data/02_urban_output_data/")
+    logging.info("directory {} succesfully created!.".
+                 format("02_urban_output_datas"))
 
 
 class Roads:
@@ -49,7 +53,6 @@ class Roads:
 
         self.cur.execute(sql)
         self.rows = self.cur.fetchall()
-
         # save selected columns as pandas dataframe
         self.df = pd.DataFrame(self.rows, columns=[
             "osm_id", self.ways_column,
@@ -70,6 +73,7 @@ class Roads:
         self._width_ = dict(zip(self.highway_feature, self.width))
         # compute area and save data to csv
         new_data = compute_area(self.new_data_, self._width_)
+        logging.info("Roads area calculation done!")
         return data_to_csv(new_data, self.destination+self.ways_column+".csv")
 
 
@@ -79,4 +83,6 @@ if __name__ == "__main__":
     roads = Roads()
     data = roads.get_table_from_db(cur, conn)
     roads.get_features(data)
+    logging.info("Extraction of osm_id, higway, length, and geometry and area")
     print("Done. Highway data abstracted!")
+    logging.info("FlexiGIS Highway job done.!")

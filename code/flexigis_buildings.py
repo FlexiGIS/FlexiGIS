@@ -15,10 +15,10 @@ from flexigis_utils import (get_polygons, get_intersects, mask_landuse_data,
                             get_features, get_data_from_buildings,
                             get_csv_categories)
 
+# create a log file
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="../code/log/flexigis_buildings.log",
                     level=logging.DEBUG)
-
 # csv files destination
 temp_destination = "../data/02_urban_output_data/temp/"
 main_destination = "../data/02_urban_output_data/"
@@ -134,9 +134,13 @@ def all_building_categories():
     data_landuse.to_csv(main_destination+"landuse.csv", encoding="utf8")
     # create temp directory to store temporary csv files
     if Path(temp_destination).exists():
+        logging.info("directory {} already exists.".
+                     format(str(temp_destination)))
         pass
     else:
         os.mkdir(temp_destination)
+        logging.info("directory {} succesfully created!".
+                     format(str(temp_destination)))
 
     print("Extracting building and landuse intersects!")
 
@@ -158,6 +162,8 @@ def all_building_categories():
                 # write output to csv file
                 final_data.to_csv(temp_destination + category+"_" +
                                   building_type+".csv", encoding="utf8")
+                logging.info("csv file for {} succesfuly created in temp.".
+                             format(str(building_type)))
 
 
 def commercial_buildings():
@@ -222,13 +228,17 @@ def save_categorized_to_csv_(*argv):
                 os.unlink(file_path)
             elif os.path.isdir(file_path):
                 shutil.rmtree(file_path)
+            logging.info("../data/temp directory cleaned.")
         except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (file_path, e))
 
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+            logging.error('Failed to delete %s. Reason: %s' % (file_path, e))
     # write categories to csv files separately
     for arg in argv:
         arg.to_csv(main_destination+str(arg.buildings[0])+".csv",
                    encoding="utf8")
+        logging.info("{} csv file generated succesfuly.".
+                     format(str(arg.buildings[0])))
 
 
 def main():
@@ -247,6 +257,7 @@ def main():
     save_categorized_to_csv_(commercial, residential, industrial,
                              agricultural, educational)
     print("Done. csv files of categorised building generated!")
+    logging.info("FlexiGIS building job done.!")
 
 
 if __name__ == "__main__":

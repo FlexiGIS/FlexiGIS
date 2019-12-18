@@ -13,13 +13,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from pathlib import Path
+import logging
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Configuration
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                    filename="../code/log/flexigis_urban_energy.log",
+                    level=logging.DEBUG)
+
 if Path("../data/03_urban_energy_requirements/").exists():
+    logging.info("directory {} already exists.".
+                 format("03_urban_energy_requirements"))
     pass
 else:
     os.mkdir("../data/03_urban_energy_requirements/")
+    logging.info("directory {} succesfully created!.".
+                 format("03_urban_energy_requirements"))
 
 Weather = True
 SLP = True
@@ -42,6 +51,7 @@ output_destination = "../data/03_urban_energy_requirements/"
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if Weather is True:
     print('Weather Data Soda')
+    logging.info("read weather data Soda")
     soda = pd.read_csv(input_destination_1+'weather-data.csv',
                        encoding="ISO-8859-1", delimiter=',')
     GHI = soda['Global Horiz']/1000  # convert to kWh/m2
@@ -51,6 +61,7 @@ if Weather is True:
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if SLP is True:
     print('Read and Normalise Standard Load Profiles')
+    logging.info("Read and Normalise Standard Load Profiles")
     # , index_col='Zeitstempel', parse_dates=['Zeitstempel'])
     dfs = pd.read_csv(input_destination_1+'SLP.csv', delimiter=',')
     Zeit_stempel = dfs['Zeitstempel']
@@ -65,6 +76,7 @@ if SLP is True:
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if EUIx is True:
     print('Read Electricity Usage Index kwh/m2 per year')
+    logging.info("Read Electricity Usage Index kwh/m2 per year")
     x_a = 120/1000*1.0  # EUI_a
     x_c = 201/1000*1.0  # EUI_c
     x_e = 142/1000*1.0  # EUI_e
@@ -91,6 +103,7 @@ if Ag is True:
 #    df1 = pd.read_csv('a_load.csv', delimiter=";")
 #    df1['Load[kWh]'].plot()
 #    df1['PV[kWh]'].plot()
+    logging.info("Agr. quarter hourly Energy Requirments REs simulated.")
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if Co is True:
     print('Simulate Com. quarter hourly Energy Requirments REs')
@@ -109,6 +122,7 @@ if Co is True:
 #    df2 = pd.read_csv('c_load.csv', delimiter=";")
 #    df2['Load[kWh]'].plot()
 #    df2['PV[kWh]'].plot()
+    logging.info("Com. quarter hourly Energy Requirments REs simulated.")
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if Ed is True:
     print('Simulate edu. quarter hourly Energy Requirments REs')
@@ -127,6 +141,7 @@ if Ed is True:
 #    df3 = pd.read_csv('e_load.csv', delimiter=";")
 #    df3['Load[kWh]'].plot()
 #    df3['PV[kWh]'].plot()
+    logging.info("Edu. quarter hourly Energy Requirments REs simulated.")
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if In is True:
     print('Simulate Ind. quarter hourly Energy Requirments REs')
@@ -145,6 +160,7 @@ if In is True:
 #    df4 = pd.read_csv('i_load.csv', delimiter=";")
 #    df4['Load[kWh]'].plot()
 #    df4['PV[kWh]'].plot()
+    logging.info("Ind. quarter hourly Energy Requirments REs simulated.")
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if Re is True:
     print('Simulate Res. quarter hourly Energy Requirments REs')
@@ -163,6 +179,7 @@ if Re is True:
 #    df5 = pd.read_csv('r_load.csv', delimiter=";")
 #    df5['Load[kWh]'].plot()
 #    df5['PV[kWh]'].plot()
+    logging.info("Res. quarter hourly Energy Requirments REs simulated.")
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if Hi is True:  # highway
     print('Simulate Urban Streetlightning. quarter hourly')
@@ -179,6 +196,7 @@ if Hi is True:  # highway
     fname.close()
 #    df6 = pd.read_csv('sl_load.csv', delimiter =";")
 #    df6['Load[kWh]'].plot()
+    logging.info("Urban Streetlightning. quarter hourly simulated.")
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if PV_all is True:
     print('Aggrgate all simulated PV power generation')
@@ -194,6 +212,7 @@ if PV_all is True:
     dfallpv = pd.DataFrame(sum_pv, columns=["PV[MWh]"])
     dfallpv.to_csv(output_destination+'Aggregated-pv.csv', index=True,
                    encoding='utf-8')  # , delimiter = ";" )
+    logging.info("All simulated PV power generation aggregated")
     print('Done! Thanx Alaa')
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if load_all is True:
@@ -210,6 +229,7 @@ if load_all is True:
     sum_load = np.array(sum_load_all)
     dfallload = pd.DataFrame(sum_load, columns=["Load[MWh]"])
     dfallload.to_csv(output_destination+'Aggregated-load.csv')
+    logging.info("All ssimulated electricity consumptions aggregated")
     print('Done! Thanx Alaa')
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Simulate quarter load
@@ -229,4 +249,5 @@ if Plot is True:
     plt.savefig("../data/04_Visualisation/Energy_Requirments_in_Oldenburg.png",
                 dpi=300)
     plt.show()
+    logging.info("Urban Energy Requirments REs plot generated succesfuly")
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
