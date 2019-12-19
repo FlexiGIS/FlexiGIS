@@ -33,7 +33,7 @@ This package establishes urban energy infrastructure. It deals with extracting, 
 It simulates urban energy requirments (consumption and generation). The spatio-temporal electricity consumption and renewable
 energy generation from PV and wind in the defined urban area are modelled.
 
-![FlexiGIS Energy_requirements](data/04_Visualisation/Aggregated_Energy_Requirments_in_Oldenburg.png)
+![FlexiGIS Simulated Energy_requirements](data/04_Visualisation/Energy_Requirments_in_Oldenburg.png)
 
 ## Module III: Optimisation of flexibility options
 
