@@ -139,8 +139,7 @@ g. `make drop_database`
 https://github.com/FlexiGIS/FlexiGIS.git
 ## Documentation
 
-A detailed documentation of the FlexiGIS code will be available in the user guide (in folder doc).
-The user guide will include detailed information about the FlexiGIS code structure, how to run the FlexiGIS model. Moreover, the user guide includes information about the simplifications and assumptions of the FlexiGIS model as well as information about how the OSM data are used.
+A detailed documentation of the FlexiGIS code will be available in the user guide (in folder doc) and the Read the Docs https://readthedocs.org/. The documentation will include detailed information about the FlexiGIS code structure, how to run the FlexiGIS model. Moreover, it will provide description about all the simplifications and assumptions of the FlexiGIS model as well as information about how the OSM data are used.
 
 ## Help
 
