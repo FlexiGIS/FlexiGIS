@@ -139,15 +139,14 @@ g. `make drop_database`
 https://github.com/FlexiGIS/FlexiGIS.git
 ## Documentation
 
-A detailed documentation of the FlexiGIS code  is available in the user guide (in folder doc).
-The user guide includes detailed information about the FlexiGIS code structure, how to run the FlexiGIS model. Moreover, the user guide includes information about the simplifications and assumptions of the FlexiGIS model as well as information about how the OSM data are used.
+A detailed documentation of the FlexiGIS code will be available in the user guide (in folder doc).
+The user guide will include detailed information about the FlexiGIS code structure, how to run the FlexiGIS model. Moreover, the user guide includes information about the simplifications and assumptions of the FlexiGIS model as well as information about how the OSM data are used.
 
 ## Help
 
-*In case of any questions, comments or suggestions please do not hesitate to contact us by email via developers(at)FlexiGIS.de.*
+In case of any questions, comments or suggestions please do not hesitate to contact us by email via developers(at)FlexiGIS.de.
 
-*If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to:
-flexigis-subscribe(at)dlr.de.*
+If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to: flexigis-subscribe(at)dlr.de.
 
 ## Contributors
 Project team:
@@ -160,4 +159,4 @@ MSc. Chinonso C. Unaichi
 
 ## Contact
 
-*Contact email: flexigis-developers(at)dlr.de.*
+Contact email: flexigis-developers(at)dlr.de.
