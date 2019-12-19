@@ -143,7 +143,7 @@ A detailed documentation of the FlexiGIS code will be available in the user guid
 
 ## FlexiGIS publications list:
 
-### Alhamwi et. al, *GIS-based urban energy systems models and tools: Introducing a model for the optimisation of flexibilisation technologies in urban areas*, Applied Energy, Volume 191, 1-9 (2017), 10.1016/j.apenergy.2017.01.048, https://doi.org/10.1016/j.apenergy.2017.01.048.
+#### Alhamwi et. al, *GIS-based urban energy systems models and tools: Introducing a model for the optimisation of flexibilisation technologies in urban areas*, Applied Energy, Volume 191, 1-9 (2017), 10.1016/j.apenergy.2017.01.048, https://doi.org/10.1016/j.apenergy.2017.01.048.
 
 #### Alhamwi et. al, *OpenStreetMap data in modelling the urban energy infrastructure: a first assessment and analysis*, Energy Procedia, Volume 142, 1968–1976 (2017), 10.1016/j.egypro.2017.12.397, https://doi.org/10.1016/j.egypro.2017.12.397.
 
@@ -160,9 +160,9 @@ A detailed documentation of the FlexiGIS code will be available in the user guid
 
 ## Help
 
-In case of any questions, comments or suggestions please do not hesitate to contact us by email via flexigis.developers(at)dlr.de.
+In case of any questions, comments or suggestions please do not hesitate to contact us by email via `flexigis.developers(at)dlr.de`.
 
-If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to: flexigis-subscribe(at)dlr.de.
+If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to: `flexigis-subscribe(at)dlr.de`.
 
 ## Contributors
 Project team:
@@ -175,4 +175,4 @@ MSc. Chinonso C. Unaichi
 
 ## Contact
 
-Contact email: flexigis-developers(at)dlr.de.
+Contact email: `flexigis.developers(at)dlr.de`.
