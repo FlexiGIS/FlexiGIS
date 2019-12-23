@@ -34,7 +34,8 @@ def df_to_geodata(df):
     df = df.drop(columns=["geometry"])
     return df
 
-def plot_building():
+
+def plot_building(legend_box, font_size):
     """Plot polygons."""
     geodata_building = df_to_geodata(df_building)
     fig, ax = plt.subplots(1, figsize=(12, 10))
@@ -43,12 +44,13 @@ def plot_building():
                           edgecolor="0.8")
     leg = ax.get_legend()
     leg.set_title("building")
-    leg.set_bbox_to_anchor((0.0, 0.05, 0.01, 0.8))
+    leg.set_bbox_to_anchor(legend_box)
     plt.axis("off")
-    plt.title("Building infrastructure in Oldenburg", fontsize=20)
+    plt.title("Building infrastructure in Oldenburg", fontsize=font_size)
     plt.savefig(destination+"buildings.png", dpi=300)
 
-def plot_landuses():
+
+def plot_landuses(legend_box, font_size):
     """Plot polygons."""
     geodata_building = df_to_geodata(df_building)
     geodata_landuse = df_to_geodata(df_landuse)
@@ -59,12 +61,13 @@ def plot_landuses():
     geodata_building.plot(ax=base, edgecolor="0.8", color='white', legend=True)
     leg = ax.get_legend()
     leg.set_title("landuse")
-    leg.set_bbox_to_anchor((0.0, 0.05, 0.01, 0.8))
+    leg.set_bbox_to_anchor(legend_box)
     plt.axis("off")
-    plt.title("Land use in Oldenburg", fontsize=20)
+    plt.title("Land use in Oldenburg", fontsize=font_size)
     plt.savefig(destination+"landuse.png", dpi=300)
 
-def plot_roads():
+
+def plot_roads(legend_box, font_size):
     """Plot lines."""
     geodata_highway = highway_to_geodata(df_highway)
     fig, ax = plt.subplots(1, figsize=(12, 10))
@@ -73,8 +76,8 @@ def plot_roads():
 
     leg = ax.get_legend()
     leg.set_title("highway")
-    leg.set_bbox_to_anchor((0.0, 0.05, 0.01, 0.8))
-    plt.title("Roads infrastructure in Oldenburg", fontsize=20)
+    leg.set_bbox_to_anchor(legend_box)
+    plt.title("Roads infrastructure in Oldenburg", fontsize=font_size)
     plt.axis("off")
     plt.savefig(destination+"highway.png", dpi=300)
 
@@ -82,6 +85,8 @@ def plot_roads():
 if __name__ == "__main__":
     sns.set_style("dark")
     sns.set_context("notebook", font_scale=1.5, rc={"lines.linewidth": 2.5})
-    plot_landuses()
-    plot_roads()
-    plot_building()
+    legend_box = (0.0, 0.05, 0.01, 0.7)
+    font_size = 20
+    plot_landuses(legend_box, font_size)
+    plot_roads(legend_box, font_size)
+    plot_building(legend_box, font_size)

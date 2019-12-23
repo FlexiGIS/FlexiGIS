@@ -52,8 +52,8 @@ class BuildingPolygons:
 
     # save selected columns as pandas dataframe
         self.df = pd.DataFrame(self.rows, columns=[
-                               "osm_id", "building", "landuse", "geometry",
-                               "way_area", "area", "polygon"])
+                               "osm_id", "building", "landuse",
+                               "area", "polygon"])
         return self.df
         # Building data correction
 
@@ -62,7 +62,7 @@ class BuildingPolygons:
 
         df: pandas dataframe
         """
-        self.df_building = df.drop(columns=["landuse", "geometry", "way_area"])
+        self.df_building = df.drop(columns=["landuse"])
         self.data_building = self.df_building.dropna().\
             sort_values(by="building")
         self.new_building = self.data_building["polygon"].\
@@ -87,7 +87,7 @@ class BuildingPolygons:
     def get_landuse(self, df):
         """Get landuse column."""
         # Landuse data correction
-        self.df_landuse = df.drop(columns=["building", "geometry", "way_area"])
+        self.df_landuse = df.drop(columns=["building"])
         self.data_landuse = self.df_landuse.dropna().sort_values(by="landuse")
         self.new_landuse = self.data_landuse["polygon"]\
             .str.split(";", n=1, expand=True)
@@ -114,20 +114,28 @@ def get_data_from_db():
     return df
 
 
-def get_building_data():
+def get_building_data(df):
     """Get building data as geodataframe."""
     polygons = BuildingPolygons()
-    df = get_data_from_db()
+    # df = get_data_from_db()
     data_building = polygons.get_building(df)
     return data_building
 
 
-def all_building_categories():
-    """Output abstracted data for all categories."""
-    df = get_data_from_db()
+def get_landuse_data(df):
+    """Get landuse data as geodataframe."""
     polygons = BuildingPolygons()
-    data_building = polygons.get_building(df)
+    # df = get_data_from_db()
     data_landuse = polygons.get_landuse(df)
+    return data_landuse
+
+
+def all_building_categories(df, data_building, data_landuse):
+    """Output abstracted data for all categories."""
+    # df = get_data_from_db()
+    data_building = data_building
+    polygons = BuildingPolygons()
+    data_landuse = data_landuse
     features_building = polygons.get_unique_features(data_building)
 
     # save landuse data to csv
@@ -241,10 +249,11 @@ def save_categorized_to_csv_(*argv):
                      format(str(arg.buildings[0])))
 
 
-def main():
+def FlexiGIS(df):
     """Execute all functions."""
-    data_building = get_building_data()
-    all_building_categories()
+    data_building = get_building_data(df)
+    data_landuse = get_landuse_data(df)
+    all_building_categories(df, data_building, data_landuse)
     commercial = commercial_buildings()
     residential = residential_buildings()
     industrial = industrial_building()
@@ -261,4 +270,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    df = get_data_from_db()
+    FlexiGIS(df)

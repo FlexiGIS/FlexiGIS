@@ -86,11 +86,21 @@ After making sure all system requirements are satisfied, create a Python virtual
 environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/ . After creating a python virtual environment, install
 the required python dependencies by running:
 
-activate the virtual environment: `source virtual_env_name/bin/activate`
+activate the virtual environment
 
-cd into the unzipped or cloned FlexiGIS directory: `cd ../FlexiGIS`
+```
+source virtual_env_name/bin/activate
+```
+cd into the unzipped or cloned FlexiGIS directory
 
-install requirements: `pip install -r requirements.txt`
+```
+cd ../FlexiGIS
+```
+install requirements
+
+```
+pip install -r requirements.txt
+```
 
 ##### FlexiGIS directory description
 
