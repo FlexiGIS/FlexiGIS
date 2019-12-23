@@ -33,7 +33,7 @@ This package establishes urban energy infrastructure. It deals with extracting, 
 It simulates urban energy requirments (consumption and generation). The spatio-temporal electricity consumption and renewable
 energy generation from PV and wind in the defined urban area are modelled.
 
-![FlexiGIS Energy_requirements](data/04_Visualisation/Aggregated_Energy_Requirments_in_Oldenburg.png)
+![FlexiGIS Simulated Energy_requirements](data/04_Visualisation/Energy_Requirments_in_Oldenburg.png)
 
 ## Module III: Optimisation of flexibility options
 
@@ -149,15 +149,30 @@ g. `make drop_database`
 https://github.com/FlexiGIS/FlexiGIS.git
 ## Documentation
 
-A detailed documentation of the FlexiGIS code  is available in the user guide (in folder doc).
-The user guide includes detailed information about the FlexiGIS code structure, how to run the FlexiGIS model. Moreover, the user guide includes information about the simplifications and assumptions of the FlexiGIS model as well as information about how the OSM data are used.
+A detailed documentation of the FlexiGIS code will be available in the user guide (in folder doc) and the Read the Docs https://readthedocs.org/. The documentation will include detailed information about the FlexiGIS code structure, how to run the FlexiGIS model. Moreover, it will provide description about all the simplifications and assumptions of the FlexiGIS model as well as information about how the OSM data are used.
+
+## FlexiGIS publications list:
+
+#### Alhamwi et. al, *GIS-based urban energy systems models and tools: Introducing a model for the optimisation of flexibilisation technologies in urban areas*, Applied Energy, Volume 191, 1-9 (2017), 10.1016/j.apenergy.2017.01.048, https://doi.org/10.1016/j.apenergy.2017.01.048.
+
+#### Alhamwi et. al, *OpenStreetMap data in modelling the urban energy infrastructure: a first assessment and analysis*, Energy Procedia, Volume 142, 1968–1976 (2017), 10.1016/j.egypro.2017.12.397, https://doi.org/10.1016/j.egypro.2017.12.397.
+
+#### Alhamwi et. al, *Modelling urban energy requirements using open source data and models*, Applied Energy, Volume 231, 1100-1108 (2018), 10.1016/j.apenergy.2018.09.164, https://doi.org/10.1016/j.apenergy.2018.09.164.
+
+#### Alhamwi et. al, *FlexiGIS: an open source optimisation platform for the optimisation of flexibility options in urban energy systems*, Energy Procedia, Volume 152, 941-949 (2018), 10.1016/j.egypro.2018.09.097, https://doi.org/10.1016/j.egypro.2018.09.097.
+
+#### Alhamwi et. al, *Development of a GIS-based platform for the allocation and optimisation of distributed storage in urban energy systems*, Applied Energy, Volume 251, 113360 (2019), 10.1016/j.apenergy.2019.113360, https://doi.org/10.1016/j.apenergy.2019.113360.
+
+#### Ranalli and Alhamwi, *Configurations of renewable power generation in urban energy systems using open source data and models: with case study in Philadelphia*, Applied Energy, 2019, under review.
+
+#### Alhamwi et. al, *Modelling urban street lighting infrastructure using open source data*, to be submitted to IEEE Access, 2020.
+
 
 ## Help
 
-*In case of any questions, comments or suggestions please do not hesitate to contact us by email via developers(at)FlexiGIS.de.*
+In case of any questions, comments or suggestions please do not hesitate to contact us by email via `flexigis.developers(at)dlr.de`.
 
-*If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to:
-flexigis-subscribe(at)dlr.de.*
+If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to: `flexigis-subscribe(at)dlr.de`.
 
 ## Contributors
 Project team:
@@ -170,4 +185,4 @@ MSc. Chinonso C. Unaichi
 
 ## Contact
 
-*Contact email: flexigis-developers(at)dlr.de.*
+Contact email: `flexigis.developers(at)dlr.de`.
