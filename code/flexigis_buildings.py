@@ -15,14 +15,6 @@ from flexigis_utils import (get_polygons, get_intersects, mask_landuse_data,
                             get_features, get_data_from_buildings,
                             get_csv_categories)
 
-# create a log file
-logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
-                    filename="../code/log/flexigis_buildings.log",
-                    level=logging.DEBUG)
-# csv files destination
-temp_destination = "../data/02_urban_output_data/temp/"
-main_destination = "../data/02_urban_output_data/"
-
 
 class BuildingPolygons:
     """Object class that gets landuse and building data from database.
@@ -130,7 +122,8 @@ def get_landuse_data(df):
     return data_landuse
 
 
-def all_building_categories(df, data_building, data_landuse):
+def all_building_categories(df, data_building, data_landuse, main_destination,
+                            temp_destination):
     """Output abstracted data for all categories."""
     # df = get_data_from_db()
     data_building = data_building
@@ -174,7 +167,7 @@ def all_building_categories(df, data_building, data_landuse):
                              format(str(building_type)))
 
 
-def commercial_buildings():
+def commercial_buildings(temp_destination):
     """Extract commercial buildings (commercial + retial polygons)."""
     commercials_comm = get_csv_categories(temp_destination, "commercial")
     commercials_retail = get_csv_categories(temp_destination, "retail")
@@ -185,7 +178,7 @@ def commercial_buildings():
     return commercial
 
 
-def residential_buildings():
+def residential_buildings(temp_destination):
     """Extract residential buildings."""
     residential = get_csv_categories(temp_destination, "residential")
     listOfString_res = ['residential' for i in range(len(residential))]
@@ -194,7 +187,7 @@ def residential_buildings():
     return residential
 
 
-def industrial_building():
+def industrial_building(temp_destination):
     """Extract industrial buildings."""
     industrial = get_csv_categories(temp_destination, "industrial")
     listOfString_ind = ['industrial' for i in range(len(industrial))]
@@ -203,7 +196,7 @@ def industrial_building():
     return industrial
 
 
-def agricultural_building():
+def agricultural_building(temp_destination):
     """Extract agricultural (Farmland + Famyard polygons)."""
     agriculture_farmyard = get_csv_categories(temp_destination, "farmyard")
     agriculture_farmland = get_csv_categories(temp_destination, "farmland")
@@ -223,12 +216,13 @@ def educational_building(data):
     return educational
 
 
-def save_categorized_to_csv_(*argv):
+def save_categorized_to_csv_(temp_destination, main_destination, *argv):
     """Export categorized buildings of interest to csv."""
     # clean ../02_urban_output_data/temp/ directory
     # inspired by question from stackoverflow
     # https://stackoverflow.com/questions/185936/how-to-delete-the-contents-of-a-folder-in-python
     folder = temp_destination
+    main_destination = main_destination
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
@@ -249,26 +243,35 @@ def save_categorized_to_csv_(*argv):
                      format(str(arg.buildings[0])))
 
 
-def FlexiGIS(df):
+def flexiGISbuilding(df):
     """Execute all functions."""
+    # create a log file
+    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                        filename="../code/log/flexigis_buildings.log",
+                        level=logging.DEBUG)
+    # csv files destination
+    temp_destination = "../data/02_urban_output_data/temp/"
+    main_destination = "../data/02_urban_output_data/"
     data_building = get_building_data(df)
     data_landuse = get_landuse_data(df)
-    all_building_categories(df, data_building, data_landuse)
-    commercial = commercial_buildings()
-    residential = residential_buildings()
-    industrial = industrial_building()
-    agricultural = agricultural_building()
+    all_building_categories(df, data_building, data_landuse, main_destination,
+                            temp_destination)
+    commercial = commercial_buildings(temp_destination)
+    residential = residential_buildings(temp_destination)
+    industrial = industrial_building(temp_destination)
+    agricultural = agricultural_building(temp_destination)
     educational = educational_building(data_building)
     all_df = pd.concat([agricultural, commercial, educational, industrial,
                         residential], ignore_index=True)
     all_df.to_csv(main_destination+"buildings.csv", encoding="utf8")
 
-    save_categorized_to_csv_(commercial, residential, industrial,
-                             agricultural, educational)
+    save_categorized_to_csv_(temp_destination, main_destination, commercial,
+                             residential, industrial, agricultural,
+                             educational)
     print("Done. csv files of categorised building generated!")
     logging.info("FlexiGIS building job done.!")
 
 
 if __name__ == "__main__":
     df = get_data_from_db()
-    FlexiGIS(df)
+    flexiGISbuilding(df)

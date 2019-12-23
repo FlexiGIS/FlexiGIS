@@ -46,12 +46,14 @@ include $(config)
 #=================================================================================#
 ROAD_CSV:= $(load_folder)/highway.csv
 BUILDINGS_CSV:=$(output_folder)/buildings.csv
+EXAMPLE_DATA:=$(input_folder)/OSM_data.csv
 #=================================================================================#
 #              Definition of tasks                                                #
 #=================================================================================#
 
 
 .PHONY: all
+.PHONY: example
 .PHONY: download
 .PHONY: filter_data
 .PHONY: export_data
@@ -179,10 +181,13 @@ demand_supply_simulation:
 	@echo "Done. Modelling urban energy requirements." >> log/urban_energy.log
 	@echo "--> Done. Modelling urban energy requirements"
 
+example:
+	@echo "\n### example ### \nBuilding and landuse data abstraction of Oldenburg based on filtered landuse and building OSM data:"
+	@if [ -e $(EXAMPLE_DATA) ]; then python example_building.py ; fi
+	@echo "Example data abstraction done. see ../data/04_Visualisation folder for sample plot"
 #=================================================================================#
 #              DROPPING                                                           #
 #=================================================================================#
-
 # If you wish to drop your database
 
 drop_database:
