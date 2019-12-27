@@ -10,21 +10,6 @@ from pathlib import Path
 
 from flexigis_utils import (compute_area, data_to_csv)
 
-# create a log file
-logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
-                    filename="../code/log/flexigis_road.log",
-                    level=logging.DEBUG)
-
-
-if Path("../data/02_urban_output_data/").exists():
-    logging.info("directory {} already exists.".
-                 format("02_urban_output_datas"))
-    pass
-else:
-    os.mkdir("../data/02_urban_output_data/")
-    logging.info("directory {} succesfully created!.".
-                 format("02_urban_output_datas"))
-
 
 class Roads:
     """Object class that get line data from database and export output to csv.
@@ -77,12 +62,31 @@ class Roads:
         return data_to_csv(new_data, self.destination+self.ways_column+".csv")
 
 
+def flexigisRoad(data):
+    """Execute all functions for road."""
+    # create a log file
+    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                        filename="../code/log/flexigis_road.log",
+                        level=logging.DEBUG)
+
+    if Path("../data/02_urban_output_data/").exists():
+        logging.info("directory {} already exists.".
+                     format("02_urban_output_datas"))
+        pass
+    else:
+        os.mkdir("../data/02_urban_output_data/")
+        logging.info("directory {} succesfully created!.".
+                     format("02_urban_output_datas"))
+
+    roads.get_features(data)
+    logging.info("Extraction of osm_id, higway, length, and geometry and area")
+    print("Done. Highway data abstracted!")
+    logging.info("FlexiGIS Highway job done.!")
+
+
 if __name__ == "__main__":
     conn = dbconn_from_args()
     cur = conn.cursor()
     roads = Roads()
     data = roads.get_table_from_db(cur, conn)
-    roads.get_features(data)
-    logging.info("Extraction of osm_id, higway, length, and geometry and area")
-    print("Done. Highway data abstracted!")
-    logging.info("FlexiGIS Highway job done.!")
+    flexigisRoad(data)

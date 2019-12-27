@@ -44,7 +44,7 @@ include $(config)
 #=================================================================================#
 #              Output Files                                                       #
 #=================================================================================#
-ROAD_CSV:= $(load_folder)/highway.csv
+ROAD_CSV:= $(output_folder)/highway.csv
 BUILDINGS_CSV:=$(output_folder)/buildings.csv
 EXAMPLE_DATA:=$(input_folder)/OSM_data.csv
 #=================================================================================#

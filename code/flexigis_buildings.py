@@ -36,7 +36,7 @@ class BuildingPolygons:
         self.ways_landuse = "landuse"
 
     # fetch polygons (building and landuse) columns from db
-        sql = "SELECT osm_id, building, landuse, way, way_area,\
+        sql = "SELECT osm_id, building, landuse, \
         ST_Area(ST_Transform(way, 3857)) a,\
          ST_ASEWKT(ST_Transform(way, 3857))as p FROM planet_osm_polygon"
         self.cur.execute(sql)
