@@ -46,7 +46,7 @@ include $(config)
 #=================================================================================#
 ROAD_CSV:= $(output_folder)/highway.csv
 BUILDINGS_CSV:=$(output_folder)/buildings.csv
-EXAMPLE_DATA:=$(input_folder)/OSM_data.csv
+EXAMPLE_DATA:=$(input_folder)/example_OSM_data/OSM_road.csv
 #=================================================================================#
 #              Definition of tasks                                                #
 #=================================================================================#
@@ -182,8 +182,9 @@ demand_supply_simulation:
 	@echo "--> Done. Modelling urban energy requirements"
 
 example:
-	@echo "\n### example ### \nBuilding and landuse data abstraction of Oldenburg based on filtered landuse and building OSM data:"
-	@if [ -e $(EXAMPLE_DATA) ]; then python example_building.py ; fi
+	@echo "\n### example ### \ndata abstraction based on filtered OSM data for Oldenburg:"
+	@if [ -e $(EXAMPLE_DATA) ]; then python example.py ; fi
+	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
 	@echo "Example data abstraction done. see ../data/04_Visualisation folder for sample plot"
 #=================================================================================#
 #              DROPPING                                                           #

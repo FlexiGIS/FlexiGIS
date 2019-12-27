@@ -32,9 +32,9 @@ def data_to_csv(dataset, name="name"):
     dataset: dataframe object
     name: str object, name of the output csv file (the table name).
     """
-    dataset_new = dataset["polygon_1"].str.split(";", n=1, expand=True)
+    dataset_new = dataset["geometry"].str.split(";", n=1, expand=True)
     dataset["polygon"] = dataset_new[1]
-    dataset = dataset.drop(columns=["polygon_1", "geometry"])
+    dataset = dataset.drop(columns=["geometry"])
     return dataset.to_csv(name, encoding="utf-8")
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
