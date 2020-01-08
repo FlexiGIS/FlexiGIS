@@ -186,9 +186,11 @@ example:
 	@if [ -e $(EXAMPLE_DATA) ]; then python example.py ; fi
 	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
 	@echo "Example data abstraction done. see ../data/04_Visualisation folder for sample plot"
+
 #=================================================================================#
 #              DROPPING                                                           #
 #=================================================================================#
+
 # If you wish to drop your database
 
 drop_database:
