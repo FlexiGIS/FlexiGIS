@@ -8,11 +8,9 @@ Date: 13.12.2019
 
 Copyright: FlexiGIS code is licensed under the 3-Clause BSD License https://opensource.org/licenses/BSD-3-Clause
 
-FlexiGIS stands for flexibilisation in Geographic Information Systems (GIS). It extracts, filters and clusters the geo-referenced urban energy infrastructure, simulates the local electricity consumption and power generation from on-site renewable energy resources, and allocates the required decentralised storage in urban settings. FlexiGIS investigates systematically different scenarios of self-consumption, it analyses the characteristics and roles of flexibilisation technologies in promoting higher autarky levels in cities. The extracted urban energy infrustructure are based mainly on OpenStreetMap data.
+FlexiGIS stands for Flexibilisation in Geographic Information Systems (GIS). It extracts, filters and categorises the geo-referenced urban energy infrastructure, simulates the local electricity consumption and power generation from on-site renewable energy resources, and allocates the required decentralised storage in urban settings. FlexiGIS investigates systematically different scenarios of self-consumption, it analyses the characteristics and roles of flexibilisation technologies in promoting higher autarky levels in cities. The extracted urban energy infrustructure are based mainly on OpenStreetMap data.
 
-The OpenStreetMap data is available under the Open Database License (ODbL). A description of the ODbL license is available at the webpage http://opendatacommons.org/licenses/odbl.
-OpenStreetMap cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit the link http://www.openstreetmap.org/copyright. The OpenStreetMap data distributed is available under the Open Database License ODbL. For more information, please visit the OpenStreetMap web page openstreetmap.org.
-The datasets can be redistributed and/or modified resulted by FlexiGIS under the same licenses and copyright.
+The OpenStreetMap (OSM) data is available under the Open Database License (ODbL). A description of the ODbL license is available at the webpage http://opendatacommons.org/licenses/odbl. OpenStreetMap cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit the link http://www.openstreetmap.org/copyright. The OpenStreetMap data distributed is available under the Open Database License ODbL.
 
 The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License". Redistribution and use in source and binary forms, with or without modification, are permitted. For more information concerning the BSD-3C and the description of the terms under which you can use the FlexiGIS code, please visit https://opensource.org/licenses/BSD-3-Clause.
 
@@ -20,8 +18,10 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 ## Module I: FlexiGIS urban spatial platform
 
-This package establishes urban energy infrastructure. It deals with extracting, acquiring and processing urban georeferenced input data extracted from OpenStreetMap.
-
+This package establishes urban energy infrastructure. It extracts, acquires and processes urban georeferenced data extracted from OpenStreetMap. In order to extract the OpenStreetMap georeferenced datasets of urban energy infrustructure datasets and its required features, Module I derives an automatised extraction procedure. Firstly, the raw OpenStreetMap data is downloaded from the OpenStreetMap database for the invistigated urban space from `Geofabrik`. Second, the OpenStreetMap datasets are filtered for the respective case study defined by the provided `.POLY` file using the open source java tool `osmosis`. The OpenStreetMap data are filtered for the follwoing OSM elements 
+* `landuse = *` (Fig. 1.)
+* `building = *` (Fig. 2.) and 
+* `highway = *` (Fig. 3.)
 
 ![FlexiGIS Buildings](data/04_Visualisation/landuse.png)
 Fig. 1. Extracted OpenStreetMap `landuse` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.
@@ -32,17 +32,21 @@ Fig. 2. Extracted OpenStreetMap `building` datasets for the city of Oldenburg. C
 ![FlexiGIS Highway](data/04_Visualisation/highway.png)
 Fig. 3. Extracted OpenStreetMap `highway` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.
 
+After filtering the OSM raw data, the georeferenced building and roard infrastructure in the city of Oldenburg are exported to a relational postgis-enabled database using the open source `osm2pgsql`.
+
 ## Module II: FlexiGIS temporal dimension
 
 It simulates urban energy requirments (consumption and generation). The spatio-temporal electricity consumption and renewable
-energy generation from PV and wind in the defined urban area are modelled.
+energy generation from PV and wind in the defined urban area are modelled. This component models the combined spatial parameters of urban geometries (Module I) and linkes them to real-world applications using GIS. Here, a bottom-up simulation approach is developed to calculate local urban electricity demand and power generation from available renewable energy resources. For instance, using open source datases like Standardised Load Profiles and publicaly available weather data, Fig. 4 shows the generated quarter-hourly time series of the aggregated load and PV power supply profile for invistigated case study.
 
 ![FlexiGIS Simulated Energy_requirements](data/04_Visualisation/Energy_Requirments_in_Oldenburg.png)
 Fig. 4. Simulated electricity consumption (green) and solar power generation (red) for the city of Oldenburg.
 
 ## Module III: Optimisation of flexibility options
 
-* to be added
+The spatial-temporal simulation outputs from Module I and II are highly resolved time series of electricity demand and supply. Theses generated datasets will be used by the `urbs` model as inputs to the linear optimisation problem. This module aims to determine the minimum system costs at the given spatial urban scale while matching simultenously the simulated electricity demand. In addition, it aims to allocate and optimise distributed storage and other felecibility options in urban energy systems.
+
+This component will be explained in details. The codes, scripts and coupling of urbs model and FlexiGIS platform will be added.
 
 ## System requirements
 FlexiGIS is developed and tested on Linux (Ubuntu 16.04.6). The tools and software used in FlexiGIS and their versions are listed in the following:
