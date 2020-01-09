@@ -22,22 +22,18 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 This package establishes urban energy infrastructure. It deals with extracting, acquiring and processing urban georeferenced input data extracted from OpenStreetMap.
 
-![FlexiGIS Buildings](data/04_Visualisation/landuse.png)
-.center[Fig. 1. Extracted OpenStreetMap `landuse` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
+![FlexiGIS Buildings](data/04_Visualisation/landuse.png).center[Fig. 1. Extracted OpenStreetMap `landuse` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
 
-![FlexiGIS Buildings](data/04_Visualisation/buildings.png)
-.center[Fig. 2. Extracted OpenStreetMap `building` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
+![FlexiGIS Buildings](data/04_Visualisation/buildings.png).center[Fig. 2. Extracted OpenStreetMap `building` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
 
-![FlexiGIS Highway](data/04_Visualisation/highway.png)
-.center[Fig. 3. Extracted OpenStreetMap `highway` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
+![FlexiGIS Highway](data/04_Visualisation/highway.png).center[Fig. 3. Extracted OpenStreetMap `highway` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
 
 ## Module II: FlexiGIS temporal dimension
 
 It simulates urban energy requirments (consumption and generation). The spatio-temporal electricity consumption and renewable
 energy generation from PV and wind in the defined urban area are modelled.
 
-![FlexiGIS Simulated Energy_requirements](data/04_Visualisation/Energy_Requirments_in_Oldenburg.png)
-.center[Fig. 4. Simulated electricity consumption (green) and solar power generation (red) for the city of Oldenburg.]
+![FlexiGIS Simulated Energy_requirements](data/04_Visualisation/Energy_Requirments_in_Oldenburg.png).center[Fig. 4. Simulated electricity consumption (green) and solar power generation (red) for the city of Oldenburg.]
 
 ## Module III: Optimisation of flexibility options
 
