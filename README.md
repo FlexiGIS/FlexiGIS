@@ -18,10 +18,10 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 ## Module I: FlexiGIS urban spatial platform
 
-This package establishes urban energy infrastructure. It extracts, acquires and processes urban georeferenced data extracted from OpenStreetMap. In order to extract the OpenStreetMap georeferenced datasets of urban energy infrustructure datasets and its required features, Module I derives an automatised extraction procedure. Firstly, the raw OpenStreetMap data is downloaded from the OpenStreetMap database for the invistigated urban space from `Geofabrik`. Second, the OpenStreetMap datasets are filtered for the respective case study defined by the provided `.POLY` file using the open source java tool `osmosis`. The OpenStreetMap data are filtered for the follwoing OSM elements 
-* `landuse = *` (Fig. 1.)
-* `building = *` (Fig. 2.) and 
-* `highway = *` (Fig. 3.)
+This package establishes urban energy infrastructure. It extracts, acquires and processes urban georeferenced data extracted from OpenStreetMap. In order to extract the OpenStreetMap georeferenced datasets of urban energy infrustructure datasets and its required features, Module I derives an automatised extraction procedure. Firstly, the raw OpenStreetMap data is downloaded from the OpenStreetMap database for the invistigated urban space from `Geofabrik`. Second, the OpenStreetMap datasets are filtered for the respective case study defined by the provided `.POLY` file using the open source java tool `osmosis`. The OpenStreetMap data are filtered for the follwoing OSM elements: 
+* `landuse = *` is a OSM feature that provides information about the human use of land in the respective area (See Figure 1)
+* `building = *` describes all mapped objects that are considered as buildings of different types like supermarkets, hospitals, schools ... (See Figure 2) 
+* `highway = *` tag describes all lines considered as streets, roads, paths, etc. (See Figuer 3)
 
 ![FlexiGIS Buildings](data/04_Visualisation/landuse.png)
 Fig. 1. Extracted OpenStreetMap `landuse` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.
@@ -32,7 +32,7 @@ Fig. 2. Extracted OpenStreetMap `building` datasets for the city of Oldenburg. C
 ![FlexiGIS Highway](data/04_Visualisation/highway.png)
 Fig. 3. Extracted OpenStreetMap `highway` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.
 
-After filtering the OSM raw data, the georeferenced building and roard infrastructure in the city of Oldenburg are exported to a relational postgis-enabled database using the open source `osm2pgsql`.
+After filtering the OSM raw data, the georeferenced building and roard infrastructure in the city of Oldenburg are exported to a relational postgis-enabled database using the open source `osm2pgsql`. Theses datasets can be exported as CSV files or visualised as maps (see Figures 1-3).
 
 ## Module II: FlexiGIS temporal dimension
 
@@ -190,9 +190,9 @@ A detailed documentation of the FlexiGIS code will be available in the user guid
 
 #### Alhamwi et. al, *Development of a GIS-based platform for the allocation and optimisation of distributed storage in urban energy systems*, Applied Energy, Volume 251, 113360 (2019), 10.1016/j.apenergy.2019.113360, https://doi.org/10.1016/j.apenergy.2019.113360.
 
-#### Ranalli and Alhamwi, *Configurations of renewable power generation in urban energy systems using open source data and models: with case study in Philadelphia*, Applied Energy, 2019, under review.
+#### Ranalli and Alhamwi, *Configurations of renewable power generation in urban energy systems using open source data and models: with case study in Philadelphia*, Applied Energy, (2020), under review.
 
-#### Alhamwi et. al, *Modelling urban street lighting infrastructure using open source data*, to be submitted to IEEE Access, 2020.
+#### Alhamwi et. al, *Modelling urban street lighting infrastructure using open source data*, to be submitted to IEEE Access, (2020).
 
 
 ## Help
