@@ -22,7 +22,7 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 This package establishes urban energy infrastructure. It deals with extracting, acquiring and processing urban georeferenced input data extracted from OpenStreetMap.
 
-![FlexiGIS Buildings](data/04_Visualisation/landuse.png).center[Fig. 1. Extracted OpenStreetMap `landuse` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
+<img src="/data/04_Visualisation/landuse.png" alt="Fig. 1. Extracted OpenStreetMap `landuse` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors."/>
 
 ![FlexiGIS Buildings](data/04_Visualisation/buildings.png).center[Fig. 2. Extracted OpenStreetMap `building` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
 
