@@ -23,10 +23,13 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 This package establishes urban energy infrastructure. It deals with extracting, acquiring and processing urban georeferenced input data extracted from OpenStreetMap.
 
 ![FlexiGIS Buildings](data/04_Visualisation/landuse.png)
+.center[Fig. 1. Extracted OpenStreetMap `landuse` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
 
 ![FlexiGIS Buildings](data/04_Visualisation/buildings.png)
+.center[Fig. 2. Extracted OpenStreetMap `building` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
 
 ![FlexiGIS Highway](data/04_Visualisation/highway.png)
+.center[Fig. 3. Extracted OpenStreetMap `highway` datasets for the city of Oldenburg. Credits: OpenStreetMap contributors.]
 
 ## Module II: FlexiGIS temporal dimension
 
@@ -34,6 +37,7 @@ It simulates urban energy requirments (consumption and generation). The spatio-t
 energy generation from PV and wind in the defined urban area are modelled.
 
 ![FlexiGIS Simulated Energy_requirements](data/04_Visualisation/Energy_Requirments_in_Oldenburg.png)
+.center[Fig. 4. Simulated electricity consumption (green) and solar power generation (red) for the city of Oldenburg.]
 
 ## Module III: Optimisation of flexibility options
 
@@ -61,8 +65,7 @@ osm2pgsql: Instruction are available on how to download and install osm2pgsql fo
 Python: Ensure you can run python (with version 3 and above) on your OS. Python can be downloaded following this link https://www.python.org/downloads/ or Anaconda distro from https://www.anaconda.com/distribution/ .
 
 ## Getting Started
-To use the FlexiGIS model download the FlexiGIS code and data folder as a zip file or clone the
- repository from the FlexiGIS GitHub repo. After downloading the FlexiGIS code, unzip the folder FlexiGIS in the location of your choice. The file structure of the FlexiGIS code folder is as follows:
+To use the FlexiGIS spatial-temporal platform (Module I and II) download the FlexiGIS code and data folder as a zip file or clone the repository from the FlexiGIS GitHub repo. After downloading the FlexiGIS code, unzip the folder FlexiGIS in the location of your choice. The file structure of the FlexiGIS code folder is as follows:
 
 * FlexiGIS
     * ├── code
@@ -82,8 +85,7 @@ To use the FlexiGIS model download the FlexiGIS code and data folder as a zip fi
 
   
 ## Installation
-After making sure all system requirements are satisfied, create a Python virtual environment where the required python dependencies can be installed using pip. Python virtual
-environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/ . After creating a python virtual environment, install
+After making sure all system requirements are satisfied, create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies for both Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/ . After creating a python virtual environment, install
 the required python dependencies by running:
 
 activate the virtual environment
@@ -123,7 +125,7 @@ Plots of the abstracted urban infrastructure and aggregated load and PV requirem
 
 ## Running FlexiGIS
 
-To run FlexiGIS execute the following steps:
+To run the first two components of the FlexiGIS platform (Module I and II), execute the following steps:
 
 1. Download the FlexiGIS folder and unzip it in the location of your choice.
 
