@@ -19,8 +19,8 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 ## Module I: FlexiGIS urban spatial platform
 
 This package establishes urban energy infrastructure. It extracts, acquires and processes urban georeferenced data extracted from OpenStreetMap. In order to extract the OpenStreetMap georeferenced datasets of urban energy infrustructure datasets and its required features, Module I derives an automatised extraction procedure. Firstly, the raw OpenStreetMap data is downloaded from the OpenStreetMap database for the invistigated urban space from `Geofabrik`. Second, the OpenStreetMap datasets are filtered for the respective case study defined by the provided `.POLY` file using the open source java tool `osmosis`. The OpenStreetMap data are filtered for the follwoing OSM elements: 
-* `landuse = *` is a OSM feature that provides information about the human use of land in the respective area (See Figure 1)
-* `building = *` describes all mapped objects that are considered as buildings of different types like supermarkets, hospitals, schools ... (See Figure 2) 
+* `landuse = *` provides information about the human use of land in the respective area (See Figure 1)
+* `building = *` describes all mapped objects considered as buildings of different types like houses, schools ... (See Figure 2) 
 * `highway = *` tag describes all lines considered as streets, roads, paths, etc. (See Figuer 3)
 
 ![FlexiGIS Buildings](data/04_Visualisation/landuse.png)
