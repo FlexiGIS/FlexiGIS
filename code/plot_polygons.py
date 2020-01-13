@@ -38,55 +38,63 @@ def df_to_geodata(df):
 def plot_building(legend_box, font_size):
     """Plot polygons."""
     geodata_building = df_to_geodata(df_building)
-    fig, ax = plt.subplots(1, figsize=(12, 10))
+    fig, ax = plt.subplots(1, figsize=(10, 7), facecolor='whitesmoke')
     geodata_building.plot(column='buildings', categorical=True, legend=True,
                           ax=ax, linewidth=0.1, cmap='Dark2',
                           edgecolor="0.8")
+
+    ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
     leg.set_title("building")
     leg.set_bbox_to_anchor(legend_box)
     plt.axis("off")
     plt.title("Building infrastructure in Oldenburg", fontsize=font_size)
-    plt.savefig(destination+"buildings.png", dpi=300)
+    plt.savefig(destination+"buildings.png", facecolor=fig.get_facecolor(),
+                dpi=300)
 
 
 def plot_landuses(legend_box, font_size):
     """Plot polygons."""
     geodata_building = df_to_geodata(df_building)
     geodata_landuse = df_to_geodata(df_landuse)
-    fig, ax = plt.subplots(1, figsize=(12, 10))
+    fig, ax = plt.subplots(1, figsize=(10, 7), facecolor='whitesmoke')
     base = geodata_landuse.plot(column='landuse', categorical=True,
                                 legend=True, ax=ax, linewidth=0.1,
                                 cmap='tab10', edgecolor="0.8")
     geodata_building.plot(ax=base, edgecolor="0.8", color='white', legend=True)
+
+    ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
     leg.set_title("landuse")
     leg.set_bbox_to_anchor(legend_box)
     plt.axis("off")
     plt.title("Land use in Oldenburg", fontsize=font_size)
-    plt.savefig(destination+"landuse.png", dpi=300)
+    plt.savefig(destination+"landuse.png", facecolor=fig.get_facecolor(),
+                dpi=300)
 
 
 def plot_roads(legend_box, font_size):
     """Plot lines."""
     geodata_highway = highway_to_geodata(df_highway)
-    fig, ax = plt.subplots(1, figsize=(12, 10))
+    fig, ax = plt.subplots(1, figsize=(10, 7), facecolor='whitesmoke')
     geodata_highway.plot(column='highway', categorical=True, legend=True,
                          ax=ax, linewidth=1, cmap='tab10', edgecolor="0.8")
 
+    ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
     leg.set_title("highway")
     leg.set_bbox_to_anchor(legend_box)
     plt.title("Roads infrastructure in Oldenburg", fontsize=font_size)
     plt.axis("off")
-    plt.savefig(destination+"highway.png", dpi=300)
+    plt.savefig(destination+"highway.png", facecolor=fig.get_facecolor(),
+                dpi=300)
 
 
 if __name__ == "__main__":
     sns.set_style("dark")
     sns.set_context("notebook", font_scale=1.5, rc={"lines.linewidth": 2.5})
     legend_box = (0.0, 0.05, 0.01, 0.7)
-    font_size = 20
+    font_size = 15
     plot_landuses(legend_box, font_size)
     plot_roads(legend_box, font_size)
     plot_building(legend_box, font_size)
