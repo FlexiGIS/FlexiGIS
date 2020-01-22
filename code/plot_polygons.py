@@ -1,9 +1,9 @@
-"""Plot data using geopandas."""
-from shapely import wkt
+"""**Plot data using geopandas**."""
 import pandas as pd
-from geopandas import GeoDataFrame
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+from flexigis_utils import (highway_to_geodata, df_to_geodata)
 
 csv_file = "../data/02_urban_output_data/"
 buildings_csv = csv_file+"buildings.csv"
@@ -19,26 +19,16 @@ classifications = ["commercial", "retail", "residential", "farmland",
 df_landuse = df_landuse.loc[df_landuse["landuse"].isin(classifications)]
 
 
-def highway_to_geodata(df):
-    """Highway to geodata."""
-    df["polygon1"] = df["polygon"].apply(wkt.loads)
-    df = GeoDataFrame(df, geometry='polygon1')
-    df = df.drop(columns=["polygon"])
-    return df
+def plot_building(legend_box, fig_size, font_size, face_color):
+    """Plot polygons for buildings.
 
-
-def df_to_geodata(df):
-    """Convert data to geodataframe."""
-    df['polygon'] = df['geometry'].apply(wkt.loads)
-    df = GeoDataFrame(df, geometry='polygon')
-    df = df.drop(columns=["geometry"])
-    return df
-
-
-def plot_building(legend_box, font_size):
-    """Plot polygons."""
+    :param tuple(float) legend_box: tuple of floats, eg (0.0, 0.05, 0.01, 0.7)
+    :param tuple(int) fig_size: figure size
+    :param int font_size: title font size
+    :param str face_color: backgroud color (eg, white, black)
+    """
     geodata_building = df_to_geodata(df_building)
-    fig, ax = plt.subplots(1, figsize=(10, 7), facecolor='whitesmoke')
+    fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
     geodata_building.plot(column='buildings', categorical=True, legend=True,
                           ax=ax, linewidth=0.1, cmap='Dark2',
                           edgecolor="0.8")
@@ -53,11 +43,17 @@ def plot_building(legend_box, font_size):
                 dpi=300)
 
 
-def plot_landuses(legend_box, font_size):
-    """Plot polygons."""
+def plot_landuses(legend_box, fig_size, font_size, face_color):
+    """Plot polygons for landuse.
+
+    :param tuple(float) legend_box: tuple of floats, eg (0.0, 0.05, 0.01, 0.7)
+    :param tuple(int) fig_size: figure size
+    :param int font_size: title font size
+    :param str face_color: backgroud color (eg, white, black)
+    """
     geodata_building = df_to_geodata(df_building)
     geodata_landuse = df_to_geodata(df_landuse)
-    fig, ax = plt.subplots(1, figsize=(10, 7), facecolor='whitesmoke')
+    fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
     base = geodata_landuse.plot(column='landuse', categorical=True,
                                 legend=True, ax=ax, linewidth=0.1,
                                 cmap='tab10', edgecolor="0.8")
@@ -73,10 +69,16 @@ def plot_landuses(legend_box, font_size):
                 dpi=300)
 
 
-def plot_roads(legend_box, font_size):
-    """Plot lines."""
+def plot_roads(legend_box, fig_size, font_size, face_color):
+    """Plot lines (highway).
+
+    :param tuple(float) legend_box: tuple of floats, eg (0.0, 0.05, 0.01, 0.7)
+    :param tuple(int) fig_size: figure size
+    :param int font_size: title font size
+    :param str face_color: backgroud color (eg, white, black)
+    """
     geodata_highway = highway_to_geodata(df_highway)
-    fig, ax = plt.subplots(1, figsize=(10, 7), facecolor='whitesmoke')
+    fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
     geodata_highway.plot(column='highway', categorical=True, legend=True,
                          ax=ax, linewidth=1, cmap='tab10', edgecolor="0.8")
 
@@ -95,6 +97,8 @@ if __name__ == "__main__":
     sns.set_context("notebook", font_scale=1.5, rc={"lines.linewidth": 2.5})
     legend_box = (0.0, 0.05, 0.01, 0.7)
     font_size = 15
-    plot_landuses(legend_box, font_size)
-    plot_roads(legend_box, font_size)
-    plot_building(legend_box, font_size)
+    fig_size = (7, 5)
+    face_color = "white"
+    plot_landuses(legend_box, fig_size, font_size, face_color)
+    plot_roads(legend_box, fig_size, font_size, face_color)
+    plot_building(legend_box, fig_size, font_size, face_color)

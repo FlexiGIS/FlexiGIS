@@ -177,7 +177,7 @@ abstract_data:
 demand_supply_simulation:
 	@echo "\n### Step6 ### \nModelling demand and supply and saving aggregated energry required as CSV files to folder '$(load_folder)':"
 	@date >> log/urban_energy.log
-	@if [ -e $(ROAD_CSV) ]; then python flexigis_urban_energy_requirments.py ; fi
+	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
 	@echo "Done. Modelling urban energy requirements." >> log/urban_energy.log
 	@echo "--> Done. Modelling urban energy requirements"
 
@@ -185,6 +185,7 @@ example:
 	@echo "\n### example ### \ndata abstraction based on filtered OSM data for Oldenburg:"
 	@if [ -e $(EXAMPLE_DATA) ]; then python example.py ; fi
 	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
+	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
 	@echo "Example data abstraction done. see ../data/04_Visualisation folder for sample plot"
 
 #=================================================================================#

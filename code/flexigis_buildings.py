@@ -3,7 +3,6 @@
 Get Building and Landuse data from database and export results to CSV.
 """
 import pandas as pd
-from db_connect import dbconn_from_args
 import os
 from pathlib import Path
 import shutil
@@ -11,29 +10,46 @@ from geopandas import GeoDataFrame
 from shapely import wkt
 import logging
 
+from db_connect import dbconn_from_args
 from flexigis_utils import (get_polygons, get_intersects, mask_landuse_data,
                             get_features, get_data_from_buildings,
                             get_csv_categories)
+# create a log file
+logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                    filename="../code/log/flexigis_buildings.log",
+                    level=logging.DEBUG)
 
 
 class BuildingPolygons:
-    """Object class that gets landuse and building data from database.
+    """Get landuse and building data from database.
 
-    get_building_landuse_polygons: returns querried database table as pandas
-    dataframe.
-    get_building: return GeoDataFrame for building categories
-    get_unique_features: return a list of uniques categories of landuse or
-    building.
-    get_landuse: returns a GeoDataFrame for landuse categories.
+    - Example::
+
+        from db_connect import dbconn_from_args
+
+        conn = dbconn_from_args() # connection to database
+        cur = conn.cursor()
+        df = BuildingPolygons.get_building_landuse_polygons(scur, conn)
+        building_data = BuildingPolygons.get_building(df) # building data
+        landuse_data = BuildingPolygons.get_landuse(df) # landuse data
     """
 
-    def get_building_landuse_polygons(self, cur, conn):
-        """Connect to database and query table."""
-        self.cur = cur
-        self.conn = conn
+    def __init__(self):
+        """Init method that holds needed variables."""
         self.table = "planet_osm_polygon"
         self.ways_building = "building"
         self.ways_landuse = "landuse"
+
+    def get_building_landuse_polygons(self, cur, conn):
+        """Connect to database and query table.
+
+        :param object cur: data base cursor
+        :param object conn: database connection
+        :return: dataframe of OSM data for building and landuse
+        :rtype: DataFrame
+        """
+        self.cur = cur
+        self.conn = conn
 
     # fetch polygons (building and landuse) columns from db
         sql = "SELECT osm_id, building, landuse, \
@@ -44,15 +60,15 @@ class BuildingPolygons:
 
     # save selected columns as pandas dataframe
         self.df = pd.DataFrame(self.rows, columns=[
-                               "osm_id", "building", "landuse",
+                               "osm_id", self.ways_building, self.ways_landuse,
                                "area", "polygon"])
         return self.df
-        # Building data correction
 
+    # Building data correction
     def get_building(self, df):
-        """Get building columns.
+        """Get building data.
 
-        df: pandas dataframe
+        df: dataframe
         """
         self.df_building = df.drop(columns=["landuse"])
         self.data_building = self.df_building.dropna().\
@@ -67,7 +83,7 @@ class BuildingPolygons:
             apply(wkt.loads)
         self.data_building = GeoDataFrame(self.data_building,
                                           geometry='geometry')
-        self.data_building = self.data_building.set_index(["building"])
+        self.data_building = self.data_building.set_index([self.ways_building])
         return self.data_building
 
     def get_unique_features(self, df):
@@ -77,10 +93,11 @@ class BuildingPolygons:
         # print(features_building)
 
     def get_landuse(self, df):
-        """Get landuse column."""
+        """Get landuse data."""
         # Landuse data correction
-        self.df_landuse = df.drop(columns=["building"])
-        self.data_landuse = self.df_landuse.dropna().sort_values(by="landuse")
+        self.df_landuse = df.drop(columns=[self.ways_building])
+        self.data_landuse = self.df_landuse.dropna().\
+            sort_values(by=self.ways_landuse)
         self.new_landuse = self.data_landuse["polygon"]\
             .str.split(";", n=1, expand=True)
         self.data_landuse["geometry"] = self.new_landuse[1]
@@ -90,7 +107,7 @@ class BuildingPolygons:
             apply(wkt.loads)
         self.data_landuse = GeoDataFrame(self.data_landuse,
                                          geometry='geometry')
-        self.data_landuse = self.data_landuse.set_index(["landuse"])
+        self.data_landuse = self.data_landuse.set_index([self.ways_landuse])
         return self.data_landuse
 
         # features_landuse = data_landuse.index.unique()
@@ -244,11 +261,26 @@ def save_categorized_to_csv_(temp_destination, main_destination, *argv):
 
 
 def flexiGISbuilding(df):
-    """Execute all functions."""
-    # create a log file
-    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
-                        filename="../code/log/flexigis_buildings.log",
-                        level=logging.DEBUG)
+    """Execute all functions.
+
+    :param DataFrame data: OSM building dataset
+    :return: csv files of different building category
+    :rtype: csv file
+
+    This function can be imported as a module, for buildings data abstraction.
+
+    - Example::
+
+        import pandas as pd
+        import flexigis_buildings
+
+        # get logging
+        flexigis_buildings.logging
+        csv_file = "../data/01_raw_input_data/example_OSM_data/"
+        df_road = pd.read_csv(csv_file+"OSM_building.csv") # filtered OSM data
+        flexigis_road.flexiGISroad(df_road) # export abstracted building data
+        to csv
+    """
     # csv files destination
     temp_destination = "../data/02_urban_output_data/temp/"
     main_destination = "../data/02_urban_output_data/"
