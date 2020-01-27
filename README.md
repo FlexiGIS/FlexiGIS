@@ -90,7 +90,13 @@ To use the FlexiGIS spatial-temporal platform (Module I and II) download the Fle
 
   
 ## Installation
-After making sure all system requirements are satisfied, create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies for both Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/ . After creating a python virtual environment, install
+After making sure all system requirements are satisfied, clone it
+
+```
+git clone FlexiGIS repository from GitHub
+```
+
+create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies for both Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, install
 the required python dependencies by running:
 
 activate the virtual environment
