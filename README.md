@@ -90,30 +90,36 @@ To use the FlexiGIS spatial-temporal platform (Module I and II) download the Fle
 
   
 ## Installation
-After making sure all system requirements are satisfied, clone it
+After making sure that all system requirements are satisfied, clone the FlexiGIS repository using:
 
 ```
-git clone FlexiGIS repository from GitHub
+git clone _FlexiGIS repository_ from GitHub
 ```
 
-create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies for both Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, install
-the required python dependencies by running:
+In a next step, create a Python virtual environment (give a name e.g. _env_name) where the required python dependencies can be installed using pip. 
 
-activate the virtual environment
+```
+python3 -m venv _env_name
+``` 
+
+Then, activate the virtual environment:
 
 ```
 source virtual_env_name/bin/activate
 ```
-cd into the unzipped or cloned FlexiGIS directory
+
+Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, cd into the unzipped or cloned FlexiGIS directory
 
 ```
 cd ../FlexiGIS
 ```
-install requirements
+
+install the required python dependencies by running:
 
 ```
 pip install -r requirements.txt
 ```
+Now you are ready to excute FlexiGIS (Please note, that this applies for both Module I and II).
 
 ##### FlexiGIS directory description
 
@@ -144,7 +150,7 @@ To run the first two components of the FlexiGIS platform (Module I and II), exec
 
 ###### The available makefile options are:
 ```
-a. $ make all
+a. $ make
 ```
 make all executes make commands for the OSM data, from download to the simulation of load and PV profiles for the urban infrastructures.
 
