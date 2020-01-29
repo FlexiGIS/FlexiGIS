@@ -1,1 +1,3 @@
-*__pycache__
+code/__pycache__
+doc/build/html
+doc/build/latex
