@@ -1,4 +1,4 @@
-"""Module II: Urban Energy Requirements Simulation."""
+"""**Urban Energy Requirements Simulation**."""
 # from __future__ import division
 import pandas as pd
 import numpy as np

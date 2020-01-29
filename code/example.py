@@ -1,4 +1,4 @@
-"""Example using filtered OSM building and highway data stored as csv file."""
+"""**Example using filtered OSM building and highway data stored as csv file**."""
 import pandas as pd
 import flexigis_buildings
 import flexigis_road

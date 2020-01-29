@@ -94,7 +94,7 @@ def plot_roads(legend_box, fig_size, font_size, face_color):
 
 if __name__ == "__main__":
     sns.set_style("dark")
-    sns.set_context("notebook", font_scale=1.5, rc={"lines.linewidth": 2.5})
+    sns.set_context(context=None, font_scale=1, rc=None)
     legend_box = (0.0, 0.05, 0.01, 0.7)
     font_size = 15
     fig_size = (7, 5)

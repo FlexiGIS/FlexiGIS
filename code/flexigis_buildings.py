@@ -1,7 +1,4 @@
-"""Module I.
-
-Get Building and Landuse data from database and export results to CSV.
-"""
+"""**Get Building and Landuse data from database and export as CSV files**."""
 import pandas as pd
 import os
 from pathlib import Path
@@ -21,18 +18,7 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
 
 
 class BuildingPolygons:
-    """Get landuse and building data from database.
-
-    - Example::
-
-        from db_connect import dbconn_from_args
-
-        conn = dbconn_from_args() # connection to database
-        cur = conn.cursor()
-        df = BuildingPolygons.get_building_landuse_polygons(scur, conn)
-        building_data = BuildingPolygons.get_building(df) # building data
-        landuse_data = BuildingPolygons.get_landuse(df) # landuse data
-    """
+    """Get landuse and building data from database."""
 
     def __init__(self):
         """Init method that holds needed variables."""
@@ -66,10 +52,7 @@ class BuildingPolygons:
 
     # Building data correction
     def get_building(self, df):
-        """Get building data.
-
-        df: dataframe
-        """
+        """Get building data."""
         self.df_building = df.drop(columns=["landuse"])
         self.data_building = self.df_building.dropna().\
             sort_values(by="building")
@@ -115,7 +98,11 @@ class BuildingPolygons:
 
 
 def get_data_from_db():
-    """Get building and landuse as DataFrame from database."""
+    """Get building and landuse as DataFrame from database.
+
+    :return: dataset containing building and landuse columns
+    :retype: DataFrame
+    """
     conn = dbconn_from_args()
     cur = conn.cursor()
     polygons = BuildingPolygons()
@@ -124,24 +111,39 @@ def get_data_from_db():
 
 
 def get_building_data(df):
-    """Get building data as geodataframe."""
+    """Get building data as geodataframe.
+
+    :param DataFrame df: Filtered OSM data from database
+    :return: building dataset
+    :retype: GeoDataFrame
+    """
     polygons = BuildingPolygons()
-    # df = get_data_from_db()
     data_building = polygons.get_building(df)
     return data_building
 
 
 def get_landuse_data(df):
-    """Get landuse data as geodataframe."""
+    """Get landuse data as geodataframe.
+
+    :param DataFrame df: Filtered OSM data from database
+    :return: landuse dataset
+    :retype: GeoDataFrame
+    """
     polygons = BuildingPolygons()
-    # df = get_data_from_db()
     data_landuse = polygons.get_landuse(df)
     return data_landuse
 
 
 def all_building_categories(df, data_building, data_landuse, main_destination,
                             temp_destination):
-    """Output abstracted data for all categories."""
+    """Output abstracted data for all categories.
+
+    :param DataFrame df: Filtered OSM data
+    :param DataFrame data_building: building data
+    :param DataFrame data_landuse: landuse daa
+    :param str main_destination: output data destination
+    :param str temp_destination: temp data destination
+    """
     # df = get_data_from_db()
     data_building = data_building
     polygons = BuildingPolygons()
@@ -185,7 +187,12 @@ def all_building_categories(df, data_building, data_landuse, main_destination,
 
 
 def commercial_buildings(temp_destination):
-    """Extract commercial buildings (commercial + retial polygons)."""
+    """Extract commercial buildings (commercial + retial polygons).
+
+    :param str temp_destination: temp directory path
+    :return: DataFrame containing commercial buildings
+    :retype: DataFrame
+    """
     commercials_comm = get_csv_categories(temp_destination, "commercial")
     commercials_retail = get_csv_categories(temp_destination, "retail")
     commercial = pd.concat([commercials_comm, commercials_retail])
@@ -196,7 +203,12 @@ def commercial_buildings(temp_destination):
 
 
 def residential_buildings(temp_destination):
-    """Extract residential buildings."""
+    """Extract residential buildings.
+
+    :param str temp_destination: temp directory path
+    :return: DataFrame containing residential buildings
+    :retype: DataFrame
+    """
     residential = get_csv_categories(temp_destination, "residential")
     listOfString_res = ['residential' for i in range(len(residential))]
     residential.insert(1, "buildings", listOfString_res, True)
@@ -205,7 +217,12 @@ def residential_buildings(temp_destination):
 
 
 def industrial_building(temp_destination):
-    """Extract industrial buildings."""
+    """Extract industrial buildings.
+
+    :param str temp_destination: temp directory path
+    :return: DataFrame containing industrial buildings
+    :retype: DataFrame
+    """
     industrial = get_csv_categories(temp_destination, "industrial")
     listOfString_ind = ['industrial' for i in range(len(industrial))]
     industrial.insert(1, "buildings", listOfString_ind, True)
@@ -214,7 +231,12 @@ def industrial_building(temp_destination):
 
 
 def agricultural_building(temp_destination):
-    """Extract agricultural (Farmland + Famyard polygons)."""
+    """Extract agricultural (Farmland + Famyard polygons).
+
+    :param str temp_destination: temp directory path
+    :return: DataFrame containing agricultural buildings
+    :retype: DataFrame
+    """
     agriculture_farmyard = get_csv_categories(temp_destination, "farmyard")
     agriculture_farmland = get_csv_categories(temp_destination, "farmland")
     agriculture = pd.concat([agriculture_farmyard, agriculture_farmland])
@@ -225,7 +247,12 @@ def agricultural_building(temp_destination):
 
 
 def educational_building(data):
-    """Extract educational."""
+    """Extract educational.
+
+    :param Dataframe data: Pandas Dataframe of building dataset
+    :return: DataFrame containing educational buildings
+    :retype: DataFrame
+    """
     education = data.loc[["kindergarten", "school", "university"], :]
     listOfString_edu = ['educational' for i in range(len(education))]
     education.insert(1, "buildings", listOfString_edu, True)
@@ -234,7 +261,12 @@ def educational_building(data):
 
 
 def save_categorized_to_csv_(temp_destination, main_destination, *argv):
-    """Export categorized buildings of interest to csv."""
+    """Export categorized buildings of interest to csv.
+
+    :param str temp_destination: directory path to store temp file
+    :param str main_destination: directory path to store output data
+    :param DataFrame argv: pandas dataframe of abstracted data
+    """
     # clean ../02_urban_output_data/temp/ directory
     # inspired by question from stackoverflow
     # https://stackoverflow.com/questions/185936/how-to-delete-the-contents-of-a-folder-in-python
@@ -264,22 +296,21 @@ def flexiGISbuilding(df):
     """Execute all functions.
 
     :param DataFrame data: OSM building dataset
-    :return: csv files of different building category
-    :rtype: csv file
 
-    This function can be imported as a module, for buildings data abstraction.
+    This function can be imported as a module, for buildings data extraction.
 
     - Example::
 
         import pandas as pd
         import flexigis_buildings
 
-        # get logging
+        # get logger
         flexigis_buildings.logging
         csv_file = "../data/01_raw_input_data/example_OSM_data/"
-        df_road = pd.read_csv(csv_file+"OSM_building.csv") # filtered OSM data
-        flexigis_road.flexiGISroad(df_road) # export abstracted building data
-        to csv
+        # filtered OSM data
+        df_building = pd.read_csv(csv_file+"OSM_building.csv")
+        # export extracted building data as csv file
+        flexigis_buildings.flexiGISbuilding(df_building)
     """
     # csv files destination
     temp_destination = "../data/02_urban_output_data/temp/"

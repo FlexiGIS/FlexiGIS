@@ -1,7 +1,4 @@
-"""Module I.
-
-Get Highway data from database and export result csv files.
-"""
+"""**Get Highway data from database and export result csv files**."""
 import pandas as pd
 import logging
 import os
@@ -250,11 +247,9 @@ class GetPoints:
 
 
 def flexiGISroad(data):
-    """Execute `Roads` class .
+    """Execute `Roads` class.
 
     :param DataFrame data: OSM highway dataset
-    :return: csv containing highway attributes
-    :rtype: csv file
 
     This function can be imported as a module, for highway data abstraction.
 
@@ -268,8 +263,6 @@ def flexiGISroad(data):
         csv_file = "../data/01_raw_input_data/example_OSM_data/"
         df_road = pd.read_csv(csv_file+"OSM_road.csv") # filtered OSM data
         flexigis_road.flexiGISroad(df_road) # export abstracted highway data
-        to csv
-
     """
     roads = Roads()
     roads.get_road_features(data)
