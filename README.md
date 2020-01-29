@@ -18,9 +18,9 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 ## Module I: FlexiGIS urban spatial platform
 
-This package establishes urban energy infrastructure. It extracts, acquires and processes urban georeferenced data extracted from OpenStreetMap. In order to extract the OpenStreetMap georeferenced datasets of urban energy infrustructure datasets and its required features, Module I derives an automatised extraction procedure. Firstly, the raw OpenStreetMap data is downloaded from the OpenStreetMap database for the invistigated urban space from `Geofabrik`. Second, the OpenStreetMap datasets are filtered for the respective case study defined by the provided `.POLY` file using the open source java tool `osmosis`. The OpenStreetMap data are filtered for the follwoing OSM elements: 
+This package establishes urban energy infrastructure. It extracts, acquires and processes urban georeferenced data extracted from OpenStreetMap. In order to extract the OpenStreetMap georeferenced datasets of urban energy infrustructure datasets and its required features, Module I derives an automatised extraction procedure. Firstly, the raw OpenStreetMap data is downloaded from the OpenStreetMap database for the invistigated urban space from `Geofabrik`. Second, the OpenStreetMap datasets are filtered for the respective case study defined by the provided `.POLY` file using the open source java tool `osmosis`. The OpenStreetMap data are filtered for the follwoing OSM elements:
 * `landuse = *` provides information about the human use of land in the respective area (See Figure 1)
-* `building = *` describes all mapped objects considered as buildings of different types like houses, schools ... (See Figure 2) 
+* `building = *` describes all mapped objects considered as buildings of different types like houses, schools ... (See Figure 2)
 * `highway = *` tag describes all lines considered as streets, roads, paths, etc. (See Figuer 3)
 
 ![FlexiGIS Buildings](data/04_Visualisation/landuse.png)
@@ -90,13 +90,13 @@ To use the FlexiGIS spatial-temporal platform (Module I and II) download the Fle
 
   
 ## Installation
-After making sure all system requirements are satisfied, clone it
+After making sure all system requirements are satisfied, clone FlexiGIS repo
 
 ```
-git clone FlexiGIS repository from GitHub
+git clone https://github.com/FlexiGIS/FlexiGIS.git
 ```
 
-create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies for both Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, install
+create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies to Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, install
 the required python dependencies by running:
 
 activate the virtual environment
