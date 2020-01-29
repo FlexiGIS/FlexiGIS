@@ -1,8 +1,8 @@
 .. module:: FlexiGIS
 
-.. _OSM Data Abstraction and Demand Simulation:
+.. _FlexiGIS Module:
 
-OSM Data Abstraction and Demand Simulation
+FlexiGIS Module
 ===========================================
 
 .. toctree::

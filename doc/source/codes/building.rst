@@ -1,8 +1,8 @@
 .. module:: FlexiGIS
 
-.. _FlexiGIS Building:
+.. _flexigis_buildings.py:
 
-FlexiGIS Building
-==================
+flexigis_buildings.py
+=====================
 .. automodule:: flexigis_buildings
     :members:

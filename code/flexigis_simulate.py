@@ -1,4 +1,7 @@
-"""**Urban Energy Requirements Simulation**."""
+"""**This module simualates Urban Energy Requirements**.
+
+Outputs are stored stored as csv.
+"""
 # from __future__ import division
 import pandas as pd
 import numpy as np
@@ -23,6 +26,7 @@ class UrbanEnergyRequirement(object):
         self.input_destination_1 = "../data/01_raw_input_data/"
         self.input_destination_2 = "../data/02_urban_output_data/"
         self.output_destination = "../data/03_urban_energy_requirements/"
+        self.output_destination2 = "../data/04_Visualisation/"
 
         if Path(self.output_destination).exists():
             logging.info("directory {} already exists.".
@@ -268,8 +272,7 @@ class UrbanEnergyRequirement(object):
         plt.ylabel('MW')
         plt.title('Aggregated Energy Requirments in Oldenburg')
         plt.legend(['Simulated PV', 'Simulated load'], loc='upper left')
-        plt.savefig("../data/04_Visualisation/\
-        Energy_Requirments_in_Oldenburg.png", dpi=300)
+        plt.savefig(self.destination2+"Energy_Requirments.png", dpi=300)
         plt.show()
         logging.info("Urban Energy Requirments REs plot generated succesfuly")
 

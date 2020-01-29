@@ -4,6 +4,8 @@
 
 Makefile
 =========
+**Contains rules for the automation of all flexiGIS modules.**
+
 - Download::
 
     # download  the OSM raw data from geofabrik url and save to folder
@@ -11,7 +13,7 @@ Makefile
 
 - filter_data::
 
-    # Filter the OSM raw geo-urban datasets using `Osmosis`_
+    # Filter the OSM raw geo-urban datasets using Osmosis
 
     osmosis \
 	--read-pbf file=$(OSM_raw_data) \
@@ -36,6 +38,7 @@ Makefile
 	--buffer outPipe.0=landuse_building \
 	--merge inPipe.0=landuse_building inPipe.1=highway \
 	--write-pbf file=$(OSM_merged_data)
+
 
 - export_data::
 

@@ -13,11 +13,15 @@ After creating a python virtual environment, FlexiGIS can easily be installed by
 
     $ source virtual_env_name/bin/activate
 
-2. cd into the unzipped or cloned FlexiGIS folder ::
+2. clone the FlexiGIS code from the GitHub repository ::
+
+    $ git clone https://github.com/FlexiGIS/FlexiGIS.git
+
+3. cd into the cloned FlexiGIS folder ::
 
     $ cd ../FlexiGIS
 
-3. install the required python modules in the FlexiGIS/requirement.txt file ::
+4. install the required python modules in the FlexiGIS/requirement.txt file ::
 
     $ pip install -r requirements.txt
 

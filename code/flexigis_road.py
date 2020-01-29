@@ -1,4 +1,8 @@
-"""**Get Highway data from database and export result csv files**."""
+"""**Get georeferenced Highway data from database**.
+
+Hihgway information such as motor ways, squares, bus stop, links. Outputs ara
+ exported to csv.
+"""
 import pandas as pd
 import logging
 import os
@@ -75,7 +79,6 @@ class Roads:
 
         :param DataFrame dataset: highway dataset
         :return: csv containing highway attributes (eg. OSM_id, length, area)
-        :rtype: csv file
         """
         self.highway_feature = ['motorway', 'primary',
                                 'residential', 'secondary',
@@ -95,7 +98,6 @@ class Roads:
 
         :param DataFrame dataset: highway dataset
         :return: csv containing highway attributes (eg. OSM_id, length, area)
-        :rtype: csv file
         """
         self.highway_feature2 = ['living_street', 'motorway', 'pedestrian',
                                  'primary', 'secondary', 'service', 'tertiary',
@@ -165,7 +167,6 @@ class GetRoadsPolygons:
 
         :param DataFrame dataset: highway dataset
         :return: csv containing highway attributes (eg. OSM_id, area, geometry)
-        :rtype: csv file
         """
         self.destination = "../data/02_urban_output_data/"
         self.roadpolygons_feature = ['crossing', 'footway', 'living_street',
@@ -231,7 +232,6 @@ class GetPoints:
 
         :param DataFrame dataset: highway dataset
         :return: csv containing highway attributes (eg. OSM_id, geometry)
-        :rtype: csv file
         """
         self.point_feature = ['bus_stop', 'crossing', 'give_way',
                               'motorwyay_junction', 'passing_place',

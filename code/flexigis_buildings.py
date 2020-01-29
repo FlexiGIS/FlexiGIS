@@ -1,4 +1,9 @@
-"""**Get Building and Landuse data from database and export as CSV files**."""
+"""**Get building and landuse georeferenced data from database**.
+
+Output georeferenced building data are categorized into Agricultural,
+Commercial, Educational, Industrial and Residential. Outputs data are stored as
+stored as csv files.
+"""
 import pandas as pd
 import os
 from pathlib import Path

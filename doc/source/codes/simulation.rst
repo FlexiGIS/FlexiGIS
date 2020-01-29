@@ -1,8 +1,8 @@
 .. module:: FlexiGIS
 
-.. _FlexiGIS Energy Requirement:
+.. _flexigis_simulate.py:
 
-FlexiGIS Energy Requirement
-===========================
+flexigis_simulate.py
+=====================
 .. automodule:: flexigis_simulate
     :members:

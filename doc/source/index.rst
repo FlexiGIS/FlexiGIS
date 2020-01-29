@@ -46,7 +46,7 @@ Open Database License ODbL.
 
 .. toctree::
   :maxdepth: 1
-  :caption: FlexiGIS Documentation:
+  :caption: FlexiGIS module description:
 
   FlexiGIS_code
 

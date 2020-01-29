@@ -1,8 +1,8 @@
 .. module:: FlexiGIS
 
-.. _FlexiGIS utils:
+.. _flexigis_utils.py:
 
-FlexiGIS utils
+flexigis_utils.py
 ===============
 .. automodule:: flexigis_utils
     :members:

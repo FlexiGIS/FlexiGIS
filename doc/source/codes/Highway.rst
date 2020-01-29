@@ -1,8 +1,8 @@
 .. module:: FlexiGIS
 
-.. _FlexiGIS Highway:
+.. _flexigis_road.py:
 
-FlexiGIS Highway
+flexigis_road.py
 ==================
 .. automodule:: flexigis_road
     :members:

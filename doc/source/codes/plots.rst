@@ -1,8 +1,8 @@
 .. module:: FlexiGIS
 
-.. _FlexiGIS plots:
+.. _plot_polygons.py:
 
-FlexiGIS plots
-===============
+plot_polygons.py
+=================
 .. automodule:: plot_polygons
     :members:
