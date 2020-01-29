@@ -90,6 +90,7 @@ To use the FlexiGIS spatial-temporal platform (Module I and II) download the Fle
 
   
 ## Installation
+<<<<<<< HEAD
 After making sure all system requirements are satisfied, clone FlexiGIS repo
 
 ```
@@ -98,22 +99,38 @@ git clone https://github.com/FlexiGIS/FlexiGIS.git
 
 create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies to Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, install
 the required python dependencies by running:
+=======
+After making sure that all system requirements are satisfied, clone the FlexiGIS repository using:
 
-activate the virtual environment
+```
+git clone _FlexiGIS repository_ from GitHub
+```
+
+In a next step, create a Python virtual environment (give a name e.g. _env_name) where the required python dependencies can be installed using pip. 
+>>>>>>> c9df1c2739b412fc10e2d37d76323aced66e9577
+
+```
+python3 -m venv _env_name
+``` 
+
+Then, activate the virtual environment:
 
 ```
 source virtual_env_name/bin/activate
 ```
-cd into the unzipped or cloned FlexiGIS directory
+
+Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, cd into the unzipped or cloned FlexiGIS directory
 
 ```
 cd ../FlexiGIS
 ```
-install requirements
+
+install the required python dependencies by running:
 
 ```
 pip install -r requirements.txt
 ```
+Now you are ready to excute FlexiGIS (Please note, that this applies for both Module I and II).
 
 ##### FlexiGIS directory description
 
@@ -144,7 +161,7 @@ To run the first two components of the FlexiGIS platform (Module I and II), exec
 
 ###### The available makefile options are:
 ```
-a. $ make all
+a. $ make
 ```
 make all executes make commands for the OSM data, from download to the simulation of load and PV profiles for the urban infrastructures.
 
