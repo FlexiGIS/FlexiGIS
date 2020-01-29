@@ -77,49 +77,31 @@ To use the FlexiGIS spatial-temporal platform (Module I and II) download the Fle
     * ├── data
     * │   ├── 01_raw_input_data
     * │   ├── 02_urban_output_data
-    * │   │   └── temp
     * │   ├── 03_urban_energy_requirements
     * │   └── 04_Visualisation
     * ├── doc
-    * │   ├── AUTHOR
-    * │   ├── BSD License.pdf
-    * │   ├── COPYING
-    * │   ├── LICENSE
-    * │   ├── README.md
+    * ├── README.md
     * └── requirements.txt
 
-  
 ## Installation
-<<<<<<< HEAD
 After making sure all system requirements are satisfied, clone FlexiGIS repo
-
+create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies to Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/.
+first clone the FlexiGIS code from the GitHub repository by running:
 ```
 git clone https://github.com/FlexiGIS/FlexiGIS.git
 ```
-
-create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies to Module I and II. Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, install
-the required python dependencies by running:
-=======
-After making sure that all system requirements are satisfied, clone the FlexiGIS repository using:
-
-```
-git clone _FlexiGIS repository_ from GitHub
-```
-
-In a next step, create a Python virtual environment (give a name e.g. _env_name) where the required python dependencies can be installed using pip. 
->>>>>>> c9df1c2739b412fc10e2d37d76323aced66e9577
+In the next step, create a Python virtual environment (give a name e.g. _env_name) where the required python dependencies can be installed using pip.
 
 ```
 python3 -m venv _env_name
-``` 
+```
 
 Then, activate the virtual environment:
 
 ```
 source virtual_env_name/bin/activate
 ```
-
-Python virtual environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/. After creating a python virtual environment, cd into the unzipped or cloned FlexiGIS directory
+After creating and activativating the python virtual environment, cd into the cloned FlexiGIS directory:
 
 ```
 cd ../FlexiGIS
