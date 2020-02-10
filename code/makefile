@@ -54,6 +54,7 @@ EXAMPLE_DATA:=$(input_folder)/example_OSM_data/OSM_road.csv
 
 .PHONY: all
 .PHONY: example
+.PHONY: shapefile
 .PHONY: download
 .PHONY: filter_data
 .PHONY: export_data
@@ -181,19 +182,33 @@ demand_supply_simulation:
 	@echo "Done. Modelling urban energy requirements." >> log/urban_energy.log
 	@echo "--> Done. Modelling urban energy requirements"
 
+
+#=================================================================================#
+#              FLEXIGIS-EXAMPLE                                 				  #
+#=================================================================================#
 example:
-	@echo "\n### example ### \ndata abstraction based on filtered OSM data for Oldenburg:"
+	@echo "\n### example based on filtered OSM data for Oldenburg ###"
 	@if [ -e $(EXAMPLE_DATA) ]; then python example.py ; fi
 	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
 	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
 	@echo "Example data abstraction done. see ../data/04_Visualisation folder for sample plot"
+
+
+#=================================================================================#
+#             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
+#=================================================================================#
+
+# if you wish to generate shape files for interactive visualisation on QGIS
+shapefile:
+	@echo "\n### Convert georeferenced csv files to shape files ###"
+	@if [ -e $(ROAD_CSV) ]; then python create_shapefile.py; fi
+
 
 #=================================================================================#
 #              DROPPING                                                           #
 #=================================================================================#
 
 # If you wish to drop your database
-
 drop_database:
-	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
-	@if [ "$(answer)" = "yes" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi
+	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
+	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi

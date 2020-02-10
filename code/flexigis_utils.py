@@ -46,6 +46,7 @@ def data_to_csv(dataset, name="name"):
     dataset_new = dataset["geometry"].str.split(";", n=1, expand=True)
     dataset["polygon"] = dataset_new[1]
     dataset = dataset.drop(columns=["geometry"])
+    dataset = dataset.rename(columns={"polygon": "geometry"})
     return dataset.to_csv(name, encoding="utf-8")
 
 
@@ -157,18 +158,18 @@ def get_csv_categories(destination, name="category_name"):
     category = category.drop(mask.index)
     return category
 
-
-def highway_to_geodata(df):
-    """Highway to geodata.
-
-    :param Dataframe df: georeferenced OSM data for lines.
-    :return: GeoDataFrame of highway OSM data
-    :rtype: pandas.GeoDataFrame
-    """
-    df["polygon1"] = df["polygon"].apply(wkt.loads)
-    df = GeoDataFrame(df, geometry='polygon1')
-    df = df.drop(columns=["polygon"])
-    return df
+#
+# def highway_to_geodata(df):
+#     """Highway to geodata.
+#
+#     :param Dataframe df: georeferenced OSM data for lines.
+#     :return: GeoDataFrame of highway OSM data
+#     :rtype: pandas.GeoDataFrame
+#     """
+#     df["polygon"] = df["geometry"].apply(wkt.loads)
+#     df = GeoDataFrame(df, geometry='polygon')
+#     df = df.drop(columns=["geometry"])
+#     return df
 
 
 def df_to_geodata(df):

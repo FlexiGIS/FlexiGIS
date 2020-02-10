@@ -272,7 +272,7 @@ class UrbanEnergyRequirement(object):
         plt.ylabel('MW')
         plt.title('Aggregated Energy Requirments in Oldenburg')
         plt.legend(['Simulated PV', 'Simulated load'], loc='upper left')
-        plt.savefig(self.destination2+"Energy_Requirments.png", dpi=300)
+        plt.savefig(self.output_destination2+"Energy_Requirments.png", dpi=300)
         plt.show()
         logging.info("Urban Energy Requirments REs plot generated succesfuly")
 

@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from flexigis_utils import (highway_to_geodata, df_to_geodata)
+from flexigis_utils import df_to_geodata
 
 
 def plot_building(df_building, legend_box, fig_size, font_size, face_color,
@@ -23,7 +23,7 @@ def plot_building(df_building, legend_box, fig_size, font_size, face_color,
                           ax=ax, linewidth=0.1, cmap='Dark2',
                           edgecolor="0.8")
 
-    ax.set_facecolor("whitesmoke")
+    # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
     leg.set_title("building")
     leg.set_bbox_to_anchor(legend_box)
@@ -53,7 +53,7 @@ def plot_landuses(df_building, df_landuse, legend_box, fig_size, font_size,
                                 cmap='tab10', edgecolor="0.8")
     geodata_building.plot(ax=base, edgecolor="0.8", color='white', legend=True)
 
-    ax.set_facecolor("whitesmoke")
+    # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
     leg.set_title("landuse")
     leg.set_bbox_to_anchor(legend_box)
@@ -74,12 +74,12 @@ def plot_roads(df_highway, legend_box, fig_size, font_size, face_color,
     :param str face_color: backgroud color (eg, white, black)
     :param str destination: plot destination path
     """
-    geodata_highway = highway_to_geodata(df_highway)
+    geodata_highway = df_to_geodata(df_highway)
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
     geodata_highway.plot(column='highway', categorical=True, legend=True,
                          ax=ax, linewidth=1, cmap='tab10', edgecolor="0.8")
 
-    ax.set_facecolor("whitesmoke")
+    # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
     leg.set_title("highway")
     leg.set_bbox_to_anchor(legend_box)
