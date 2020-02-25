@@ -31,8 +31,8 @@ def csv_to_shapefile():
         gdf.to_file(driver='ESRI Shapefile',
                     filename=shape_file_dest+base_name)
 
-    print("Done! shape files for OSM categories generated. See " + " " +
-          shape_file_dest+" "+"for output files")
+    print("Info: Shape Files of OSM Data categories generated. See " + " " +
+          shape_file_dest+" "+"for Outputs")
 
 
 def shapeFile_dir():

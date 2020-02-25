@@ -6,3 +6,5 @@ plot_polygons.py
 =================
 .. automodule:: plot_polygons
     :members:
+
+Plot geo-referenced data (landuse, building, highway) using geopandas.

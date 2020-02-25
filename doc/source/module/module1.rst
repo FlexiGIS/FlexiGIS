@@ -2,17 +2,17 @@
 
 .. _Module I:
 
-Module I: Spartial urban energy system platform
+Module I: Spatial urban energy system platform
 ================================================
 This module establishes urban energy infrastructure. It extracts, acquires
-and processes urban georeferenced data extracted from `OpenStreetMap`_.
+and processes urban geo-referenced data extracted from `OpenStreetMap`_.
 In order to extract the `OpenStreetMap`_ georeferenced datasets of urban energy
-infrustructure and its required features, this module derives an automatised
+infrastructure and its required features, this module derives an automatised
 extraction procedure. Firstly, the raw `OpenStreetMap`_ data is downloaded from
-the `OpenStreetMap`_ database for the invistigated urban space from `Geofabrik`_.
+the `OpenStreetMap`_ database for the investigated urban space from `Geofabrik`_.
 Second, the `OpenStreetMap`_ datasets are filtered for the respective case study
 defined by a .poly file using `osmosis`_, an open source java tool.
-The `OpenStreetMap`_ data are filtered for the follwoing OSM tags: landuse,
+The `OpenStreetMap`_ data are filtered for the following OSM tags: landuse,
 building, and highway.
 
 .. note::

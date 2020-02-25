@@ -2,7 +2,7 @@
 
 .. _module2:
 
-Module II: Modelling urban energy requirements
+Module II: Modeling urban energy requirements
 ===============================================
 This module simulates urban energy requirements (consumption and generation). The spatio-temporal
 electricity consumption and renewable energy generation from PV and wind, in the defined

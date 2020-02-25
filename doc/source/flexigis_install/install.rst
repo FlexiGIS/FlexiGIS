@@ -9,82 +9,96 @@ the required python dependencies can be installed using pip. Python virtual envi
 created by following the steps described `here`_.
 After creating a python virtual environment, FlexiGIS can easily be installed by following these steps:
 
-1. activate the virtual environment ::
+1. First clone the FlexiGIS code from the GitHub repository by running::
 
-    $ source virtual_env_name/bin/activate
+    user@terminal:~$ git clone https://github.com/FlexiGIS/FlexiGIS.git
 
-2. clone the FlexiGIS code from the GitHub repository ::
+2. In the next step, create a Python virtual environment (e.g. _env_name) where the required python dependencies can be installed using pip::
 
-    $ git clone https://github.com/FlexiGIS/FlexiGIS.git
+    user@terminal:~$ python3 -m venv _env_name
 
-3. cd into the cloned FlexiGIS folder ::
+3. activate the virtual environment ::
 
-    $ cd ../FlexiGIS
+    user@terminal:~$ source _env_name/bin/activate
 
-4. install the required python modules in the FlexiGIS/requirement.txt file ::
+4. cd into the cloned FlexiGIS folder ::
 
-    $ pip install -r requirements.txt
+    (_env_name) user@terminal:~$ cd ../FlexiGIS
+
+5. install the required python dependencies ::
+
+    (_env_name) user@terminal:~/FlexiGIS$ pip install -r requirements.txt
 
 Running FlexiGIS
 =================
 To run the first two components of the FlexiGIS platform (Module I and II), Go into the folder code,
-check the parameters in `config.mk` file. Ensure you have all paremeters in the config.mk properly set, see
-:ref:`FlexiGIS Config`.
+check the parameters in `config.mk` file. Ensure you have all parameters in the config.mk properly set, see
+:ref:`FlexiGIS Config`. Also ensure the poly file of the spatial location of choice is available in the data/01_raw_input_data directory before running FlexiGIS.
 
-FlexiGIS is executed using the make command, the available options are:
+FlexiGIS is executed using the make command, To run the available makefile options, go into the code directory in your linux terminal. The available make options are:
 
 - a::
 
-    $ make all
+    (_env_name) user@terminal:~/FlexiGIS/code$ make all
 
 It executes all necessary make commands for FlexiGIS, from download to the simulation
 of load and PV profiles for the urban infrastructures.
 
 - b::
 
-    $ make download
+    (_env_name) user@terminal:~/FlexiGIS/code$ make download
 
 make download, downloads spatial OSM data of a given location
 
 - c::
 
-    $ make filter_data
+    (_env_name) user@terminal:~/FlexiGIS/code$ make filter_data
 
 filters the downloaded OSM planet data
 
 - d::
 
-    $ make export_data
+    (_env_name) user@terminal:~/FlexiGIS/code$ make export_data
 
-exports the spatially filtered OSM data to a PostgreSQL database
+exports the spatially filtered OSM data to a PostgreSQL database using osm2pgsql
 
 - e::
 
-    $ make abstract_data
+    (_env_name) user@terminal:~/FlexiGIS/code$ make abstract_data
 
 extract highway, building and landuse data from filtered OSM data
 
 - f::
 
-    $ make demand_supply_simulation
+    (_env_name) user@terminal:~/FlexiGIS/code$ make demand_supply_simulation
 
 executes the simulation of load and PV profiles for urban infrastructure
 
 - g::
 
-    $ make drop_database
+    (_env_name) user@terminal:~/FlexiGIS/code$ make drop_database
 
 provides option to either drop the database or not
 
 - h::
 
-    $ make example
+    (_env_name) user@terminal:~/FlexiGIS/code$ make example
 
 make example can be run to generate an example simulation of aggregated load and
 PV profile for Oldenburg. After running make example, the routine imports spatially
-filtered OSM Highway,landuse and building data stored as csv files in the
+filtered OSM Highway, landuse and building data stored as csv files in the
 **../data/01_raw_input_data/example_OSM_data** folder. In other words, it runs steps *e* and *g*
-using the provided example data.
+using the provided example data. After running the FlexiGIS model using the makefile, the resulting
+aggregated load and PV profiles, urban infrastructure data are stored as .csv data in folder **../data/03_urban_energy_requirements**,
+also static plots of the urban infrastrure and simulated load and PV profiles are created and stored in the data/04-visualisation folder.
+To visualised the extracted georeferenced urban infrastructure interactively, run
+
+- i::
+
+    (_env_name) user@terminal:~/FlexiGIS/code$ make shapefile
+
+this generates shapely objects of the extracted urban infrastructure, which can be used to generate
+ interactive plots in `QGIS`_.
 
 .. note::
 
@@ -93,6 +107,7 @@ using the provided example data.
     data/03_urban_energy_requirements.
 
 .. _here: https://packaging.python.org/tutorials/installing-packages
+.. _QGIS: https://www.qgis.org/en/site/
 
 .. toctree::
   :maxdepth: 2

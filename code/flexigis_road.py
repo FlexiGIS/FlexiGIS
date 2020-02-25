@@ -1,7 +1,7 @@
 """**Get georeferenced Highway data from database**.
 
-Hihgway information such as motor ways, squares, bus stop, links. Outputs ara
- exported to csv.
+Highway categories such as motor ways, squares, bus stop, links. Outputs are
+ exported to csv files.
 """
 import pandas as pd
 import logging
@@ -272,7 +272,7 @@ def flexiGISroad(data):
 
 
 if __name__ == "__main__":
-    print("  === FLEXIGIS HIGHWAY ====")
+    print("  ==== FLEXIGIS HIGHWAY ====")
     conn = dbconn_from_args()
     cur = conn.cursor()
     roads = Roads()

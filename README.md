@@ -1,5 +1,5 @@
 # FlexiGIS: an open source GIS-based platform for modelling energy systems and flexibility options in urban areas.
-FlexiGIS stands for Flexibilisation in Geographic Information Systems (GIS). It extracts, filters and categorises the geo-referenced urban energy infrastructure, simulates the local electricity consumption and power generation from on-site renewable energy resources, and allocates the required decentralised storage in urban settings. FlexiGIS investigates systematically different scenarios of self-consumption, it analyses the characteristics and roles of flexibilisation technologies in promoting higher autarky levels in cities. The extracted urban energy infrustructure are based mainly on OpenStreetMap data.
+FlexiGIS stands for Flexibilisation in Geographic Information Systems (GIS). It extracts, filters and categorises the geo-referenced urban energy infrastructure, simulates the local electricity consumption and power generation from on-site renewable energy resources, and allocates the required decentralised storage in urban settings. FlexiGIS investigates systematically different scenarios of self-consumption, it analyses the characteristics and roles of flexibilisation technologies in promoting higher autarky levels in cities. The extracted urban energy infrastructure are based mainly on OpenStreetMap data.
 
 [![Documentation Status](https://readthedocs.org/projects/flexigis/badge/?version=latest)](https://flexigis.readthedocs.io/en/latest/?badge=latest)
 
@@ -21,7 +21,7 @@ Fig. 3. Extracted OpenStreetMap `highway` datasets for the city of Oldenburg. Cr
 After filtering the OSM raw data, the georeferenced building and roard infrastructure in the city of Oldenburg are exported to a relational postgis-enabled database using the open source `osm2pgsql`. Theses datasets can be exported as CSV files or visualised as maps (see Figures 1-3).
 
 ## Module II: FlexiGIS temporal dimension
-It simulates urban energy requirments (consumption and generation). The spatio-temporal electricity consumption and renewable energy generation from PV and wind in the defined urban area are modelled. This component models the combined spatial parameters of urban geometries (Module I) and linkes them to real-world applications using GIS. Here, a bottom-up simulation approach is developed to calculate local urban electricity demand and power generation from available renewable energy resources. For instance, using open source datases like Standardised Load Profiles and publicaly available weather data, Fig. 4 shows the generated quarter-hourly time series of the aggregated load and PV power supply profile for invistigated case study.
+It simulates urban energy requirments (consumption and generation). The spatio-temporal electricity consumption and renewable energy generation from PV and wind in the defined urban area are modelled. This component models the combined spatial parameters of urban geometries (Module I) and linkes them to real-world applications using GIS. Here, a bottom-up simulation approach is developed to calculate local urban electricity demand and power generation from available renewable energy resources. For instance, using open source datases like Standardised Load Profiles and publicaly available weather data, [ Figure 4 ](data/04_Visualisation/Energy_Requirments.png) shows the generated quarter-hourly time series of the aggregated load and PV power supply profile for invistigated case study.
 
 ![FlexiGIS Simulated Energy_requirements](data/04_Visualisation/Energy_Requirments.png)
 Fig. 4. Simulated electricity consumption (green) and solar power generation (red) for the city of Oldenburg.
@@ -109,7 +109,7 @@ To run the available makefile options, go into the code directory in your linux 
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make all
 ```
-make-all executes multiple make commands for the OSM data, from download to the simulation of load and PV profiles for the urban infrastructures. However, you can run these step one after the other by running
+make-all executes multiple make options for the OSM data, from download to the simulation of load and PV profiles for the urban infrastructures. However, you can run these step one after the other by running
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make download
 ```
@@ -154,7 +154,7 @@ The OpenStreetMap (OSM) data is available under the Open Database License (ODbL)
 ## Contact
 Author: Alaa Alhamwi alaa.alhamwi@dlr.de
 
-Organisation: German Aerospace Center ([DLR](https://www.dlr.de/ve/)) - Institute of Networked Energy Systems, department Energy system Analysis(ESY).
+Organisation: German Aerospace Center ([DLR](https://www.dlr.de/ve/)) - Institute of Networked Energy Systems, department for Energy system Analysis(ESY).
 
 ## Project Team
 Dr. Wided Medjroubi (project leader), Dr. Alaa Alhamwi (FlexiGIS main author), MSc. Chinonso C. Unaichi

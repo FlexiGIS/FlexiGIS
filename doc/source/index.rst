@@ -14,23 +14,12 @@ infrastructure, simulates the local electricity consumption and power generation
 on-site renewable energy resources, and allocates the required decentralised storage in
 urban settings. FlexiGIS investigates systematically different scenarios of self-consumption,
 it analyses the characteristics and roles of flexibilisation technologies in promoting higher
-autarky levels in cities. The extracted urban energy infrustructure are based mainly on `Open Street Map`_ data.
-
-The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License".
-Redistribution and use in source and binary forms, with or without modification, are permitted.
-For more information concerning the BSD-3C and the description of the terms under which you can use
-the FlexiGIS code, please see `opensource licenses`_.
-
-The OpenStreetMap (OSM) data is available under the Open Database License (ODbL). A description of
-the ODbL license is available at the `opendatacommons licenses`_. OpenStreetMap
-cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit
-the `openstreetmap copyright`_ page. The OpenStreetMap data distributed is available under the
-Open Database License ODbL.
+autarky levels in cities. The extracted urban energy infrastructure are based mainly on `Open Street Map`_ data.
 
 :Author: Alaa Alhamwi, <alaa.alhamwi@dlr.de>
-:Organization: DLR-Institute for Networked Energy Systems, Oldenburg
+:Organization: `DLR`_ - Institute of Networked Energy Systems, department for Energy System Analysis (ESY)
 :Version: |version|
-:Date: |today|
+:Date: 13.12.2019
 
 .. toctree::
    :maxdepth: 1
@@ -50,6 +39,20 @@ Open Database License ODbL.
 
   FlexiGIS_code
 
+
+License
+========
+The FlexiGIS is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License".
+Redistribution and use in source and binary forms, with or without modification, are permitted.
+For more information concerning the BSD-3C and the description of the terms under which you can use
+the FlexiGIS code, please see `opensource licenses`_.
+
+The OpenStreetMap (OSM) data is available under the Open Database License (ODbL). A description of
+the ODbL license is available at the `opendatacommons licenses`_. OpenStreetMap
+cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit
+the `openstreetmap copyright`_ page. The OpenStreetMap data distributed is available under the
+Open Database License ODbL.
+
 Indices and tables
 ==================
 
@@ -61,3 +64,4 @@ Indices and tables
 .. _opensource licenses: https://opensource.org/licenses/BSD-3-Clause
 .. _opendatacommons licenses: https://opendatacommons.org/licenses/odbl/index.html
 .. _openstreetmap copyright: http://www.openstreetmap.org/copyright
+.. _DLR: https://www.dlr.de/ve/

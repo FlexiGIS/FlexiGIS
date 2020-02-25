@@ -38,7 +38,7 @@ Python: Ensure you can run python (with version 3 and above) on your OS. Downloa
 
 
 To use the FlexiGIS spatial-temporal platform (Module I and II, see :ref:`FlexiGIS Components`) download the FlexiGIS
-code and data folder as a zip file or clone the repository from the FlexiGIS GitHub repo. After
+code and data folder as a zip file or clone the repository from the FlexiGIS GitHub repository. After
 downloading the FlexiGIS code, unzip the folder FlexiGIS in the location of your choice. The file
 structure of the FlexiGIS folder is as follows:
 

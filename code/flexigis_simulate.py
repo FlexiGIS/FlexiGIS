@@ -1,4 +1,4 @@
-"""**This module simualates Urban Energy Requirements**.
+"""**This module simulates Urban Energy Requirements**.
 
 Outputs are stored stored as csv.
 """
