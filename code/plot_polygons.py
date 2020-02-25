@@ -106,8 +106,8 @@ if __name__ == "__main__":
     sns.set_style("dark")
     sns.set_context(context=None, font_scale=1, rc=None)
     legend_box = (0.0, 0.05, 0.01, 0.7)
-    font_size = 15
-    fig_size = (7, 5)
+    font_size = 11
+    fig_size = (6, 4)
     face_color = "white"
 
     plot_landuses(df_building, df_landuse, legend_box, fig_size, font_size,

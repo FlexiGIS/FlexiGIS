@@ -341,5 +341,6 @@ def flexiGISbuilding(df):
 
 
 if __name__ == "__main__":
+    print("  === FLEXIGIS BUILDINGS ====")
     df = get_data_from_db()
     flexiGISbuilding(df)

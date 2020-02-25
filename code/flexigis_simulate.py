@@ -27,7 +27,8 @@ class UrbanEnergyRequirement(object):
         self.input_destination_2 = "../data/02_urban_output_data/"
         self.output_destination = "../data/03_urban_energy_requirements/"
         self.output_destination2 = "../data/04_Visualisation/"
-
+        self.norm = 1000
+        self.factorGHI = 0.15*0.75
         if Path(self.output_destination).exists():
             logging.info("directory {} already exists.".
                          format("03_urban_energy_requirements"))
@@ -40,11 +41,11 @@ class UrbanEnergyRequirement(object):
 
     def weather(self):
         """Read solar data."""
-        print('Weather Data Soda')
+        print('Weather Data: Solar Radiation Data')
         logging.info("read weather data Soda")
         soda = pd.read_csv(self.input_destination_1+'weather-data.csv',
                            encoding="ISO-8859-1", delimiter=',')
-        self.GHI = soda['Global Horiz']/1000  # convert to kWh/m2
+        self.GHI = soda['Global Horiz']/self.norm
         self.wind = soda['Wind speed']
 
 # if SLP is True:
@@ -56,24 +57,24 @@ class UrbanEnergyRequirement(object):
         self.dfs = pd.read_csv(self.input_destination_1+'SLP.csv',
                                delimiter=',')
         self.Zeit_stempel = self.dfs['Zeitstempel']
-        self.AL = self.dfs['L0']/1000  # AL=aggricultural load
-        self.CL = self.dfs['G0']/1000  # CL=commercial load
-        self.EL = self.dfs['G1']/1000  # EL=educational load
-        self.IL = self.dfs['G3']/1000  # IL=industrial load
-        self.RL = self.dfs['H0']/1000  # CL=residential load
-        self.SL = self.dfs['SB2']/1000  # SL=Street Light
+        self.AL = self.dfs['L0']/self.norm  # AL=aggricultural load
+        self.CL = self.dfs['G0']/self.norm  # CL=commercial load
+        self.EL = self.dfs['G1']/self.norm  # EL=educational load
+        self.IL = self.dfs['G3']/self.norm  # IL=industrial load
+        self.RL = self.dfs['H0']/self.norm  # CL=residential load
+        self.SL = self.dfs['SB2']/self.norm  # SL=Street Light
 
 # if EUIx is True:
     def electricity_usage_index(self):
         """Read Electricity Usage Index kwh/m2 per year."""
         print('Read Electricity Usage Index kwh/m2 per year')
         logging.info("Read Electricity Usage Index kwh/m2 per year")
-        self.x_a = 120/1000*1.0  # EUI_a
-        self.x_c = 201/1000*1.0  # EUI_c
-        self.x_e = 142/1000*1.0  # EUI_e
-        self.x_i = 645/1000*1.0  # EUI_i
-        self.x_r = 146/1000*1.0  # EUI_r
-        self.x_sl = 4/1000  # EUIsl
+        self.x_a = 120/self.norm*1.0  # EUI_a
+        self.x_c = 201/self.norm*1.0  # EUI_c
+        self.x_e = 142/self.norm*1.0  # EUI_e
+        self.x_i = 645/self.norm*1.0  # EUI_i
+        self.x_r = 146/self.norm*1.0  # EUI_r
+        self.x_sl = 4/self.norm  # EUIsl
 
 # if Ag is True:
     def agricultural_load(self):
@@ -90,7 +91,7 @@ class UrbanEnergyRequirement(object):
         for i, row in self.dfs.iterrows():
             row = str(self.Zeit_stempel[i]) + ';' + \
                 str(area_a*self.AL[i]*self.x_a) + ';' + \
-                str(area_a_pv*self.GHI[i]*0.15*0.75) + '\n'
+                str(area_a_pv*self.GHI[i]*self.factorGHI) + '\n'
 
             load_a.append(row)
         fname.writelines(load_a)
@@ -115,7 +116,7 @@ class UrbanEnergyRequirement(object):
         for i, row in self.dfs.iterrows():
             row = str(self.Zeit_stempel[i]) + ';' + \
                 str(area_c*self.CL[i]*self.x_c) + \
-                ';' + str(area_c_pv*self.GHI[i]*0.15*0.75) + '\n'
+                ';' + str(area_c_pv*self.GHI[i]*self.factorGHI) + '\n'
 
             load_c.append(row)
         fname.writelines(load_c)
@@ -139,7 +140,7 @@ class UrbanEnergyRequirement(object):
         for i, row in self.dfs.iterrows():
             row = str(self.Zeit_stempel[i]) + ';' + str(area_e*self.EL[i] *
                                                         self.x_e) + \
-                ';' + str(area_e_pv*self.GHI[i]*0.15*0.75) + '\n'
+                ';' + str(area_e_pv*self.GHI[i]*self.factorGHI) + '\n'
             load_e.append(row)
         fname.writelines(load_e)
         fname.close()
@@ -162,7 +163,7 @@ class UrbanEnergyRequirement(object):
         for i, row in self.dfs.iterrows():
             row = str(self.Zeit_stempel[i]) + ';' + str(area_i*self.IL[i] *
                                                         self.x_i) + \
-                ';' + str(area_i_pv*self.GHI[i]*0.15*0.75) + '\n'
+                ';' + str(area_i_pv*self.GHI[i]*self.factorGHI) + '\n'
             load_i.append(row)
         fname.writelines(load_i)
         fname.close()
@@ -184,7 +185,7 @@ class UrbanEnergyRequirement(object):
         for i, row in self.dfs.iterrows():
             row = str(self.Zeit_stempel[i]) + ';' + str(area_r*self.RL[i] *
                                                         self.x_r) + \
-                ';' + str(area_r_pv*self.GHI[i]*0.15*0.75) + '\n'
+                ';' + str(area_r_pv*self.GHI[i]*self.factorGHI) + '\n'
             load_r.append(row)
         fname.writelines(load_r)
         fname.close()
@@ -223,15 +224,15 @@ class UrbanEnergyRequirement(object):
         df3e = pd.read_csv(self.output_destination+'e_load.csv', delimiter=";")
         df4i = pd.read_csv(self.output_destination+'i_load.csv', delimiter=";")
         df5r = pd.read_csv(self.output_destination+'r_load.csv', delimiter=";")
-        sum_pv_all = df1a['PV[kWh]'] / 1000 + df2c['PV[kWh]']\
-            / 1000 + df3e['PV[kWh]'] / 1000 + df4i['PV[kWh]'] / 1000 +\
-            df5r['PV[kWh]'] / 1000
+        sum_pv_all = df1a['PV[kWh]'] / self.norm + df2c['PV[kWh]']\
+            / self.norm + df3e['PV[kWh]'] / self.norm + \
+            df4i['PV[kWh]'] / self.norm + df5r['PV[kWh]'] / self.norm
         sum_pv = np.array(sum_pv_all)
         dfallpv = pd.DataFrame(sum_pv, columns=["PV[MWh]"])
         dfallpv.to_csv(self.output_destination+'Aggregated-pv.csv', index=True,
                        encoding='utf-8')  # , delimiter = ";" )
         logging.info("All simulated PV power generation aggregated")
-        print('Done! Thanx Alaa')
+        print('Info: Aggt. PV Power')
 
 # if load_all is True:
     def electricity_aggregate(self):
@@ -251,23 +252,24 @@ class UrbanEnergyRequirement(object):
                              delimiter=";")
         sum_load_all = (df11a['Load[kWh]'] + df21c['Load[kWh]'] +
                         df31e['Load[kWh]'] + df41i['Load[kWh]'] +
-                        df51r['Load[kWh]'] + df61sl['Load[kWh]']) / 1000
+                        df51r['Load[kWh]'] + df61sl['Load[kWh]']) / self.norm
         sum_load = np.array(sum_load_all)
         dfallload = pd.DataFrame(sum_load, columns=["Load[MWh]"])
         dfallload.to_csv(self.output_destination+'Aggregated-load.csv')
         logging.info("All ssimulated electricity consumptions aggregated")
-        print('Done! Thanx Alaa')
+        print('Info: Aggt. Electricity Load')
 
 # if Plot is True:
     def plot_quarter_load_energy(self):
         """Simulate quarter load and plot Urban Energy Requirments REs."""
         print('Plot Urban Energy Requirments REs')
+        fig_size = (14, 8)
         dfsim_s = pd.read_csv(self.output_destination+'Aggregated-pv.csv',
                               delimiter=",")
-        dfsim_s['PV[MWh]'].plot(style='r', figsize=(16, 8), grid=True)
+        dfsim_s['PV[MWh]'].plot(style='r', figsize=fig_size, grid=True)
         dfsim_l = pd.read_csv(self.output_destination+'Aggregated-load.csv',
                               delimiter=",")
-        dfsim_l['Load[MWh]'].plot(style='g', figsize=(16, 8), grid=True)
+        dfsim_l['Load[MWh]'].plot(style='g', figsize=fig_size, grid=True)
         plt.xlabel('Time')
         plt.ylabel('MW')
         plt.title('Aggregated Energy Requirments in Oldenburg')

@@ -76,7 +76,7 @@ all: drop_database download filter_data export_data abstract_data demand_supply_
 # Step1: Download the OSM raw geo urban data.
 
 download:
-	@echo "\n### Step1 ### \nDownload the OSM raw data from \n   '$(OSM_raw_data_URL)' \n and saving it to \n   '$(OSM_raw_data)':"
+	@echo "\n STEP 1: \nDownload the OSM raw data from \n   '$(OSM_raw_data_URL)' \n and saving it to \n   '$(OSM_raw_data)':"
 	@date >> log/download.log
 	wget -nv -O $(OSM_raw_data) $(OSM_raw_data_URL) >> log/download.log 2>&1
 	@echo "Done. Download OSM raw data" >> log/download.log
@@ -89,7 +89,7 @@ download:
 # Step2: Filtering the OSM raw urban data.
 
 filter_data:
-	@echo "\n### Filtering the OSM raw geo-urban datasets:"
+	@echo "\n STEP 2: \nFiltering OSM PBF File With Bounding POLY FILE:"
 	@date >> log/osmosis.log
 	osmosis \
 	--read-pbf file=$(OSM_raw_data) \
@@ -116,16 +116,15 @@ filter_data:
 	--write-pbf file=$(OSM_merged_data) >> log/osmosis.log 2>&1;
 	@echo "osmosis data filtering done." >> log/osmosis.log
 	@date >> log/osmosis.log
-	@echo "--> Done. OSM filtered urban energy infrastructure"
+	@echo "Info: OSM Filtered Urban Energy Infrastructure"
 
 #=================================================================================#
 #              URBAN DATA EXPORT TO DATABASE                                      #
 #=================================================================================#
-
 # Step3: Export the Filtered OSM data to the Postgres Server.
 
 export_data:
-	@echo "\n### Step3 ### \nExporting the Filtered OSM data to Postgres Server:"
+	@echo "\n STEP 3: \nExporting the Filtered OSM data to Postgres Server:"
 	@date >> log/database.log
 	export PGPASSWORD=$(postgres_password); createdb -U $(postgres_user) -h $(postgres_host) $(postgres_database);
 	export PGPASSWORD=$(postgres_password); $(osm2pgsql_bin) -r pbf --username=$(postgres_user) --database=$(postgres_database) --host=$(postgres_host) --port=$(postgres_port) -s \
@@ -134,16 +133,15 @@ export_data:
 	@echo "OSM data export to database done." >> log/database.log
 	@date >> log/osm2pgsql.log
 	#@date >> log/database.log
-	@echo "--> Done. FlexiGIS OSM data Export."
+	@echo "Info: FlexiGIS OSM Data Export Complete."
 
 #=================================================================================#
 #              ABSTRACTION AND DATA PROCESSING                                    #
 #=================================================================================#
-
 # Step4: Execute the abstraction script flexigis_buildings.py & flexigis_road.py on the database created in Step3
 
 abstract_data:
-	@echo "\n### Step4 ### \nRunning the abstraction script flexigis_road.py on the database '$(postgres_database)':"
+	@echo "\n STEP 4: \nRunning the Abstraction script on the database '$(postgres_database)':"
 	# log/abstraction.done: log/database_import.done
 	@date >> log/abstract.log
 	@if [ $(postgres_password) =  ]; \
@@ -153,9 +151,7 @@ abstract_data:
 	python flexigis_road.py -U $(postgres_user) -P $(postgres_port) -H $(postgres_host) -D $(postgres_database) -X $(postgres_password) ; \
 	fi
 	@echo "highway data abstraction done." >> log/abstract.log
-	#@touch log/abstraction.done
-	@echo "--> Done. FlexiGIS Highway Data Abstraction."
-	@echo "\n### Step5 ### \nRunning the abstraction script flexigis_buildings.py on the database '$(postgres_database)':"
+	@echo "Info: FlexiGIS Highway Data Abstraction Complete."
 	@date >> log/abstract.log
 	@if [ $(postgres_password) =  ]; \
 	then \
@@ -164,50 +160,45 @@ abstract_data:
 	python flexigis_buildings.py -U $(postgres_user) -P $(postgres_port) -H $(postgres_host) -D $(postgres_database) -X $(postgres_password) ; \
 	fi
 	@echo "Building and landuse data abstraction done." >> log/abstract.log
-	@echo "Generating plots."
+	@echo "Info: FlexiGIS Buildings Data Abstraction Complete."
+	@echo "Info: Generating Plots of Geo-referenced Data."
 	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
 	@echo "plots for building and highway generated." >> log/abstract.log
-	@echo "--> Done. FlexiGIS Buildings Data Abstraction."
+	@echo "Info: Plots Generated."
 
 #=================================================================================#
 #              MODELLING URBAN ENERGY REQUIREMENT                                 #
 #=================================================================================#
-
 # Step5: Modelling urban energy requirements
 
 demand_supply_simulation:
-	@echo "\n### Step6 ### \nModelling demand and supply and saving aggregated energry required as CSV files to folder '$(load_folder)':"
+	@echo "\n STEP 5: \nModel Demand and Supply"
 	@date >> log/urban_energy.log
 	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
 	@echo "Done. Modelling urban energy requirements." >> log/urban_energy.log
-	@echo "--> Done. Modelling urban energy requirements"
-
+	@echo "Info: Output Files IN Folder '$(load_folder)'"
 
 #=================================================================================#
 #              FLEXIGIS-EXAMPLE                                 				  #
 #=================================================================================#
 example:
-	@echo "\n### example based on filtered OSM data for Oldenburg ###"
+	@echo "\n TEST: \nExample Based on Filtered OSM Data of Oldenburg"
 	@if [ -e $(EXAMPLE_DATA) ]; then python example.py ; fi
 	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
 	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
-	@echo "Example data abstraction done. see ../data/04_Visualisation folder for sample plot"
-
+	@echo "Info: Example Data Abstraction & Simulation Complete. see ../data/04_Visualisation folder for sample plot"
 
 #=================================================================================#
 #             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
 #=================================================================================#
-
 # if you wish to generate shape files for interactive visualisation on QGIS
 shapefile:
-	@echo "\n### Convert georeferenced csv files to shape files ###"
+	@echo "\n STEP 6: \nConvert Geo-referenced csv Files to Shapely Objects"
 	@if [ -e $(ROAD_CSV) ]; then python create_shapefile.py; fi
-
 
 #=================================================================================#
 #              DROPPING                                                           #
 #=================================================================================#
-
 # If you wish to drop your database
 drop_database:
 	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
