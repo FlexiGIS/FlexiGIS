@@ -17,10 +17,10 @@ Directory Description
 * data
 
     The folder `data` contains or should contain all the input data needed and
-    ouput data generated after running FlexiGIS. The folder data contains 4 sub
+    output data generated after running FlexiGIS. The folder data contains 4 sub
     folders, which are introduced as follows:
 
-    * `01_raw_input_data` contains the poly file of the respective invistegated
+    * `01_raw_input_data` contains the poly file of the respective investigated
         urban area (e.g. Oldenburg.poly). The poly file is used to filter the
         OSM planet datasets to include the data of case study. This is achieved
         by Osmosis and executed by running "make filter_data". However, the OSM

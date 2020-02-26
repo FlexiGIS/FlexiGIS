@@ -8,4 +8,4 @@ flexigis_buildings.py
     :members:
 
 Get Building and Landuse geo-referenced data. Output geo-referenced building data are categorized into Agricultural,
-Commercial, Educational, Industrial and Residential. Outputs data are stored as csv files.
+Commercial, Educational, Industrial and Residential. Outputs data are stored as CSV files.

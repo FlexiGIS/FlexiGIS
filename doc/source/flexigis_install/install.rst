@@ -35,7 +35,7 @@ To run the first two components of the FlexiGIS platform (Module I and II), Go i
 check the parameters in `config.mk` file. Ensure you have all parameters in the config.mk properly set, see
 :ref:`FlexiGIS Config`. Also ensure the poly file of the spatial location of choice is available in the data/01_raw_input_data directory before running FlexiGIS.
 
-FlexiGIS is executed using the make command, To run the available makefile options, go into the code directory in your linux terminal. The available make options are:
+FlexiGIS is executed using the make command, To run the available makefile options, go into the code directory in your Linux terminal. The available make options are:
 
 - a::
 
@@ -91,14 +91,13 @@ filtered OSM Highway, landuse and building data stored as csv files in the
 using the provided example data. After running the FlexiGIS model using the makefile, the resulting
 aggregated load and PV profiles, urban infrastructure data are stored as .csv data in folder **../data/03_urban_energy_requirements**,
 also static plots of the urban infrastrure and simulated load and PV profiles are created and stored in the data/04-visualisation folder.
-To visualised the extracted georeferenced urban infrastructure interactively, run
+To visualised the extracted geo-referenced urban infrastructure interactively, run make shapefile.
 
 - i::
 
     (_env_name) user@terminal:~/FlexiGIS/code$ make shapefile
 
-this generates shapely objects of the extracted urban infrastructure, which can be used to generate
- interactive plots in `QGIS`_.
+this generates shapely objects of the extracted urban infrastructure, which can be used to generate interactive plots in `QGIS`_.
 
 .. note::
 
