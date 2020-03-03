@@ -146,6 +146,9 @@ this generates shapely objects of the extracted urban infrastructure, which can 
 ## Documentation
 Jump to [documentation](https://flexigis.readthedocs.io/en/latest/) for more details about FlexiGIS.
 
+## Publications List
+To see the list of publications jump to [publications](https://flexigis.readthedocs.io/en/latest/module/publication.html).
+
 ## License
 FlexiGIS is licensed under the [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause), "New BSD License" or "Modified BSD License".
 
