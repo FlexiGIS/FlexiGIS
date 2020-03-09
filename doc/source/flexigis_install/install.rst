@@ -66,7 +66,8 @@ exports the spatially filtered OSM data to a PostgreSQL database using osm2pgsql
 
     (_env_name) user@terminal:~/FlexiGIS/code$ make abstract_data
 
-extract highway, building and landuse data from filtered OSM data
+extract highway, building and landuse data from filtered OSM data, stores them as
+shape files and also generate geopandas plots of the urban infrastructures
 
 - f::
 
@@ -90,14 +91,9 @@ filtered OSM Highway, landuse and building data stored as csv files in the
 **../data/01_raw_input_data/example_OSM_data** folder. In other words, it runs steps *e* and *g*
 using the provided example data. After running the FlexiGIS model using the makefile, the resulting
 aggregated load and PV profiles, urban infrastructure data are stored as .csv data in folder **../data/03_urban_energy_requirements**,
-also static plots of the urban infrastrure and simulated load and PV profiles are created and stored in the data/04-visualisation folder.
-To visualised the extracted geo-referenced urban infrastructure interactively, run make shapefile.
-
-- i::
-
-    (_env_name) user@terminal:~/FlexiGIS/code$ make shapefile
-
-this generates shapely objects of the extracted urban infrastructure, which can be used to generate interactive plots in `QGIS`_.
+also static plots of the urban infrastructures and simulated load and PV profiles are created and stored in the data/04-visualisation folder.
+To visualise the extracted georeferenced urban infrastructures data interactively, the generated shape file of the extracted urban infrastructures,
+can be used in `QGIS`_ to generate interactive plots.
 
 .. note::
 

@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 
 from db_connect import dbconn_from_args
-from flexigis_utils import (compute_area, data_to_csv)
+from flexigis_utils import (compute_area, data_to_file)
 # create a log file
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="../code/log/flexigis_road.log",
@@ -91,7 +91,8 @@ class Roads:
         # compute area and save data to csv
         new_data = compute_area(self.new_data_, self._width_)
         logging.info("Highway area calculation done!")
-        return data_to_csv(new_data, self.destination+self.ways_column+".csv")
+        data_to_file(new_data, self.destination+self.ways_column)
+        # data_to_csv(new_data, self.destination+self.ways_column+".csv")
 
     def get_road_features2(self, dataset):
         """Get Additional OSM Highway features, eg. motor_link, living_street.
@@ -113,7 +114,7 @@ class Roads:
         # compute area and save data to csv
         new_data = compute_area(self.new_data_, self._width_)
         logging.info("csv file of highway properties generated.")
-        return data_to_csv(new_data, self.destination+self.table+".csv")
+        data_to_file(new_data, self.destination+self.table)
 
 
 # TODO: Test newly added class and methods
@@ -176,8 +177,8 @@ class GetRoadsPolygons:
                                    isin(self.roadpolygons_feature)]
         self.new_data_polygons = self.dataset.set_index(["highway"])
 
-        return data_to_csv(self.new_data_polygons,
-                           self.destination+self.table+".csv")
+        data_to_file(self.new_data_polygons,
+                     self.destination+self.table)
         logging.info("csv file for polygons generated.")
 
 
@@ -241,8 +242,8 @@ class GetPoints:
                                    isin(self.point_feature)]
         self.new_data_points = self.dataset.set_index([self.ways_column])
 
-        return data_to_csv(self.new_data_points,
-                           self.destination+self.table+".csv")
+        data_to_file(self.new_data_points,
+                     self.destination+self.table)
         logging.info("csv file for points generated.")
 
 

@@ -17,8 +17,19 @@ it analyses the characteristics and roles of flexibilisation technologies in pro
 autarky levels in cities. The extracted urban energy infrastructure are based mainly on `Open Street Map`_ data.
 
 :Author: Alaa Alhamwi, <alaa.alhamwi@dlr.de>
-:Organization: `DLR`_ - Institute of Networked Energy Systems, department for Energy System Analysis (ESY)
+
+:Organization:
+
+.. image:: dlr-signet_grau.jpg
+    :width: 70px
+    :align: left
+    :height: 45px
+
+`DLR`_ - Institute of Networked Energy Systems, Department of Energy Systems Analysis
+
+
 :Version: |version|
+
 :Date: 13.12.2019
 
 .. toctree::

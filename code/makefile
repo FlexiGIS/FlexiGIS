@@ -44,8 +44,8 @@ include $(config)
 #=================================================================================#
 #              Output Files                                                       #
 #=================================================================================#
-ROAD_CSV:= $(output_folder)/highway.csv
-BUILDINGS_CSV:=$(output_folder)/buildings.csv
+ROAD_CSV:= $(output_folder)/highway/highway.shp
+BUILDINGS_CSV:=$(output_folder)/buildings/buildings.shp
 EXAMPLE_DATA:=$(input_folder)/example_OSM_data/OSM_road.csv
 #=================================================================================#
 #              Definition of tasks                                                #
@@ -188,13 +188,6 @@ example:
 	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
 	@echo "Info: Example Data Abstraction & Simulation Complete. see ../data/04_Visualisation folder for sample plot"
 
-#=================================================================================#
-#             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
-#=================================================================================#
-# if you wish to generate shape files for interactive visualisation on QGIS
-shapefile:
-	@echo "\n STEP 6: \nConvert Geo-referenced csv Files to Shapely Objects"
-	@if [ -e $(ROAD_CSV) ]; then python create_shapefile.py; fi
 
 #=================================================================================#
 #              DROPPING                                                           #

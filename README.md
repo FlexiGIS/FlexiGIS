@@ -125,7 +125,7 @@ exports the spatially filtered OSM data to a PostgreSQL database using [osm2pgsq
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make abstract_data
 ```
-extract categorised highway, building and landuse data from filtered OSM data
+extract categorised highway, building and landuse data from filtered OSM data, stores them as shape files and also generate geopandas plots of the urban infrastructures.
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make demand_supply_simulation
 ```
@@ -137,11 +137,7 @@ provides option to either drop the database or not.
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make example
 ```
-make example can be run to generate an example simulation of aggregated load and PV profile for Oldenburg. The example imports spatially filtered OSM Highway, landuse and building data stored as csv files in the ../data/01_raw_input_data/example_OSM_data folder. In other words, it runs steps e and g using the provided example data. After running the FlexiGIS model using the makefile, the resulting aggregated load and PV profiles, urban infrastructure data are stored as .csv data in folder data/03_urban_energy_requirements, also static plots of the urban infrastrure and simulated load and PV profiles are created and stored in the data/04-visualisation folder. To visualised the extracted georeferenced urban infrastructure interactively, run
-```console
-(_env_name) user@terminal:~/FlexiGIS/code$ make shapefile
-```
-this generates shapely objects of the extracted urban infrastructure, which can be used to generate interactive plots in [QGIS](https://www.qgis.org/en/site/).
+make example can be run to generate an example simulation of aggregated load and PV profile for Oldenburg. The example imports spatially filtered OSM Highway, landuse and building data stored as csv files in the ../data/01_raw_input_data/example_OSM_data folder. In other words, it runs steps e and g using the provided example data. After running the FlexiGIS model using the make options, the resulting aggregated load and PV profiles of the urban infrastructures are stored as .csv data in folder data/03_urban_energy_requirements, also static plots of the urban infrastructures and simulated load and PV profiles are created and stored in the data/04-visualisation folder. To visualise the extracted georeferenced urban infrastructures data interactively, the generated shape file of the extracted urban infrastructures, can be used in [QGIS](https://www.qgis.org/en/site/) to generate interactive plots.
 
 ## Documentation
 Jump to [documentation](https://flexigis.readthedocs.io/en/latest/) for more details about FlexiGIS.

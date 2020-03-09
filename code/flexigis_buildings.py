@@ -156,7 +156,8 @@ def all_building_categories(df, data_building, data_landuse, main_destination,
     features_building = polygons.get_unique_features(data_building)
 
     # save landuse data to csv
-    data_landuse.to_csv(main_destination+"landuse.csv", encoding="utf8")
+    # data_landuse.to_csv(main_destination+"landuse.csv", encoding="utf8")
+    data_landuse.to_file(main_destination+"landuse", driver='ESRI Shapefile')
     # create temp directory to store temporary csv files
     if Path(temp_destination).exists():
         logging.info("directory {} already exists.".
@@ -167,7 +168,7 @@ def all_building_categories(df, data_building, data_landuse, main_destination,
         logging.info("directory {} succesfully created!".
                      format(str(temp_destination)))
 
-    print("Extracting building and landuse intersects!")
+    print("INFO: Extracting building and landuse intersects")
 
     for building_type in features_building:
         # print("getting intersects for %s" % building_type)
@@ -265,8 +266,8 @@ def educational_building(data):
     return educational
 
 
-def save_categorized_to_csv_(temp_destination, main_destination, *argv):
-    """Export categorized buildings of interest to csv.
+def save_categorized_to_file(temp_destination, main_destination, *argv):
+    """Export categorized buildings of interest to shape file.
 
     :param str temp_destination: directory path to store temp file
     :param str main_destination: directory path to store output data
@@ -285,14 +286,18 @@ def save_categorized_to_csv_(temp_destination, main_destination, *argv):
             elif os.path.isdir(file_path):
                 shutil.rmtree(file_path)
             logging.info("../data/temp directory cleaned.")
-        except Exception as e:
 
+        except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
             logging.error('Failed to delete %s. Reason: %s' % (file_path, e))
-    # write categories to csv files separately
+
+    # write categories to csv/shapefile files separately
     for arg in argv:
-        arg.to_csv(main_destination+str(arg.buildings[0])+".csv",
-                   encoding="utf8")
+        print("INFO: shape file for"+" "+str(arg.buildings[0]))
+        # arg.to_csv(main_destination+str(arg.buildings[0])+".csv",
+        #            encoding="utf8")
+        arg.to_file(main_destination+str(arg.buildings[0]),
+                    driver='ESRI Shapefile')
         logging.info("{} csv file generated succesfuly.".
                      format(str(arg.buildings[0])))
 
@@ -331,12 +336,15 @@ def flexiGISbuilding(df):
     educational = educational_building(data_building)
     all_df = pd.concat([agricultural, commercial, educational, industrial,
                         residential], ignore_index=True)
-    all_df.to_csv(main_destination+"buildings.csv", encoding="utf8")
+    # all_df.to_csv(main_destination+"buildings.csv", encoding="utf8")
+    all_df.to_file(main_destination+"buildings", driver='ESRI Shapefile')
 
-    save_categorized_to_csv_(temp_destination, main_destination, commercial,
+    save_categorized_to_file(temp_destination, main_destination, commercial,
                              residential, industrial, agricultural,
                              educational)
-    print("Done. csv files of categorised building generated!")
+    print("Done. shape files of categorised building generated!")
+    if os.path.isdir(temp_destination):
+        shutil.rmtree(temp_destination)
     logging.info("FlexiGIS building job done.!")
 
 

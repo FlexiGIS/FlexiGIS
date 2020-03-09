@@ -1,5 +1,4 @@
 """**Helper functions for FlexiGIS data abstraction**."""
-
 import pandas as pd
 import geopandas as gpd
 import glob
@@ -35,24 +34,26 @@ def compute_area(dataset, width):
     return dataset_new
 
 
-def data_to_csv(dataset, name="name"):
-    """Write a dataframe to a csv file.
+def data_to_file(dataset, name="name"):
+    """Write a dataframe to a csv/shape file.
 
     :param DataFrame dataset: OSM planet data
     :param str name: file name of the output csv file (eg. `table_name`)
-    :return: csv file for highway category
-    :rtype: csv file
     """
     dataset_new = dataset["geometry"].str.split(";", n=1, expand=True)
     dataset["polygon"] = dataset_new[1]
     dataset = dataset.drop(columns=["geometry"])
     dataset = dataset.rename(columns={"polygon": "geometry"})
-    return dataset.to_csv(name, encoding="utf-8")
-
+    dataset['geometry'] = dataset['geometry'].apply(wkt.loads)
+    dataset = GeoDataFrame(dataset, geometry='geometry')
+    # dataset.to_csv(name, encoding="utf-8")
+    dataset.to_file(name, driver='ESRI Shapefile')
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # helper functions flexigis_buildings
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 def get_polygons(data, select="feature"):
     """Get building classification.
 
@@ -147,6 +148,8 @@ def get_csv_categories(destination, name="category_name"):
     category = []
     for i in range(len(csv_categories)):
         data_category = pd.read_csv(csv_categories[i])
+        data_category["geometry"] = data_category["geometry"].apply(wkt.loads)
+        data_category = GeoDataFrame(data_category, geometry="geometry")
         category.append(data_category)
     category = pd.concat(category)
     category = category.set_index("building")
@@ -158,28 +161,19 @@ def get_csv_categories(destination, name="category_name"):
     category = category.drop(mask.index)
     return category
 
+
+# def df_to_geodata(df):
+#     """Convert data to geodataframe.
 #
-# def highway_to_geodata(df):
-#     """Highway to geodata.
-#
-#     :param Dataframe df: georeferenced OSM data for lines.
+#     :param Dataframe df: georeferenced OSM data for polygons.
 #     :return: GeoDataFrame of highway OSM data
 #     :rtype: pandas.GeoDataFrame
 #     """
-#     df["polygon"] = df["geometry"].apply(wkt.loads)
-#     df = GeoDataFrame(df, geometry='polygon')
-#     df = df.drop(columns=["geometry"])
-#     return df
-
-
-def df_to_geodata(df):
-    """Convert data to geodataframe.
-
-    :param Dataframe df: georeferenced OSM data for polygons.
-    :return: GeoDataFrame of highway OSM data
-    :rtype: pandas.GeoDataFrame
-    """
-    df['polygon'] = df['geometry'].apply(wkt.loads)
-    df = GeoDataFrame(df, geometry='polygon')
-    df = df.drop(columns=["geometry"])
-    return df
+#     if "Unnamed: 0" in df:
+#         df = df.drop(columns=["Unnamed: 0"])
+#
+#     df["geometry"] = df["geometry"].apply(wkt.loads)
+#     gdf = GeoDataFrame(df, geometry="geometry")
+#     gdf = gdf.drop(columns=["geometry"])
+#     gdf.rename(columns={"geometry_shp": "geometry"})
+#     return gdf

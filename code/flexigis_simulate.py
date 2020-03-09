@@ -4,6 +4,7 @@ Outputs are stored stored as csv.
 """
 # from __future__ import division
 import pandas as pd
+import geopandas as gpd
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -80,8 +81,7 @@ class UrbanEnergyRequirement(object):
     def agricultural_load(self):
         """Simulate quarter load."""
         print('Simulate Agr. quarter hourly Energy Requirments REs')
-        dfa = pd.read_csv(self.input_destination_2+'agricultural.csv',
-                          delimiter=',')
+        dfa = gpd.read_file(self.input_destination_2+'agricultural/agricultural.shp')
         area_a = dfa['area'].sum()
         area_a_pv = area_a*0.267
         load_a = []
@@ -105,8 +105,7 @@ class UrbanEnergyRequirement(object):
     def commercial_energy_req(self):
         """Simulate Com. quarter hourly Energy Requirments REs."""
         print('Simulate Com. quarter hourly Energy Requirments REs')
-        dfc = pd.read_csv(self.input_destination_2+'commercial.csv',
-                          delimiter=',')
+        dfc = gpd.read_file(self.input_destination_2+'commercial/commercial.shp')
         area_c = dfc['area'].sum()
         area_c_pv = area_c*0.267
         load_c = []
@@ -130,8 +129,7 @@ class UrbanEnergyRequirement(object):
     def eductaional_energy_req(self):
         """Simulate edu. quarter hourly Energy Requirments REs."""
         print('Simulate edu. quarter hourly Energy Requirments REs')
-        dfe = pd.read_csv(self.input_destination_2+'educational.csv',
-                          delimiter=',')
+        dfe = gpd.read_file(self.input_destination_2+'educational/educational.shp')
         area_e = dfe['area'].sum()
         area_e_pv = area_e*0.267
         load_e = []
@@ -153,8 +151,7 @@ class UrbanEnergyRequirement(object):
     def industrial_energy_req(self):
         """Simulate Ind. quarter hourly Energy Requirments REs."""
         print('Simulate Ind. quarter hourly Energy Requirments REs')
-        dfi = pd.read_csv(self.input_destination_2+'industrial.csv',
-                          delimiter=',')
+        dfi = gpd.read_file(self.input_destination_2+'industrial/industrial.shp')
         area_i = dfi['area'].sum()
         area_i_pv = area_i*0.267
         load_i = []
@@ -175,8 +172,7 @@ class UrbanEnergyRequirement(object):
 # if Re is True:
     def residential_energy_req(self):
         """Simulate Res. quarter hourly Energy Requirments REs."""
-        dfr = pd.read_csv(self.input_destination_2+'residential.csv',
-                          delimiter=',')
+        dfr = gpd.read_file(self.input_destination_2 + 'residential/residential.shp')
         area_r = dfr['area'].sum()
         area_r_pv = area_r*0.578
         load_r = []
@@ -198,8 +194,7 @@ class UrbanEnergyRequirement(object):
     def highway_energy_req(self):
         """Simulate Urban Streetlightning. quarter hourly."""
         print('Simulate Urban Streetlightning. quarter hourly')
-        dfsl = pd.read_csv(self.input_destination_2+'highway.csv',
-                           delimiter=',')
+        dfsl = gpd.read_file(self.input_destination_2+'highway/highway.shp')
         area_sl = dfsl['area'].sum()
         self.no_building = len(dfsl)
         load_sl = []
