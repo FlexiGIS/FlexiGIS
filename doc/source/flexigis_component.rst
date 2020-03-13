@@ -12,4 +12,3 @@ FlexiGIS is structured into three modules:
    module/module1
    module/module2
    module/module3
-   module/publication
