@@ -12,7 +12,7 @@ from geopandas import GeoDataFrame
 from shapely import wkt
 import logging
 
-from db_connect import dbconn_from_args
+from flexigis_utils import dbconn_from_args
 from flexigis_utils import (get_polygons, get_intersects, mask_landuse_data,
                             get_features, get_data_from_buildings,
                             get_csv_categories)
