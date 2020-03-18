@@ -270,7 +270,7 @@ def flexiGISroad(data):
 
 
 if __name__ == "__main__":
-    print("  ==== FLEXIGIS HIGHWAY ====")
+    print(" ==== FLEXIGIS HIGHWAY ==== ")
     conn = dbconn_from_args()
     cur = conn.cursor()
     roads = Roads()
