@@ -155,9 +155,6 @@ def all_building_categories(df, data_building, data_landuse, main_destination,
     data_landuse = data_landuse
     features_building = polygons.get_unique_features(data_building)
 
-    # save landuse data to csv
-    # data_landuse.to_csv(main_destination+"landuse.csv", encoding="utf8")
-    data_landuse.to_file(main_destination+"landuse", driver='ESRI Shapefile')
     # create temp directory to store temporary csv files
     if Path(temp_destination).exists():
         logging.info("directory {} already exists.".
@@ -336,6 +333,11 @@ def flexiGISbuilding(df):
     educational = educational_building(data_building)
     all_df = pd.concat([agricultural, commercial, educational, industrial,
                         residential], ignore_index=True)
+
+    # save landuse data to file
+    # data_landuse.to_csv(main_destination+"landuse.csv", encoding="utf8")
+    data_landuse.reset_index().to_file(main_destination+"landuse", driver='ESRI Shapefile')
+    # Building data
     # all_df.to_csv(main_destination+"buildings.csv", encoding="utf8")
     all_df.to_file(main_destination+"buildings", driver='ESRI Shapefile')
 
