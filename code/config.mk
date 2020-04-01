@@ -1,8 +1,8 @@
 ###################################################################################
-#   FlexiGIS			                                                  #
+#   FlexiGIS			                                                          #
 #                                                                                 #
 #   Copyright "2020" "DLR VE"                                                     #
-#										  #
+#										                                          #
 #   Licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License"  #
 #                                                                                 #
 #   Redistribution and use in source and binary forms, with or without            #

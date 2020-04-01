@@ -15,11 +15,10 @@ def plot_building(df_building, legend_box, fig_size, font_size, face_color,
     :param str face_color: backgroud color (eg, white, black)
     :param str destination: plot destination path
     """
-    geodata_building = df_building
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
-    geodata_building.plot(column='buildings', categorical=True, legend=True,
-                          ax=ax, linewidth=0.1, cmap='Dark2',
-                          edgecolor="0.8")
+    df_building.plot(column='buildings', categorical=True, legend=True,
+                     ax=ax, linewidth=0.1, cmap='Dark2',
+                     edgecolor="0.8")
 
     # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
@@ -43,13 +42,11 @@ def plot_landuses(df_building, df_landuse, legend_box, fig_size, font_size,
     :param str face_color: backgroud color (eg, white, black)
     :param str destination: plot destination path
     """
-    geodata_building = df_building
-    geodata_landuse = df_landuse
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
-    base = geodata_landuse.plot(column='landuse', categorical=True,
-                                legend=True, ax=ax, linewidth=0.1,
-                                cmap='tab10', edgecolor="0.8")
-    geodata_building.plot(ax=base, edgecolor="0.8", color='white', legend=True)
+    base = df_landuse.plot(column='landuse', categorical=True,
+                           legend=True, ax=ax, linewidth=0.1,
+                           cmap='tab10', edgecolor="0.8")
+    df_building.plot(ax=base, edgecolor="0.8", color='white', legend=True)
 
     # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
@@ -72,10 +69,9 @@ def plot_roads(df_highway, legend_box, fig_size, font_size, face_color,
     :param str face_color: backgroud color (eg, white, black)
     :param str destination: plot destination path
     """
-    geodata_highway = df_highway
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
-    geodata_highway.plot(column='highway', categorical=True, legend=True,
-                         ax=ax, linewidth=1, cmap='tab10', edgecolor="0.8")
+    df_highway.plot(column='highway', categorical=True, legend=True,
+                    ax=ax, linewidth=1, cmap='tab10', edgecolor="0.8")
 
     # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()

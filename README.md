@@ -143,7 +143,7 @@ make example can be run to generate an example simulation of aggregated load and
 Jump to [documentation](https://flexigis.readthedocs.io/en/latest/) for more details about FlexiGIS.
 
 ## Publications List
-To see the list of publications jump to [publications](https://flexigis.readthedocs.io/en/latest/).
+To see the list of publications jump to [publications](https://flexigis.readthedocs.io/en/latest/#publications-list).
 
 ## License
 FlexiGIS is licensed under the [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause), "New BSD License" or "Modified BSD License".

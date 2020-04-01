@@ -2,7 +2,6 @@
 
 Outputs are stored stored as csv.
 """
-# from __future__ import division
 import pandas as pd
 import geopandas as gpd
 import numpy as np
@@ -16,10 +15,10 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     level=logging.DEBUG)
 
 
-class UrbanEnergyRequirement(object):
+class UrbanEnergyRequirement:
     """Simulate urban energy requirements.
 
-    :returns: csv files for simulated load profile and PV requirements
+    :returns: csv files of simulated load profile and PV requirements
     """
 
     def __init__(self):
@@ -81,7 +80,8 @@ class UrbanEnergyRequirement(object):
     def agricultural_load(self):
         """Simulate quarter load."""
         print('Simulate Agr. quarter hourly Energy Requirments REs')
-        dfa = gpd.read_file(self.input_destination_2+'agricultural/agricultural.shp')
+        dfa = gpd.read_file(self.input_destination_2 +
+                            'agricultural/agricultural.shp')
         area_a = dfa['area'].sum()
         area_a_pv = area_a*0.267
         load_a = []
@@ -105,7 +105,8 @@ class UrbanEnergyRequirement(object):
     def commercial_energy_req(self):
         """Simulate Com. quarter hourly Energy Requirments REs."""
         print('Simulate Com. quarter hourly Energy Requirments REs')
-        dfc = gpd.read_file(self.input_destination_2+'commercial/commercial.shp')
+        dfc = gpd.read_file(self.input_destination_2 +
+                            'commercial/commercial.shp')
         area_c = dfc['area'].sum()
         area_c_pv = area_c*0.267
         load_c = []
@@ -129,7 +130,8 @@ class UrbanEnergyRequirement(object):
     def eductaional_energy_req(self):
         """Simulate edu. quarter hourly Energy Requirments REs."""
         print('Simulate edu. quarter hourly Energy Requirments REs')
-        dfe = gpd.read_file(self.input_destination_2+'educational/educational.shp')
+        dfe = gpd.read_file(self.input_destination_2 +
+                            'educational/educational.shp')
         area_e = dfe['area'].sum()
         area_e_pv = area_e*0.267
         load_e = []
@@ -151,7 +153,8 @@ class UrbanEnergyRequirement(object):
     def industrial_energy_req(self):
         """Simulate Ind. quarter hourly Energy Requirments REs."""
         print('Simulate Ind. quarter hourly Energy Requirments REs')
-        dfi = gpd.read_file(self.input_destination_2+'industrial/industrial.shp')
+        dfi = gpd.read_file(self.input_destination_2 +
+                            'industrial/industrial.shp')
         area_i = dfi['area'].sum()
         area_i_pv = area_i*0.267
         load_i = []
@@ -172,7 +175,8 @@ class UrbanEnergyRequirement(object):
 # if Re is True:
     def residential_energy_req(self):
         """Simulate Res. quarter hourly Energy Requirments REs."""
-        dfr = gpd.read_file(self.input_destination_2 + 'residential/residential.shp')
+        dfr = gpd.read_file(self.input_destination_2 +
+                            'residential/residential.shp')
         area_r = dfr['area'].sum()
         area_r_pv = area_r*0.578
         load_r = []

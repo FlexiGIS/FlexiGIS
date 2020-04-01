@@ -50,3 +50,7 @@ def dbconn_from_args(argv=sys.argv[1:], environ=os.environ):
         if len(argv) == 0 or len(args) == len(argv):
             parser.print_help()
         raise e
+
+
+if __name__ == "__main__":
+    print("This module facilitates database connection.")

@@ -76,7 +76,7 @@ all: drop_database download filter_data export_data abstract_data demand_supply_
 # Step1: Download the OSM raw geo urban data.
 
 download:
-	@echo "\n STEP 1: \nDownload the OSM raw data from \n   '$(OSM_raw_data_URL)' \n and saving it to \n   '$(OSM_raw_data)':"
+	@echo "\n STEP 1: \nDownload the OSM raw data from \n '$(OSM_raw_data_URL)' \n and saving it to \n '$(OSM_raw_data)':"
 	@date >> log/download.log
 	wget -nv -O $(OSM_raw_data) $(OSM_raw_data_URL) >> log/download.log 2>&1
 	@echo "Done. Download OSM raw data" >> log/download.log

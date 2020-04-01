@@ -8,7 +8,7 @@ import logging
 import os
 from pathlib import Path
 
-from db_connect import dbconn_from_args
+from flexigis_utils import dbconn_from_args
 from flexigis_utils import (compute_area, data_to_file)
 # create a log file
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
@@ -159,8 +159,8 @@ class GetRoadsPolygons:
             "osm_id", self.ways_column,
             "area", "geometry"])
         self.data = self.df.dropna().sort_values(by="highway")
-        return self.data
         logging.info("polygon properties for highway extracted from database.")
+        return self.data
 
     # get features from dataframe
     def get_roadpolygons_features(self, dataset):
@@ -176,9 +176,7 @@ class GetRoadsPolygons:
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.roadpolygons_feature)]
         self.new_data_polygons = self.dataset.set_index(["highway"])
-
-        data_to_file(self.new_data_polygons,
-                     self.destination+self.table)
+        data_to_file(self.new_data_polygons, self.destination+self.table)
         logging.info("csv file for polygons generated.")
 
 
@@ -224,8 +222,8 @@ class GetPoints:
         self.df = pd.DataFrame(self.rows, columns=[
             "osm_id", self.ways_column, "geometry", "Longitude", "Latitude"])
         self.data = self.df.dropna().sort_values(by=self.ways_column)
-        return self.data
         logging.info("node properties for highway extracted from database.")
+        return self.data
         # get features from dataframe
 
     def get_point_features(self, dataset):
@@ -242,8 +240,7 @@ class GetPoints:
                                    isin(self.point_feature)]
         self.new_data_points = self.dataset.set_index([self.ways_column])
 
-        data_to_file(self.new_data_points,
-                     self.destination+self.table)
+        data_to_file(self.new_data_points, self.destination+self.table)
         logging.info("csv file for points generated.")
 
 
@@ -273,7 +270,7 @@ def flexiGISroad(data):
 
 
 if __name__ == "__main__":
-    print("  ==== FLEXIGIS HIGHWAY ====")
+    print(" ==== FLEXIGIS HIGHWAY ==== ")
     conn = dbconn_from_args()
     cur = conn.cursor()
     roads = Roads()
