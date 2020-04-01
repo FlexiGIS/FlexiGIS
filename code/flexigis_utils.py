@@ -185,7 +185,7 @@ def get_csv_categories(destination, name="category_name"):
 def dbconn_from_args():
     """Parse database credentials as environmental variables.
 
-    Get database connection from command-line arguments or 
+    Get database connection from command-line arguments or
     environment ariables. Reuse environment variables from libpq/psql
     (see http://www.postgresql.org/docs/9.1/static/libpq-envars.html)
     """
