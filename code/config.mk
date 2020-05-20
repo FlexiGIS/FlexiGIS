@@ -78,3 +78,18 @@ input_folder:=../data/01_raw_input_data/
 output_folder:=../data/02_urban_output_data/
 visualization_folder:=../data/04_Visualisation/
 tests_folder:=../code/tests
+
+# 10. Weather data and Feedin calculation parameters
+target_file:= ../data/01_raw_input_data/ERA5_data.nc
+start_date:=2018-01-01
+end_date:= 2018-12-31
+lon:=8.15
+lat:=53.20
+
+turbine_name:= E-101/3050
+hub_height:= 135
+wind_data:= wind_data.csv
+
+pv_panel:= Advent_Solar_Ventura_210___2008_
+inverter_type:= ABB__MICRO_0_25_I_OUTD_US_208__208V_
+solar_data:= solar_data.csv

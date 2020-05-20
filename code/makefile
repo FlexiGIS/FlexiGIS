@@ -61,6 +61,8 @@ EXAMPLE_DATA:=$(input_folder)/example_OSM_data/OSM_road.csv
 .PHONY: abstract_data
 .PHONY: demand_supply_simulation
 .PHONY: drop_database
+.PHONY: weather_data
+.PHONY: feedin
 
 #=================================================================================#
 #              Environment Variables                                              #
@@ -196,3 +198,20 @@ example:
 drop_database:
 	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
 	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi
+
+#=================================================================================#
+#              DOWNLOAD ERA5 WEATHER DATA                                         #
+#=================================================================================#
+weather_data:
+	@echo "\n Getting ERA5 weather data from Climate Data Store (CDS)"
+	@if [ -e $(input_folder) ]; then python weather_data.py $(lon) $(lat) $(target_file) $(start_date) $(end_date) ; fi
+	@echo "Data download is complete"
+	@echo "INFO: see ../data/01_raw_input_data, for output csv and netcdf files"
+
+#=================================================================================#
+#              GENERATE WIND AND SOLAR FEEDIN TIMESERIES                          #
+#=================================================================================#
+feedin:
+	@echo "\n Feedin generation from wind and solar"
+	@if [ -e $(target_file) ]; then python feedin.py $(lon) $(lat) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
+	@echo "INFO: see ../data/01_raw_input_data, for csv files of output power data"
