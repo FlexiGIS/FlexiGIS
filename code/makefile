@@ -196,3 +196,30 @@ example:
 drop_database:
 	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
 	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi
+
+#=================================================================================#
+#              DOWNLOAD ERA5 WEATHER DATA                                         #
+#=================================================================================#
+weather_data:
+	@echo "\n *** Getting ERA5 weather data from Climate Data Store (CDS) ***"
+	@if [ "$(region)" = "True" ]; then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
+	else \
+	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region); fi
+	@echo "INFO: see ../data/01_raw_input_data, for output netcdf"
+
+
+#=================================================================================#
+#              GENERATE WIND AND SOLAR FEEDIN TIMESERIES                          #
+#=================================================================================#
+feedin_data_format:
+	@echo "\n Weather data in Feedinlib format"
+	@if [ -e $(target_file) ]; then python data_format.py $(lon_single_location) $(lat_single_location) $(target_file); fi
+	@echo "INFO: see ../data/01_raw_input_data, for csv files of weather data"
+
+#=================================================================================#
+#              GENERATE WIND AND SOLAR FEEDIN TIMESERIES                          #
+#=================================================================================#
+feedin:
+	@echo "\n Feedin generation from wind and solar"
+	@if [ -e $(target_file) ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
+	@echo "INFO: see ../data/01_raw_input_data, for csv files of output power data"
