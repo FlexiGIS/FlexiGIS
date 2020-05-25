@@ -62,6 +62,7 @@ EXAMPLE_DATA:=$(input_folder)/example_OSM_data/OSM_road.csv
 .PHONY: demand_supply_simulation
 .PHONY: drop_database
 .PHONY: weather_data
+.PHONY:	feedin_data_format
 .PHONY: feedin
 
 #=================================================================================#
@@ -203,15 +204,25 @@ drop_database:
 #              DOWNLOAD ERA5 WEATHER DATA                                         #
 #=================================================================================#
 weather_data:
-	@echo "\n Getting ERA5 weather data from Climate Data Store (CDS)"
-	@if [ -e $(input_folder) ]; then python weather_data.py $(lon) $(lat) $(target_file) $(start_date) $(end_date) ; fi
-	@echo "Data download is complete"
-	@echo "INFO: see ../data/01_raw_input_data, for output csv and netcdf files"
+	@echo "\n *** Getting ERA5 weather data from Climate Data Store (CDS) ***"
+	@if [ "$(region)" = "True" ]; then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
+	else \
+	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region); fi
+	@echo "INFO: see ../data/01_raw_input_data, for output netcdf"
+
+
+#=================================================================================#
+#              GENERATE WIND AND SOLAR FEEDIN TIMESERIES                          #
+#=================================================================================#
+feedin_data_format:
+	@echo "\n Weather data in Feedinlib format"
+	@if [ -e $(target_file) ]; then python data_format.py $(lon_single_location) $(lat_single_location) $(target_file); fi
+	@echo "INFO: see ../data/01_raw_input_data, for csv files of weather data"
 
 #=================================================================================#
 #              GENERATE WIND AND SOLAR FEEDIN TIMESERIES                          #
 #=================================================================================#
 feedin:
 	@echo "\n Feedin generation from wind and solar"
-	@if [ -e $(target_file) ]; then python feedin.py $(lon) $(lat) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
+	@if [ -e $(target_file) ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
 	@echo "INFO: see ../data/01_raw_input_data, for csv files of output power data"
