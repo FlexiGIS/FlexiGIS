@@ -97,22 +97,17 @@ if __name__ == "__main__":
     inverter_type = sys.argv[7]
     hub_height = int(sys.argv[8])
 
-    solar_data = pd.read_csv(weather_dir+"solar_data.csv", index_col=0,
+    solar_data = pd.read_csv(weather_dir+solar_data, index_col=0,
                              date_parser=lambda idx: pd.to_datetime(idx, utc=True))
     # read multi-index wind data
-    wind_data = pd.read_csv(weather_dir+"wind_data.csv", index_col=[0], header=[0, 1],
+    wind_data = pd.read_csv(weather_dir+wind_data, index_col=[0], header=[0, 1],
                             date_parser=lambda idx: pd.to_datetime(idx, utc=True))
     # convert multi-index data frame columns levels to integer
     wind_data.columns = wind_data.columns.set_levels(
         wind_data.columns.levels[1].astype(int), level=1)
 
-    # try:
     windpower = windpower_timeseries(wind_data, turbine_name, hub_height, scale=True)
     pvpower = pv_timeseries(lon, lat, solar_data, pv_panel, inverter_type, scale=True)
-
-    # except KeyError as err:
-    #     print("key error: {0}".format(err))
-    #     print("Check input parameters in cnfig.mk")
 
     windpower = windpower.to_frame().rename(columns={"feedin_power_plant": "wind"})
     windpower.to_csv(weather_dir+"wind_power.csv")

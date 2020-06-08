@@ -17,7 +17,7 @@ def feedin_solarFormat(lon, lat, target_file, to_csv=False):
     print(pv_data.head(5))
 
     if to_csv:
-        pv_data.to_csv(weather_dir+"solar_data.csv")
+        pv_data.to_csv(weather_dir+"pv_data.csv")
     # return pv_data
 
 

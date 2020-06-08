@@ -224,5 +224,5 @@ feedin_data_format:
 #=================================================================================#
 feedin:
 	@echo "\n Feedin generation from wind and solar"
-	@if [ -e $(target_file) ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
+	@if [ "$(input_folder)" = "../data/01_raw_input_data/" ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
 	@echo "INFO: see ../data/01_raw_input_data, for csv files of output power data"

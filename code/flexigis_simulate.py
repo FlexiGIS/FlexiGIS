@@ -1,5 +1,4 @@
 """**This module simulates Urban Energy Requirements**.
-
 Outputs are stored stored as csv.
 """
 import pandas as pd
@@ -17,7 +16,6 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
 
 class UrbanEnergyRequirement:
     """Simulate urban energy requirements.
-
     :returns: csv files of simulated load profile and PV requirements
     """
 
@@ -46,7 +44,7 @@ class UrbanEnergyRequirement:
         soda = pd.read_csv(self.input_destination_1+'weather-data.csv',
                            encoding="ISO-8859-1", delimiter=',')
         self.GHI = soda['Global Horiz']/self.norm
-        self.wind = soda['Wind speed']
+        self.wind = soda['Wind speed']/self.norm
 
 # if SLP is True:
     def standard_load_profiles(self):
@@ -69,11 +67,11 @@ class UrbanEnergyRequirement:
         """Read Electricity Usage Index kwh/m2 per year."""
         print('Read Electricity Usage Index kwh/m2 per year')
         logging.info("Read Electricity Usage Index kwh/m2 per year")
-        self.x_a = 120/self.norm*1.0  # EUI_a
-        self.x_c = 201/self.norm*1.0  # EUI_c
-        self.x_e = 142/self.norm*1.0  # EUI_e
-        self.x_i = 645/self.norm*1.0  # EUI_i
-        self.x_r = 146/self.norm*1.0  # EUI_r
+        self.x_a = 120/self.norm  # EUI_a
+        self.x_c = 201/self.norm  # EUI_c
+        self.x_e = 142/self.norm  # EUI_e
+        self.x_i = 645/self.norm  # EUI_i
+        self.x_r = 146/self.norm  # EUI_r
         self.x_sl = 4/self.norm  # EUIsl
 
 # if Ag is True:
@@ -115,8 +113,8 @@ class UrbanEnergyRequirement:
 
         for i, row in self.dfs.iterrows():
             row = str(self.Zeit_stempel[i]) + ';' + \
-                str(area_c*self.CL[i]*self.x_c) + \
-                ';' + str(area_c_pv*self.GHI[i]*self.factorGHI) + '\n'
+                str(area_c*self.CL[i]*self.x_c) + ';' + \
+                str(area_c_pv*self.GHI[i]*self.factorGHI) + '\n'
 
             load_c.append(row)
         fname.writelines(load_c)
@@ -138,9 +136,9 @@ class UrbanEnergyRequirement:
         fname = open(self.output_destination+'e_load.csv', 'w')
         fname.write('TIME;Load[kWh];PV[kWh]\n')
         for i, row in self.dfs.iterrows():
-            row = str(self.Zeit_stempel[i]) + ';' + str(area_e*self.EL[i] *
-                                                        self.x_e) + \
-                ';' + str(area_e_pv*self.GHI[i]*self.factorGHI) + '\n'
+            row = str(self.Zeit_stempel[i]) + ';' +\
+                str(area_e*self.EL[i] * self.x_e) + ';' + \
+                str(area_e_pv*self.GHI[i]*self.factorGHI) + '\n'
             load_e.append(row)
         fname.writelines(load_e)
         fname.close()
@@ -161,9 +159,9 @@ class UrbanEnergyRequirement:
         fname = open(self.output_destination+'i_load.csv', 'w')
         fname.write('TIME;Load[kWh];PV[kWh]\n')
         for i, row in self.dfs.iterrows():
-            row = str(self.Zeit_stempel[i]) + ';' + str(area_i*self.IL[i] *
-                                                        self.x_i) + \
-                ';' + str(area_i_pv*self.GHI[i]*self.factorGHI) + '\n'
+            row = str(self.Zeit_stempel[i]) + ';' +\
+                str(area_i*self.IL[i] * self.x_i) + ';' +\
+                str(area_i_pv*self.GHI[i]*self.factorGHI) + '\n'
             load_i.append(row)
         fname.writelines(load_i)
         fname.close()
@@ -183,9 +181,9 @@ class UrbanEnergyRequirement:
         fname = open(self.output_destination+'r_load.csv', 'w')
         fname.write('TIME;Load[kWh];PV[kWh]\n')
         for i, row in self.dfs.iterrows():
-            row = str(self.Zeit_stempel[i]) + ';' + str(area_r*self.RL[i] *
-                                                        self.x_r) + \
-                ';' + str(area_r_pv*self.GHI[i]*self.factorGHI) + '\n'
+            row = str(self.Zeit_stempel[i]) + ';' +\
+                str(area_r*self.RL[i] * self.x_r) + ';' +\
+                str(area_r_pv*self.GHI[i]*self.factorGHI) + '\n'
             load_r.append(row)
         fname.writelines(load_r)
         fname.close()
@@ -223,9 +221,8 @@ class UrbanEnergyRequirement:
         df3e = pd.read_csv(self.output_destination+'e_load.csv', delimiter=";")
         df4i = pd.read_csv(self.output_destination+'i_load.csv', delimiter=";")
         df5r = pd.read_csv(self.output_destination+'r_load.csv', delimiter=";")
-        sum_pv_all = df1a['PV[kWh]'] / self.norm + df2c['PV[kWh]']\
-            / self.norm + df3e['PV[kWh]'] / self.norm + \
-            df4i['PV[kWh]'] / self.norm + df5r['PV[kWh]'] / self.norm
+        sum_pv_all = (df1a['PV[kWh]'] + df2c['PV[kWh]'] + df3e['PV[kWh]'] +
+                      df4i['PV[kWh]'] + df5r['PV[kWh]']) / self.norm
         sum_pv = np.array(sum_pv_all)
         dfallpv = pd.DataFrame(sum_pv, columns=["PV[MWh]"])
         dfallpv.to_csv(self.output_destination+'Aggregated-pv.csv', index=True,

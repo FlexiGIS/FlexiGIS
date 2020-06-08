@@ -85,9 +85,9 @@ start_date:=2018-01-01
 end_date:= 2018-12-31
 
 region:=False #set region to "True" or "False" if you which to download weather for a region or for single location
-# For single coordinate or location single location (e.g single location in  Berlin)
-lon_single_location:=13.1
-lat_single_location:=52.3
+# For single coordinate or location single location (e.g single location in  Oldenburg)
+lon_single_location:=8.10
+lat_single_location:=53.15
 
 # For download of weather data for a region (e.g: Berlin region)
 # Longitude 'west'-'East' and Latitude 'North'-'South'
@@ -100,4 +100,4 @@ wind_data:= wind_data.csv
 
 pv_panel:= Advent_Solar_Ventura_210___2008_
 inverter_type:= ABB__MICRO_0_25_I_OUTD_US_208__208V_
-solar_data:= solar_data.csv
+solar_data:= pv_data.csv
