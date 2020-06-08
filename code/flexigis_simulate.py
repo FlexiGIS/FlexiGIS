@@ -1,6 +1,6 @@
 """**This module simulates Urban Energy Requirements**.
 
-Outputs are stored stored as csv.
+Outputs are stored as csv.
 """
 import pandas as pd
 import geopandas as gpd

@@ -97,10 +97,10 @@ if __name__ == "__main__":
     inverter_type = sys.argv[7]
     hub_height = int(sys.argv[8])
 
-    solar_data = pd.read_csv(weather_dir+"solar_data.csv", index_col=0,
+    solar_data = pd.read_csv(weather_dir+solar_data, index_col=0,
                              date_parser=lambda idx: pd.to_datetime(idx, utc=True))
     # read multi-index wind data
-    wind_data = pd.read_csv(weather_dir+"wind_data.csv", index_col=[0], header=[0, 1],
+    wind_data = pd.read_csv(weather_dir+wind_data, index_col=[0], header=[0, 1],
                             date_parser=lambda idx: pd.to_datetime(idx, utc=True))
     # convert multi-index data frame columns levels to integer
     wind_data.columns = wind_data.columns.set_levels(
