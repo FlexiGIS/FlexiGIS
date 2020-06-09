@@ -51,7 +51,7 @@ exclude_patterns = ['_build']
 
 
 # -- Options for HTML output -------------------------------------------------
-html_logo = "flexiGIS.png"
+html_logo = "suit2.png"
 htmlhelp_basename = 'FlexiGISdoc'
 
 # LaTeX output
