@@ -81,13 +81,13 @@ tests_folder:=../code/tests
 
 # 10. Weather data (25 km x 25 km) and Feedin calculation parameters
 target_file:= ../data/01_raw_input_data/ERA5_data.nc
-start_date:=2018-01-01
-end_date:= 2018-12-31
+start_date:=2015-01-01
+end_date:= 2015-12-31
 
 region:=False #set region to "True" or "False" if you wish to download weather for a region or for single location
-# For single coordinate or location single location (e.g single location in  Berlin)
-lon_single_location:=13.1
-lat_single_location:=52.3
+# For single coordinate or location single location (e.g single location in Oldenburg)
+lon_single_location:=8.10
+lat_single_location:=53.15
 
 # For download of weather data for a region (e.g: Berlin region)
 # Longitude 'west'-'East' and Latitude 'North'-'South'

@@ -106,16 +106,11 @@ if __name__ == "__main__":
     wind_data.columns = wind_data.columns.set_levels(
         wind_data.columns.levels[1].astype(int), level=1)
 
-    # try:
     windpower = windpower_timeseries(wind_data, turbine_name, hub_height, scale=True)
     pvpower = pv_timeseries(lon, lat, solar_data, pv_panel, inverter_type, scale=True)
-
-    # except KeyError as err:
-    #     print("key error: {0}".format(err))
-    #     print("Check input parameters in cnfig.mk")
-
+    # convert wind parameters to wind power
     windpower = windpower.to_frame().rename(columns={"feedin_power_plant": "wind"})
     windpower.to_csv(weather_dir+"wind_power.csv")
-
+    # convert solar parameters to PV power
     pvpower = pvpower.to_frame().rename(columns={0: "pv"})
     pvpower.to_csv(weather_dir+"pv_power.csv")
