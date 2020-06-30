@@ -101,3 +101,6 @@ wind_data:= wind_data.csv
 pv_panel:= Advent_Solar_Ventura_210___2008_
 inverter_type:= ABB__MICRO_0_25_I_OUTD_US_208__208V_
 solar_data:= solar_data.csv
+
+# 11. Optimization
+urban_requirements_dir:=../data/03_urban_energy_requirements/

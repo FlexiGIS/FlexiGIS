@@ -33,11 +33,15 @@ from feedinlib import Photovoltaic, WindPowerPlant
 import pandas as pd
 from numpy import isnan
 import sys
+import pickle
+import logging
+# create a log file
+logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                    filename="../code/log/feedin.log",
+                    level=logging.DEBUG)
 
-weather_dir = "../data/01_raw_input_data/"
 
-
-def windpower_timeseries(wind_data, turbine_name, hub_height, scale=True):
+def windpower_timeseries(wind_data, turbine_name, weather_dir, hub_height, scale=True):
     """Generate windpower feedin time-series."""
     # The available in turbine types and specification can found in the oemof database.
     # "https://github.com/wind-python/windpowerlib/blob/dev/windpowerlib/oedb/turbine_data.csv"
@@ -48,18 +52,20 @@ def windpower_timeseries(wind_data, turbine_name, hub_height, scale=True):
     }
     wind_turbine = WindPowerPlant(**turbine_spec)
     if scale:
-
-        feedin_wind = wind_turbine.feedin(weather=wind_data, scaling="nominal_power")
+        feedin_wind = wind_turbine.feedin(
+            weather=wind_data, scaling="nominal_power")
     else:
 
         feedin_wind = wind_turbine.feedin(weather=wind_data)
+    norminal_power_wind = wind_turbine.nominal_power
+    windpower = feedin_wind.to_frame().rename(
+        columns={"feedin_power_plant": "wind"})
+    windpower.to_csv(weather_dir+"wind_power.csv")
+    logging.info("Wind feedin timeseries generated.")
+    return norminal_power_wind
 
-    print("Normalized windpower")
-    print(feedin_wind.head(5))
-    return feedin_wind
 
-
-def pv_timeseries(lon, lat, solar_data, pv_panel, inverter_type, scale=True):
+def pv_timeseries(lon, lat, solar_data, pv_panel, weather_dir, inverter_type, scale=True):
     """Generate PV power feedin timeseries."""
     # pv system parameters
     system_data = {
@@ -71,23 +77,26 @@ def pv_timeseries(lon, lat, solar_data, pv_panel, inverter_type, scale=True):
     }
     pv_system = Photovoltaic(**system_data)
     if scale:
-
         feedin_pv = pv_system.feedin(weather=solar_data,
                                      location=(lat, lon),
                                      scaling="peak_power")
     else:
         feedin_pv = pv_system.feedin(weather=solar_data,
                                      location=(lat, lon))
+    peak_power_pv = pv_system.peak_power
+    module_area = pv_system.area
     where_nan = isnan(feedin_pv)
     feedin_pv[where_nan] = 0
     feedin_pv[feedin_pv < 0] = 0
-    print("Normalized PVpower")
-    print(feedin_pv.head(5))
-    return feedin_pv
+    pv_parameter = [peak_power_pv, module_area]
+    pvpower = feedin_pv.to_frame().rename(columns={0: "pv"})
+    pvpower.to_csv(weather_dir+"pv_power.csv")
+    logging.info("PV feedin timeseries generated.")
+    return pv_parameter
 
 
 if __name__ == "__main__":
-
+    print('Info: generating feedin time-series for wind and PV')
     lon = float(sys.argv[1])
     lat = float(sys.argv[2])
     solar_data = sys.argv[3]
@@ -96,6 +105,7 @@ if __name__ == "__main__":
     pv_panel = sys.argv[6]
     inverter_type = sys.argv[7]
     hub_height = int(sys.argv[8])
+    weather_dir = "../data/01_raw_input_data/"
 
     solar_data = pd.read_csv(weather_dir+solar_data, index_col=0,
                              date_parser=lambda idx: pd.to_datetime(idx, utc=True))
@@ -106,11 +116,15 @@ if __name__ == "__main__":
     wind_data.columns = wind_data.columns.set_levels(
         wind_data.columns.levels[1].astype(int), level=1)
 
-    windpower = windpower_timeseries(wind_data, turbine_name, hub_height, scale=True)
-    pvpower = pv_timeseries(lon, lat, solar_data, pv_panel, inverter_type, scale=True)
-    # convert wind parameters to wind power
-    windpower = windpower.to_frame().rename(columns={"feedin_power_plant": "wind"})
-    windpower.to_csv(weather_dir+"wind_power.csv")
-    # convert solar parameters to PV power
-    pvpower = pvpower.to_frame().rename(columns={0: "pv"})
-    pvpower.to_csv(weather_dir+"pv_power.csv")
+    windpower = windpower_timeseries(
+        wind_data, turbine_name, weather_dir, hub_height, scale=True)
+    pvpower = pv_timeseries(lon, lat, solar_data,
+                            pv_panel, weather_dir, inverter_type, scale=True)
+
+    pvpower.append(windpower)
+    feedin_parameter = pvpower
+
+    with open('../data/01_raw_input_data/fp', 'wb') as fp:
+        pickle.dump(feedin_parameter, fp)
+    print('Info: Feedin time-series done!')
+    logging.info("feedin timeseries parameter successfully stored as pickle file.")

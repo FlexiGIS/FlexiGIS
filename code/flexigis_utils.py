@@ -166,21 +166,42 @@ def get_csv_categories(destination, name="category_name"):
     return category
 
 
-# def df_to_geodata(df):
-#     """Convert data to geodataframe.
-#
-#     :param Dataframe df: georeferenced OSM data for polygons.
-#     :return: GeoDataFrame of highway OSM data
-#     :rtype: pandas.GeoDataFrame
-#     """
-#     if "Unnamed: 0" in df:
-#         df = df.drop(columns=["Unnamed: 0"])
-#
-#     df["geometry"] = df["geometry"].apply(wkt.loads)
-#     gdf = GeoDataFrame(df, geometry="geometry")
-#     gdf = gdf.drop(columns=["geometry"])
-#     gdf.rename(columns={"geometry_shp": "geometry"})
-#     return gdf
+def shape_legend(node, ax, handles, labels, reverse=False, **kwargs):
+    """Plot legend manipulation. This code is copied from the oemof example script
+    see link here: https://github.com/oemof/oemof-examples/tree/master/oemof_examples/oemof.solph/v0.3.x/plotting_examples
+    """
+    handels = handles
+    labels = labels
+    axes = ax
+    parameter = {}
+
+    new_labels = []
+    for label in labels:
+        label = label.replace('(', '')
+        label = label.replace('), flow)', '')
+        label = label.replace(node, '')
+        label = label.replace(',', '')
+        label = label.replace(' ', '')
+        new_labels.append(label)
+    labels = new_labels
+
+    parameter['bbox_to_anchor'] = kwargs.get('bbox_to_anchor', (1, 0.5))
+    parameter['loc'] = kwargs.get('loc', 'center left')
+    parameter['ncol'] = kwargs.get('ncol', 1)
+    plotshare = kwargs.get('plotshare', 0.9)
+
+    if reverse:
+        handels = handels.reverse()
+        labels = labels.reverse()
+
+    box = axes.get_position()
+    axes.set_position([box.x0, box.y0, box.width * plotshare, box.height])
+
+    parameter['handles'] = handels
+    parameter['labels'] = labels
+    axes.legend(**parameter)
+    return axes
+
 
 def dbconn_from_args():
     """Parse database credentials as environmental variables.

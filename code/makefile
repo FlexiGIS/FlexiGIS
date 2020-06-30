@@ -47,6 +47,7 @@ include $(config)
 ROAD_CSV:= $(output_folder)/highway/highway.shp
 BUILDINGS_CSV:=$(output_folder)/buildings/buildings.shp
 EXAMPLE_DATA:=$(input_folder)/example_OSM_data/OSM_road.csv
+COMMODITIES:=$(urban_requirements_dir)/optimization-commodities.csv
 #=================================================================================#
 #              Definition of tasks                                                #
 #=================================================================================#
@@ -59,14 +60,16 @@ EXAMPLE_DATA:=$(input_folder)/example_OSM_data/OSM_road.csv
 .PHONY: filter_data
 .PHONY: export_data
 .PHONY: abstract_data
+.PHONY: feedin
 .PHONY: demand_supply_simulation
+.PHONY: optimization
 .PHONY: drop_database
 
 #=================================================================================#
 #              Environment Variables                                              #
 #=================================================================================#
 
-all: drop_database download filter_data export_data abstract_data demand_supply_simulation
+all: drop_database download filter_data export_data abstract_data feedin demand_supply_simulation optimization
 
 #=================================================================================#
 #              DOWNLOAD OSM DATASETS                                              #
@@ -124,15 +127,13 @@ filter_data:
 # Step3: Export the Filtered OSM data to the Postgres Server.
 
 export_data:
-	@echo "\n STEP 3: \nExporting the Filtered OSM data to Postgres Server:"
+	@echo "\n STEP 3: \nExport the Filtered OSM data to Postgres Server:"
 	@date >> log/database.log
 	export PGPASSWORD=$(postgres_password); createdb -U $(postgres_user) -h $(postgres_host) $(postgres_database);
 	export PGPASSWORD=$(postgres_password); $(osm2pgsql_bin) -r pbf --username=$(postgres_user) --database=$(postgres_database) --host=$(postgres_host) --port=$(postgres_port) -s \
 	-C $(osm2pgsql_cache) --hstore --number-processes $(osm2pgsql_num_processes) $(OSM_merged_data);
-	#@touch log/database_import.done
 	@echo "OSM data export to database done." >> log/database.log
 	@date >> log/osm2pgsql.log
-	#@date >> log/database.log
 	@echo "Info: FlexiGIS OSM Data Export Complete."
 
 #=================================================================================#
@@ -142,7 +143,6 @@ export_data:
 
 abstract_data:
 	@echo "\n STEP 4: \nRunning the Abstraction script on the database '$(postgres_database)':"
-	# log/abstraction.done: log/database_import.done
 	@date >> log/abstract.log
 	@if [ $(postgres_password) =  ]; \
 	then \
@@ -163,39 +163,7 @@ abstract_data:
 	@echo "Info: FlexiGIS Buildings Data Abstraction Complete."
 	@echo "Info: Generating Plots of Geo-referenced Data."
 	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
-	@echo "plots for building and highway generated." >> log/abstract.log
 	@echo "Info: Plots Generated."
-
-#=================================================================================#
-#              MODELLING URBAN ENERGY REQUIREMENT                                 #
-#=================================================================================#
-# Step5: Modelling urban energy requirements
-
-demand_supply_simulation:
-	@echo "\n STEP 5: \nModel Demand and Supply"
-	@date >> log/urban_energy.log
-	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
-	@echo "Done. Modelling urban energy requirements." >> log/urban_energy.log
-	@echo "Info: Output Files IN Folder '$(load_folder)'"
-
-#=================================================================================#
-#              FLEXIGIS-EXAMPLE                                 				  #
-#=================================================================================#
-example:
-	@echo "\n TEST: \nExample Based on Filtered OSM Data of Oldenburg"
-	@if [ -e $(EXAMPLE_DATA) ]; then python example.py ; fi
-	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
-	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
-	@echo "Info: Example Data Abstraction & Simulation Complete. see ../data/04_Visualisation folder for sample plot"
-
-
-#=================================================================================#
-#              DROPPING                                                           #
-#=================================================================================#
-# If you wish to drop your database
-drop_database:
-	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
-	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi
 
 #=================================================================================#
 #              DOWNLOAD ERA5 WEATHER DATA                                         #
@@ -223,3 +191,43 @@ feedin:
 	@echo "\n Feedin generation from wind and solar"
 	@if [ "$(input_folder)" = "../data/01_raw_input_data/" ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
 	@echo "INFO: see ../data/01_raw_input_data, for csv files of power data"
+#=================================================================================#
+#              MODELLING URBAN ENERGY REQUIREMENT                                 #
+#=================================================================================#
+
+demand_supply_simulation:
+	@echo "\n Urban Electricity Demand and Supply"
+	@date >> log/urban_energy.log
+	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
+	@echo "Done. Modelling urban energy requirements." >> log/urban_energy.log
+	@echo "Info: Output Files IN Folder '$(load_folder)'"
+
+#=================================================================================#
+#              OPTIMIZATION OF STORAGE AND FEEDIN SUPPLY                          #
+#=================================================================================#
+
+optimization:
+	@echo "\n OPtimization of Storage and Supply"
+	@if [ -e $(COMMODITIES) ]; then python flexigis_optimize.py ; fi
+	@echo "Info: Done!"
+
+#=================================================================================#
+#              FLEXIGIS-EXAMPLE                                 				  #
+#=================================================================================#
+example:
+	@echo "\n TEST: \nExample Based on Filtered OSM CSV Data"
+	@if [ -e $(EXAMPLE_DATA) ]; then python example.py ; fi
+	@if [ -e $(BUILDINGS_CSV) ]; then python plot_polygons.py ; fi
+	@if [ "$(input_folder)" = "../data/01_raw_input_data/" ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
+	@if [ -e $(ROAD_CSV) ]; then python flexigis_simulate.py ; fi
+	@if [ -e $(COMMODITIES) ]; then python flexigis_optimize.py ; fi
+	@echo "Info: Example Data Abstraction & Simulation Complete. see ../data/04_Visualisation folder for sample plot"
+
+
+#=================================================================================#
+#              DROPPING                                                           #
+#=================================================================================#
+# If you wish to drop your database
+drop_database:
+	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
+	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi

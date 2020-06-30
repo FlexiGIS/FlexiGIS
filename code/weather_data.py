@@ -15,8 +15,10 @@ see https://github.com/oemof/feedinlib/tree/dev/example for an example implement
 from feedinlib import era5
 import xarray as xr
 import sys
-
-weather_dir = "../data/01_raw_input_data/"
+import logging
+logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                    filename="../code/log/weather_data.log",
+                    level=logging.DEBUG)
 
 
 def get_data(start_date, end_date, lat, lon, target_file, region=True):
@@ -37,7 +39,9 @@ def get_data(start_date, end_date, lat, lon, target_file, region=True):
                                                  longitude=lon,
                                                  target_file=target_file)
     data_meta = xr.open_dataset(target_file)
+    logging.info("ERA5 weather data download done.")
     print(data_meta)
+    print("Info: Weather data download completed.")
 
 
 if __name__ == "__main__":
