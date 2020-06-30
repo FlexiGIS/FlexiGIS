@@ -1,0 +1,5 @@
+,economic_parameter,values
+0,nominal_value_gas[KW],1800.0
+1,variable_cost_gas,0.05
+2,inst_cap_wind[KW],18900.0
+3,inst_cap_pv[KW],63800.0
