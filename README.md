@@ -54,9 +54,11 @@ osm2pgsql: Instruction are available on how to download and install osm2pgsql fo
 
 Python: Ensure you can run python (with version 3 and above) on your OS. Python can be downloaded following this [link](https://www.python.org/downloads/) or download the [Anaconda](https://www.anaconda.com/distribution/) distro.
 
+CBC solver:
+
 ## Getting Started
 
-To use the FlexiGIS spatial-temporal platform (Module I and II) download the FlexiGIS code and data folder as a zip file or clone the repository from the FlexiGIS GitHub repo. After downloading the FlexiGIS code, unzip the folder FlexiGIS in the location of your choice. The file structure of the FlexiGIS code folder is as follows:
+To use the FlexiGIS spatial-temporal platform download the FlexiGIS code and data folder as a zip file or clone the repository from the FlexiGIS GitHub repo. After downloading the FlexiGIS code, unzip the folder FlexiGIS in the location of your choice. The file structure of the FlexiGIS code folder is as follows:
 
 - FlexiGIS
   - ├── code
@@ -72,43 +74,37 @@ To use the FlexiGIS spatial-temporal platform (Module I and II) download the Fle
 ## Installation
 
 After making sure all system requirements are satisfied, clone FlexiGIS repo
-create a Python virtual environment where the required python dependencies can be installed using pip. Please note, that this applies to Module I and II. Python virtual environment can be created by following the tutorial steps from [here](https://packaging.python.org/tutorials/installing-packages/).
+create a Python virtual environment where the required python dependencies can be installed using. Python virtual environment can be created by following the tutorial steps from [here](https://packaging.python.org/tutorials/installing-packages/).
 
-first clone the FlexiGIS code from the GitHub repository by running:
+First clone the FlexiGIS code from the GitHub repository. In the next step, create a Python virtual environment (give a name e.g. \_env_name) where the required python dependencies can be installed using pip, then activate the virtual environment.
 
 ```console
 user@terminal:~$ git clone https://github.com/FlexiGIS/FlexiGIS.git
-```
-
-In the next step, create a Python virtual environment (give a name e.g. \_env_name) where the required python dependencies can be installed using pip.
-
-```console
 user@terminal:~$ python3 -m venv _env_name
-```
-
-Then, activate the virtual environment:
-
-```console
 user@terminal:~$ source _env_name/bin/activate
 ```
 
-After creating and activativating the python virtual environment, cd into the cloned FlexiGIS directory:
+After creating and activativating the python virtual environment, cd into the cloned FlexiGIS directory, and install the required python dependencies.
 
 ```console
 (_env_name) user@terminal:~$ cd ../FlexiGIS
+(_env_name) user@terminal:~/FlexiGIS$ pip install -r requirements.txt
 ```
 
-install the required python dependencies by running:
+clone the [oemof/feedinlib](https://feedinlib.readthedocs.io/en/latest/) package from flexigis github repository(recommended) and install localy for the renewable feedin simulations. Also install the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) python package for the modelling and optimization of energy systems.
+**_Note: The default solver used in by FlexiGIS is the 'CBC' slover for the linear optimization_**
 
 ```console
-(_env_name) user@terminal:~/FlexiGIS$ pip install -r requirements.txt
+(_env_name) user@terminal:~/FlexiGIS$ git clone https://github.com/FlexiGIS/feedinlib.git
+(_env_name) user@terminal:~/FlexiGIS$ pip install -e feedinlib
+(_env_name) user@terminal:~/FlexiGIS$ pip install oemof.solph
 ```
 
 Now you are ready to excute FlexiGIS (Please note, that this applies for both Module I and II).
 
 ## Running FlexiGIS
 
-To run the first two components of the FlexiGIS platform (Module I and II), execute the following steps:
+To run the first two components of the FlexiGIS package, execute the following steps:
 
 1. After completing the setting up of FlexiGIS environment as mentioned in the steps above, go to the folder code, check the parameters in config.mk file.
 
@@ -123,50 +119,23 @@ To run the available makefile options, go into the code directory in your linux 
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make all
 ```
-
-make-all executes multiple make options for the OSM data, from download to the simulation of load and PV profiles for the urban infrastructures. However, you can run these step one after the other by running
-
-```console
-(_env_name) user@terminal:~/FlexiGIS/code$ make download
-```
-
-make download, downloads spatial OSM data of a given location
+make-all executes multiple make options, from download to the simulation of load and PV profiles for the urban infrastructures, and finally the optimization of electricity supply and alocated storage system. However, instead of running 'make all', you can run the various steps one after the other as decribed in the [documentation](https://flexigis.readthedocs.io/en/latest/flexigis_install/install.html#running-flexigis).
 
 ```console
-(_env_name) user@terminal:~/FlexiGIS/code$ make filter_data
+(_env_name) user@terminal:~/FlexiGIS/code$ make weather_data
 ```
 
-filter the downloaded OSM data using a bounding poly file of the location
+'make weather_data' downloads ECMWF ERA5 weather data of a location or region of interest from the climate data store ([CDS](https://cds.climate.copernicus.eu/#!/home)) using the feedinlib interface.
 
 ```console
-(_env_name) user@terminal:~/FlexiGIS/code$ make export_data
+(_env_name) user@terminal:~/FlexiGIS/code$ make feedin_data_format
 ```
-
-exports the spatially filtered OSM data to a PostgreSQL database using [osm2pgsql](http://wiki.openstreetmap.org/wiki/Osm2pgsql)
-
-```console
-(_env_name) user@terminal:~/FlexiGIS/code$ make abstract_data
-```
-
-extract categorised highway, building and landuse data from filtered OSM data, stores them as shape files and also generate geopandas plots of the urban infrastructures.
-
-```console
-(_env_name) user@terminal:~/FlexiGIS/code$ make demand_supply_simulation
-```
-
-executes the simulation of load and PV profiles for the urban infrastructures
-
-```console
-(_env_name) user@terminal:~/FlexiGIS/code$ make drop_database
-```
-
-provides option to either drop the database or not.
+'make feedin_data_format' prepares the dowloaded weather data into feedinlib format for feedin simulation.
 
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make example
 ```
-
-make example can be run to generate an example simulation of aggregated load and PV profile for Oldenburg. The example imports spatially filtered OSM Highway, landuse and building data stored as csv files in the ../data/01_raw_input_data/example_OSM_data folder. In other words, it runs steps e and g using the provided example data. After running the FlexiGIS model using the make options, the resulting aggregated load and PV profiles of the urban infrastructures are stored as .csv data in folder data/03_urban_energy_requirements, also static plots of the urban infrastructures and simulated load and PV profiles are created and stored in the data/04-visualisation folder. To visualise the extracted georeferenced urban infrastructures data interactively, the generated shape file of the extracted urban infrastructures, can be used in [QGIS](https://www.qgis.org/en/site/) to generate interactive plots.
+'make example' can be run to generate an example simulation of aggregated load and PV profile for Oldenburg and also model the optimal allocated storage and onsite renewable supply. The example imports spatially filtered OSM Highway, landuse and building data stored as csv files in the ../data/01_raw_input_data/example_OSM_data folder. In other words, it runs all steps using the provided example data. Hence, the make example can be used as a test run of the flexigis package. After running the FlexiGIS model using the make options, the resulting aggregated load and PV profiles of the urban infrastructures are stored as .csv data in folder data/03_urban_energy_requirements, also static plots of the urban infrastructures and simulated load and PV profiles are created and stored in the data/04-visualisation folder. To visualise the extracted georeferenced urban infrastructures data interactively, the generated shape file of the extracted urban infrastructures, can be used in [QGIS](https://www.qgis.org/en/site/) to generate interactive plots. 
 
 ## Documentation
 
