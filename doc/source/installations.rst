@@ -28,16 +28,16 @@ osm2pgsql: Instruction on how to download and install osm2pgsql for Linux system
 are available on `Osm2pgsql page`_.
 
 Python: Ensure you can run python (with version 3 and above) on your OS. Download `Python`_ or the `Anaconda`_ distro.
-
+cbc solver: See `here`_ for cbc installation instruction.
 
 .. _PostgreSQL : http://www.postgresql.org
 .. _Python : https://www.python.org/downloads
 .. _Anaconda : https://www.anaconda.com/distribution
 .. _Osmosis: http://wiki.OpenStreetMap.org/wiki/Osmosis
 .. _Osm2pgsql page: http://wiki.openstreetmap.org/wiki/Osm2pgsql
+.. _here: https://github.com/coin-or/Cbc
 
-
-To use the FlexiGIS spatial-temporal platform (Module I and II, see :ref:`FlexiGIS Components`) download the FlexiGIS
+To use the FlexiGIS spatial-temporal package download the FlexiGIS
 code and data folder as a zip file or clone the repository from the FlexiGIS GitHub repository. After
 downloading the FlexiGIS code, unzip the folder FlexiGIS in the location of your choice. The file
 structure of the FlexiGIS folder is as follows:

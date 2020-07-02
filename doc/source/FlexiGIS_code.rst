@@ -1,5 +1,3 @@
-.. module:: FlexiGIS
-
 .. _FlexiGIS Module:
 
 FlexiGIS Module
@@ -11,6 +9,10 @@ FlexiGIS Module
   codes/make_file
   codes/building
   codes/Highway
+  codes/weather_data
+  codes/data_format
+  codes/feedin
   codes/simulation
+  codes/optimization
   codes/plots
   codes/utils
