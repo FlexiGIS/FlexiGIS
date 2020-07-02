@@ -92,7 +92,7 @@ After creating and activativating the python virtual environment, cd into the cl
 ```
 
 clone the [oemof/feedinlib](https://feedinlib.readthedocs.io/en/latest/) package from flexigis github repository(recommended) and install localy for the renewable feedin simulations. Also install the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) python package for the modelling and optimization of energy systems. An additional eomof package [oemof_visio](https://github.com/oemof/oemof-visio) is required as a dependency for generating nice plots of the optimization results.
-**_Note: The default solver used in by FlexiGIS is the cbc slover for the linear optimization_**
+**_Note: The default solver used here for the linear optimization by FlexiGIS is the cbc slover_**
 
 ```console
 (_env_name) user@terminal:~/FlexiGIS$ git clone https://github.com/FlexiGIS/feedinlib.git
