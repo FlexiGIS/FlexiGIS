@@ -91,16 +91,17 @@ After creating and activativating the python virtual environment, cd into the cl
 (_env_name) user@terminal:~/FlexiGIS$ pip install -r requirements.txt
 ```
 
-clone the [oemof/feedinlib](https://feedinlib.readthedocs.io/en/latest/) package from flexigis github repository(recommended) and install localy for the renewable feedin simulations. Also install the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) python package for the modelling and optimization of energy systems.
+clone the [oemof/feedinlib](https://feedinlib.readthedocs.io/en/latest/) package from flexigis github repository(recommended) and install localy for the renewable feedin simulations. Also install the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) python package for the modelling and optimization of energy systems. An additional eomof package [oemof_visio](https://github.com/oemof/oemof-visio) is required as a dependency for generating nice plots of the optimization results.
 **_Note: The default solver used in by FlexiGIS is the cbc slover for the linear optimization_**
 
 ```console
 (_env_name) user@terminal:~/FlexiGIS$ git clone https://github.com/FlexiGIS/feedinlib.git
 (_env_name) user@terminal:~/FlexiGIS$ pip install -e feedinlib
 (_env_name) user@terminal:~/FlexiGIS$ pip install oemof.solph
+(_env_name) user@terminal:~/FlexiGIS$ pip install git+https://github.com/oemof/oemof_visio.git
 ```
 
-Now you are ready to excute FlexiGIS (Please note, that this applies for both Module I and II).
+Now you are ready to excute FlexiGIS using the make commands.
 
 ## Running FlexiGIS
 
