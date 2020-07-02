@@ -31,7 +31,7 @@ Fig. 4. Simulated electricity consumption (green) and solar power generation (re
 
 ## Module III: Optimisation of flexibility options
 
-The spatial-temporal simulation outputs from Module I and II are highly resolved time series of electricity demand and supply. Theses generated datasets will be used by the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) model as inputs to the linear optimisation problem. This module aims to determine the minimum system costs at the given spatial urban scale while matching simultenously the simulated electricity demand. In addition, it aims to allocate and optimise distributed storage and other flexibility options in urban energy systems.
+The spatial-temporal simulation outputs from Module I and II are time series of electricity demand and supply. Theses generated datasets will be used by the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) model as inputs to the linear optimisation problem. This module aims to determine the minimum system costs at the given spatial urban scale while matching simultenously the simulated electricity demand. In addition, it aims to allocate and optimise distributed storage and other flexibility options in urban energy systems.
 
 ## System requirements
 
@@ -54,7 +54,7 @@ osm2pgsql: Instruction are available on how to download and install osm2pgsql fo
 
 Python: Ensure you can run python (with version 3 and above) on your OS. Python can be downloaded following this [link](https://www.python.org/downloads/) or download the [Anaconda](https://www.anaconda.com/distribution/) distro.
 
-CBC solver:
+cbc solver: See [here](https://github.com/coin-or/Cbc) for cbc installation instruction.
 
 ## Getting Started
 
@@ -92,7 +92,7 @@ After creating and activativating the python virtual environment, cd into the cl
 ```
 
 clone the [oemof/feedinlib](https://feedinlib.readthedocs.io/en/latest/) package from flexigis github repository(recommended) and install localy for the renewable feedin simulations. Also install the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) python package for the modelling and optimization of energy systems.
-**_Note: The default solver used in by FlexiGIS is the 'CBC' slover for the linear optimization_**
+**_Note: The default solver used in by FlexiGIS is the cbc slover for the linear optimization_**
 
 ```console
 (_env_name) user@terminal:~/FlexiGIS$ git clone https://github.com/FlexiGIS/feedinlib.git
@@ -114,12 +114,13 @@ To run the first two components of the FlexiGIS package, execute the following s
 
 ###### The available makefile options are:
 
-To run the available makefile options, go into the code directory in your linux terminal, then run
+To run the available makefile options, go into the code folder of the flexigis directory in your linux terminal, then run
 
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make all
 ```
-make-all executes multiple make options, from download to the simulation of load and PV profiles for the urban infrastructures, and finally the optimization of electricity supply and alocated storage system. However, instead of running 'make all', you can run the various steps one after the other as decribed in the [documentation](https://flexigis.readthedocs.io/en/latest/flexigis_install/install.html#running-flexigis).
+
+make-all executes multiple make options, from download to the simulation of load and PV profiles for the urban infrastructures, and finally the optimization of electricity supply and the alocated storage system. However, instead of running 'make all', you can run the various steps one after the other as decribed in the [documentation](https://flexigis.readthedocs.io/en/latest/flexigis_install/install.html#running-flexigis).
 
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make weather_data
@@ -130,12 +131,15 @@ make-all executes multiple make options, from download to the simulation of load
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make feedin_data_format
 ```
+
 'make feedin_data_format' prepares the dowloaded weather data into feedinlib format for feedin simulation.
 
 ```console
 (_env_name) user@terminal:~/FlexiGIS/code$ make example
 ```
-'make example' can be run to generate an example simulation of aggregated load and PV profile for Oldenburg and also model the optimal allocated storage and onsite renewable supply. The example imports spatially filtered OSM Highway, landuse and building data stored as csv files in the ../data/01_raw_input_data/example_OSM_data folder. In other words, it runs all steps using the provided example data. Hence, the make example can be used as a test run of the flexigis package. After running the FlexiGIS model using the make options, the resulting aggregated load and PV profiles of the urban infrastructures are stored as .csv data in folder data/03_urban_energy_requirements, also static plots of the urban infrastructures and simulated load and PV profiles are created and stored in the data/04-visualisation folder. To visualise the extracted georeferenced urban infrastructures data interactively, the generated shape file of the extracted urban infrastructures, can be used in [QGIS](https://www.qgis.org/en/site/) to generate interactive plots. 
+
+'make example' can be run to generate an example simulation of aggregated load and PV profile for Oldenburg and also model the optimal allocated storage and onsite renewable supply. The example imports spatially filtered OSM Highway, landuse and building data stored as csv files in the ../data/01_raw_input_data/example_OSM_data folder. In other words, it runs all steps using the provided example data. Hence, the make example can be used as a test run of the flexigis package. After running the FlexiGIS package using the makefile commands, the resulting
+aggregated load and PV profiles, urban infrastructure data, and optimization results are stored in folder data/03_urban_energy_requirements, also static plots of the urban infrastructures and simulated load and PV profiles are created and stored in the data/04-visualisation folder. To visualise the extracted georeferenced urban infrastructures data interactively, the generated shape file of the extracted urban infrastructures, can be used in [QGIS](https://www.qgis.org/en/site/) to generate interactive plots.
 
 ## Documentation
 
