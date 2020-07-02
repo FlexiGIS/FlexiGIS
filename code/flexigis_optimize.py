@@ -1,31 +1,18 @@
-'''This script is use to optimize the RE feedin capacity and also derive the optimal storage required for the modelled energy system. 
-The optimisation is carriedout using the oemof solph package. The below codes are inspired from the example codes from oemof github repository. 
-In this module, the following energy system is modelled.
+'''This script is use to derive optimal RE feedin capacity and also the optimal
+storage required for an energy system. The optimisation is carried out using
+the oemof solph package. The below codes are taken from the `oemof-example`_ codes 
+github repository. The optimization settings are described below by the following parameters:
 
-                                    input/output  bgas     bel
-                                    |          |        |       |
-                                    |          |        |       |
-                wind(FixedSource)   |------------------>|       |
-                                    |          |        |       |
-                pv(FixedSource)     |------------------>|       |
-                                    |          |        |       |
-                gas_resource        |--------->|        |       |
-                (Commodity)         |          |        |       |
-                                    |          |        |       |
-                demand(Sink)        |<------------------|       |
-                                    |          |        |       |
-                                    |          |        |       |
-                pp_gas(Transformer) |<---------|        |       |
-                                    |------------------>|       |
-                                    |          |        |       |
-                storage(Storage)    |<------------------|       |
-                                    |------------------>|       |
-see: https://github.com/oemof/oemof-examples/blob/master/oemof_examples/oemof.solph/v0.3.x/storage_investment/v1_invest_optimize_all_technologies.py
+- optimize wind, pv, gas_resource and storage
+- set investment cost for wind, pv and storage
+- set gas price for kWh
+
+See link here: `oemof-example`_
 '''
 import pandas as pd
 import os
 import pprint as pp
-import datetime
+# import datetime
 import matplotlib.pyplot as plt
 import pickle
 import logging
@@ -35,6 +22,8 @@ from oemof.outputlib import processing, views
 import oemof.outputlib as outputlib
 import oemof_visio as oev
 from flexigis_utils import shape_legend
+
+
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="../code/log/optimize.log",
                     level=logging.DEBUG)
@@ -43,8 +32,9 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
 # load demand and supply data
 def get_commodities(data_path,
                     filename='optimization-commodities.csv'):
-    """Import simulated urban electricty demand and feedin data 
-    data: pandas dataframe with hourly time resolution as index
+    """Import simulated urban electricty demand and feedin data.
+
+    :pandas dataframe:  data: with hourly resolution as index
     """
     data = pd.read_csv(os.path.join(data_path, filename),
                        index_col='time', parse_dates=True)
@@ -62,7 +52,8 @@ def get_commodities(data_path,
 # get the maximum install pv capacity at roof top
 def get_installed_pv_capacity(dir_path_1):
     """Get maximum installed capacity calculated based on urban infrastructure.
-    maximum_capacity: list, len(maximum_capacity) = 3
+
+    :list: maximum_capacity: len(maximum_capacity) = 3
     """
     with open(os.path.join(dir_path_1, 'mc'), 'rb') as mc:
         maximum_capacity = pickle.load(mc)
@@ -73,15 +64,17 @@ def get_installed_pv_capacity(dir_path_1):
 # Create oemof energy system
 def oemof_power_system(data, dir_path_2, nominal_value_gas, variable_cost_gas,
                        max_cap_pv, max_cap_wind, inst_pv_cap, inst_wind_cap):
-    """Create simple energy system, with solar, wind and natural gas source and a battery storage.
-    data: pandas dataframe of demand, normalized pv and windpower timeseries
-    dir_path_2: directory path, to temporary dump optimization results
-    nominal_value_gas: float
-    variable_cost_gas: float
-    max_cap_pv: maximum pv capacity
-    max_cap_wind: maximum wind capacity
-    inst_pv_cap: existing installed pv capacity
-    inst_wind_cap: existing installed windpower capacity
+    """Creates an oemof energy system model and optimizes the investment of 
+    flexibilty technology.
+
+    :dataframe: data: demand, normalized pv and windpower timeseries
+    :string: dir_path_2: directory path, to temporary dump optimization results
+    :float or int: nominal_value_gas
+    :float or int: variable_cost_gas: float
+    :float or int: max_cap_pv: maximum pv capacity
+    :float or int: max_cap_wind: maximum wind capacity
+    :float or int: inst_pv_cap: existing installed pv capacity
+    :float or int: inst_wind_cap: existing installed windpower capacity
     """
     # create an energy system using setting defualt economic parameters
     energysystem = solph.EnergySystem(timeindex=data.index)
@@ -152,7 +145,7 @@ def oemof_power_system(data, dir_path_2, nominal_value_gas, variable_cost_gas,
 
 # Optimise the energy system
 def optimize(energysystem, data_path, fname='om_data'):
-    """linear optimization of the system """
+    """linear optimization of the energy system."""
     om = solph.Model(energysystem)
     om.solve(solver='cbc', solve_kwargs={'tee': False})
     # Dump results in disc for future analysis
@@ -165,7 +158,12 @@ def optimize(energysystem, data_path, fname='om_data'):
 
 
 def check_results_dataframe(energysystem_data):
-    """Print calculated optimized supply, storage and investments to screen. Also calculates renewable share in the system"""
+    """Explore optimized supply, storage and investments. 
+    Also calculates renewable share in the system.
+
+    :dict: results
+    :dataframe: elect_bus
+    """
     # Restore dumped result for - later Processing *
     # energysystem = solph.EnergySystem()
     # energysystem.restore(
@@ -197,8 +195,12 @@ def check_results_dataframe(energysystem_data):
 
 
 def plot(energysystem_data, year):
-    """This code is copied from the oemof plotting example script.
-    see link here: https://github.com/oemof/oemof-examples/tree/master/oemof_examples/oemof.solph/v0.3.x/plotting_examples"""
+    """This code is copied from the oemof plotting examples.
+
+    It allows for the customization of the plot using oemof/oev plotting object.
+    See link here: `oemof-plotting_examples`_
+    https://github.com/oemof/oemof-examples/tree/master/oemof_examples/oemof.solph/v0.3.x/plotting_examples
+    """
     results = energysystem_data.results['main']
     cdict = {
         (('electricity', 'demand'), 'flow'): '#ce4aff',

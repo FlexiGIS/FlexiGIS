@@ -4,11 +4,11 @@ CDS: see https://cds.climate.copernicus.eu/#!/home
 This script gets feedinlib input parameters from the config.mk file.
 These parameters can be changed depending on the user interest.
 
-target_file  : Netcdf file of weather data downloaded from CDS using feedinlib module
-start_date  : Start date of dowloaded  weather data (default time in UTC)
-end_date : End date of downloaded weather data (default  time in UTC)
-lon  : Longitude of data point (float / list)
-lat : Latitutude of data point (float / list)
+- target_file: Netcdf file of weather data downloaded from CDS using feedinlib module
+- start_date: Start date of dowloaded  weather data (default time in UTC)
+- end_date: End date of downloaded weather data (default  time in UTC)
+- lon: Longitude of data point (float / list)
+- lat: Latitutude of data point (float / list)
 
 see https://github.com/oemof/feedinlib/tree/dev/example for an example implementation of feedinlib.
 """

@@ -3,29 +3,28 @@
 This script gets input parameters from the config.mk file.
 These parameters can be changed depending on the user interest.
 
-target_file:=ERA5_data.nc : Netcdf file of weather data downloaded from CDS using feedinlib module
-start_date:=2018-01-01 : Start date of dowloaded  weather data (default time in UTC)
-end_date:= 2018-12-31 : End date of downloaded weather data (default  time in UTC)
-lon:=8.15 : Longitude of data point
-lat:=53.20 : Latitutude of data point
+- target_file:=ERA5_data.nc : Netcdf file of weather data downloaded from CDS using feedinlib module
+- start_date:=2018-01-01 : Start date of dowloaded  weather data (default time in UTC)
+- end_date:= 2018-12-31 : End date of downloaded weather data (default  time in UTC)
+- lon:=8.15 : Longitude of data point
+- lat:=53.20 : Latitutude of data point
+- turbine_name:= E-101/3050 : Wind turbine type
+- hub_height:= 135 . Turbine hub height
+- wind_data:= wind_data.csv : Weather data in csv. It important (if not generated using the
+  "make weather_data") to load the csv file and set the columns and rows to feedinlib format.
 
-turbine_name:= E-101/3050 : Wind turbine type
-hub_height:= 135 . Turbine hub height
-wind_data:= wind_data.csv : Weather data in csv. It important (if not generated using the
-"make weather_data") to load the csv file and set the columns and rows to feedinlib format.
-see link below for example
-https://github.com/oemof/feedinlib/blob/dev/example/simple_feedin.py
+see https://github.com/oemof/feedinlib/blob/dev/example/simple_feedin.py for example 
 
-pv_panel:= Advent_Solar_Ventura_210___2008_ : Photovoltaic panel type
-inverter_type:= ABB__MICRO_0_25_I_OUTD_US_208__208V_ : Inverter type
-solar_data:= solar_data.csv : Weather data in csv. It important (if not generated using the
- "make weather_data") to load the csv file and set the columns and rows to feedinlib format.
-see link below for example
-https://github.com/oemof/feedinlib/blob/dev/example/simple_feedin.py
+- pv_panel:= Advent_Solar_Ventura_210___2008_ : Photovoltaic panel type
+- inverter_type:= ABB__MICRO_0_25_I_OUTD_US_208__208V_ : Inverter type
+- solar_data:= solar_data.csv : Weather data in csv. It important (if not generated using the
+  "make weather_data") to load the csv file and set the columns and rows to feedinlib format.
+  see https://github.com/oemof/feedinlib/blob/dev/example/simple_feedin.py for example
 
-Note: if the weather data is dowloaded using "make weather_data", the wind and solar data csv
-files generated are already set to feedinlib format, hence no further work is needed to be done
-before using them for feedin calculations.
+.. note::
+    if the weather data is dowloaded using "make weather_data", the wind and solar data csv
+    files generated are already set to feedinlib format, hence no further work is needed to be done
+    before using them for feedin calculations.
 
 see https://github.com/oemof/feedinlib/tree/dev/example for an example implementation of feedinlib.
 """
@@ -127,4 +126,5 @@ if __name__ == "__main__":
     with open('../data/01_raw_input_data/fp', 'wb') as fp:
         pickle.dump(feedin_parameter, fp)
     print('Info: Feedin time-series done!')
-    logging.info("feedin timeseries parameter successfully stored as pickle file.")
+    logging.info(
+        "feedin timeseries parameter successfully stored as pickle file.")

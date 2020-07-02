@@ -73,11 +73,15 @@ postgres_port:=5432
 postgres_host:=10.160.84.200
 postgres_password:=pg3sa
 
-# 9. Location of the output folder
+# 9. Default Location of the output folder
+# NOTE: Dont alter these variables!.
+########################################
 input_folder:=../data/01_raw_input_data/
 output_folder:=../data/02_urban_output_data/
 visualization_folder:=../data/04_Visualisation/
 tests_folder:=../code/tests
+urban_requirements_dir:=../data/03_urban_energy_requirements/
+########################################
 
 # 10. Weather data (25 km x 25 km) and Feedin calculation parameters
 target_file:= ../data/01_raw_input_data/ERA5_data.nc
@@ -102,5 +106,3 @@ pv_panel:= Advent_Solar_Ventura_210___2008_
 inverter_type:= ABB__MICRO_0_25_I_OUTD_US_208__208V_
 solar_data:= solar_data.csv
 
-# 11. Optimization
-urban_requirements_dir:=../data/03_urban_energy_requirements/
