@@ -38,8 +38,6 @@ def get_commodities(data_path,
     """
     data = pd.read_csv(os.path.join(data_path, filename),
                        index_col='time', parse_dates=True)
-    # TODO: remove resample dataframe later. And ensure time series is hourly.
-    data = data.resample('1H').mean()
     # check whether datetime index is naive or localize
     if data.index.tzinfo is not None and \
             data.index.tzinfo.utcoffset(data.index) is not None:
@@ -64,7 +62,7 @@ def get_installed_pv_capacity(dir_path_1):
 # Create oemof energy system
 def oemof_power_system(data, dir_path_2, nominal_value_gas, variable_cost_gas,
                        max_cap_pv, max_cap_wind, inst_pv_cap, inst_wind_cap):
-    """Creates an oemof energy system model and optimizes the investment of 
+    """Creates an oemof energy system model and optimizes the investment of
     flexibilty technology.
 
     :dataframe: data: demand, normalized pv and windpower timeseries
@@ -77,7 +75,12 @@ def oemof_power_system(data, dir_path_2, nominal_value_gas, variable_cost_gas,
     :float or int: inst_wind_cap: existing installed windpower capacity
     """
     # create an energy system using setting defualt economic parameters
-    energysystem = solph.EnergySystem(timeindex=data.index)
+    number_timesteps = len(data.index)
+    period = data.index.year[10]
+    date_time_index = pd.date_range('1/1/'+str(period),
+                                    periods=number_timesteps,
+                                    freq='H')
+    energysystem = solph.EnergySystem(timeindex=date_time_index)
     # Calculate investment of technologies using oemof's economic tools.
     ann_data = pd.read_csv(os.path.join(
         dir_path_2, 'annuity_parameter.csv'), index_col='source')
@@ -172,7 +175,7 @@ def check_results_dataframe(energysystem_data):
     electricity_bus = views.node(results, 'electricity')
     custom_storage = views.node(results, 'storage')
     elect_bus = electricity_bus['sequences']
-    print('**electricity sequeence head(5) **')
+    print('**electricity sequence head(5) **')
     print(elect_bus.head(5))
     storage_ = custom_storage['sequences']
     print('** Storage sequence head(5) **')
@@ -215,7 +218,7 @@ def plot(energysystem_data, year):
                (('storage', 'electricity'), 'flow'),
                (('pp_gas', 'electricity'), 'flow')]
 
-    fig = plt.figure(figsize=(15, 5))
+    fig = plt.figure(figsize=(14, 8))
     electricity_seq = views.node(results, 'electricity')['sequences']
     plot_slice = oev.plot.slice_df(electricity_seq[str(year)+'-03-01':str(year)+'-03-10'],
                                    date_from=pd.datetime(year, 1, 1))
@@ -239,7 +242,7 @@ if __name__ == '__main__':
     dir_path_1 = '../data/03_urban_energy_requirements/'
     dir_path_2 = '../data/01_raw_input_data/'
     data = get_commodities(dir_path_1)
-    year = data.index.year[0]
+    year = data.index.year[10]
     max_cap_pv = round(get_installed_pv_capacity(dir_path_1)[1])  # KW
     max_cap_wind = get_installed_pv_capacity(dir_path_1)[0]  # KW
 

@@ -32,6 +32,8 @@ Fig. 4. Simulated electricity consumption (green) and solar power generation (re
 ## Module III: Optimisation of flexibility options
 
 The spatial-temporal simulation outputs from Module I and II are time series of electricity demand and supply. Theses generated datasets will be used by the [oemof/solph](https://oemof-solph.readthedocs.io/en/latest/index.html) model as inputs to the linear optimisation problem. This module aims to determine the minimum system costs at the given spatial urban scale while matching simultenously the simulated electricity demand. In addition, it aims to allocate and optimise distributed storage and other flexibility options in urban energy systems.
+![Optimal supply and Storage](data/04_Visualisation/om.png)
+Fig. 5. Example result of optimal energy requirements, which minimize investement cost simulated for the city of Oldenburg.
 
 ## System requirements
 

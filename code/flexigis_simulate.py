@@ -54,8 +54,8 @@ class UrbanEnergyRequirement:
 
     def standard_load_profiles(self):
         """Read Standard Load Profiles."""
-        self.dfs = pd.read_csv(os.path.join(self.input_destination_1, 'SLP.csv'),
-                               delimiter=',')
+        self.dfs = pd.read_csv(os.path.join(
+            self.input_destination_1, 'SLP.csv'))
         # get different scenario load profiles in kWh
         self.AL, self.CL = self.dfs['L0']/self.norm, self.dfs['G0']/self.norm
         self.EL, self.IL = self.dfs['G1']/self.norm, self.dfs['G3']/self.norm

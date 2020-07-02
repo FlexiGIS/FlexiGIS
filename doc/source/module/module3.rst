@@ -11,4 +11,10 @@ at the given spatial urban scale while matching simultaneously the simulated ele
 In addition, it aims to allocate and optimise distributed storage and other flexibility options
 in urban energy systems. 
 
+.. _Figure 5:
+.. figure:: img/om.png
+
+     Example result of optimal energy requirements, which minimize investement cost simulated for the city of Oldenburg.
+
+
 .. _eomof-solph: https://oemof-solph.readthedocs.io/en/latest/index.html

@@ -207,7 +207,7 @@ demand_supply_simulation:
 #=================================================================================#
 
 optimization:
-	@echo "\n OPtimization of Storage and Supply"
+	@echo "\n Optimization of Storage and Supply"
 	@if [ -e $(COMMODITIES) ]; then python flexigis_optimize.py ; fi
 	@echo "Info: Done!"
 
