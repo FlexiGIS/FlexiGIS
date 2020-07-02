@@ -46,4 +46,4 @@ sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.2
 sphinxcontrib-serializinghtml==1.1.3
 urllib3==1.25.7
--e git+https://github.com/oemof/feedinlib.git
+-e git+https://github.com/oemof/feedinlib.git@a0094c7d277b289cb6f5222d184d081b0f7eea5f#egg=feedinlib 
