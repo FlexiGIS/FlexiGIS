@@ -230,7 +230,7 @@ def plot(energysystem_data, year):
                                      date_format='%d-%m-%H', offset=12)
 
     ax.set_ylabel('Power in MW')
-    ax.set_xlabel('2015')
+    ax.set_xlabel(str(year))
     ax.set_title("Electricity bus")
     plt.savefig('../data/04_Visualisation/om.png', dpi=300)
     logging.info("Generate plot of optimized variables.")
