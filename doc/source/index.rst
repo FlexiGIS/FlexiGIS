@@ -63,7 +63,7 @@ A. Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *FlexiGIS: an open source optimisat
 
 A. Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *Development of a GIS-based platform for the allocation and optimisation of distributed storage in urban energy systems*, Applied Energy, Volume 251, 113360 (2019), 10.1016/j.apenergy.2019.113360, https://doi.org/10.1016/j.apenergy.2019.113360.
 
-Ranalli and Alhamwi, *Configurations of renewable power generation in urban energy systems using open source data and models: with case study in Philadelphia*, Applied Energy, (2020), under review.
+J. Ranalli and A. Alhamwi, *Configurations of renewable power generation in cities using open source approaches: With Philadelphia case study*, Applied Energy, Volume 269, 115027 (2020), 10.1016/j.apenergy.2020.115027, https://doi.org/10.1016/j.apenergy.2020.115027
 
 Alhamwi et. al, *Modelling urban street lighting infrastructure using open source data*, to be submitted to IEEE Access, (2020).
 
