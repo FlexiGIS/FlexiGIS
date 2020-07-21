@@ -162,7 +162,7 @@ The OpenStreetMap (OSM) data is available under the Open Database License (ODbL)
 
 Author: Alaa Alhamwi alaa.alhamwi@dlr.de
 
-Project maintainer: Chinonso unaichi chinonso.unaichi@dlr.de
+Project maintainer: Chinonso Unaichi chinonso.unaichi@dlr.de
 
 Organisation: German Aerospace Center ([DLR](https://www.dlr.de/ve/)) - Institute of Networked Energy Systems, department for Energy system Analysis(ESY).
 
