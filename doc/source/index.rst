@@ -53,19 +53,19 @@ autarky levels in cities. The extracted urban energy infrastructure are based ma
 
 Publications List
 =================
-A. Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *GIS-based urban energy systems models and tools: Introducing a model for the optimisation of flexibilisation technologies in urban areas*, Applied Energy, Volume 191, 1-9 (2017), 10.1016/j.apenergy.2017.01.048, https://doi.org/10.1016/j.apenergy.2017.01.048.
+- Alaa Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *GIS-based urban energy systems models and tools: Introducing a model for the optimisation of flexibilisation technologies in urban areas*, Applied Energy, Volume 191, 1-9 (2017), 10.1016/j.apenergy.2017.01.048, https://doi.org/10.1016/j.apenergy.2017.01.048.
 
-A. Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *OpenStreetMap data in modelling the urban energy infrastructure: a first assessment and analysis*, Energy Procedia, Volume 142, 1968–1976 (2017), 10.1016/j.egypro.2017.12.397, https://doi.org/10.1016/j.egypro.2017.12.397.
+- Alaa Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *OpenStreetMap data in modelling the urban energy infrastructure: a first assessment and analysis*, Energy Procedia, Volume 142, 1968–1976 (2017), 10.1016/j.egypro.2017.12.397, https://doi.org/10.1016/j.egypro.2017.12.397.
 
-A. Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *Modelling urban energy requirements using open source data and models*, Applied Energy, Volume 231, 1100-1108 (2018), 10.1016/j.apenergy.2018.09.164, https://doi.org/10.1016/j.apenergy.2018.09.164.
+- Alaa Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *Modelling urban energy requirements using open source data and models*, Applied Energy, Volume 231, 1100-1108 (2018), 10.1016/j.apenergy.2018.09.164, https://doi.org/10.1016/j.apenergy.2018.09.164.
 
-A. Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *FlexiGIS: an open source optimisation platform for the optimisation of flexibility options in urban energy systems*, Energy Procedia, Volume 152, 941-949 (2018), 10.1016/j.egypro.2018.09.097, https://doi.org/10.1016/j.egypro.2018.09.097.
+- Alaa Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *FlexiGIS: an open source optimisation platform for the optimisation of flexibility options in urban energy systems*, Energy Procedia, Volume 152, 941-949 (2018), 10.1016/j.egypro.2018.09.097, https://doi.org/10.1016/j.egypro.2018.09.097.
 
-A. Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *Development of a GIS-based platform for the allocation and optimisation of distributed storage in urban energy systems*, Applied Energy, Volume 251, 113360 (2019), 10.1016/j.apenergy.2019.113360, https://doi.org/10.1016/j.apenergy.2019.113360.
+- Alaa Alhamwi, W. Medjroubi, T. Vogt, C. Agert, *Development of a GIS-based platform for the allocation and optimisation of distributed storage in urban energy systems*, Applied Energy, Volume 251, 113360 (2019), 10.1016/j.apenergy.2019.113360, https://doi.org/10.1016/j.apenergy.2019.113360.
 
-Ranalli and Alhamwi, *Configurations of renewable power generation in urban energy systems using open source data and models: with case study in Philadelphia*, Applied Energy, (2020), under review.
+- Joseph Ranalli and Alaa Alhamwi, *Configurations of renewable power generation in cities using open source approaches: With Philadelphia case study*, Applied Energy, Volume 269, 115027 (2020), 10.1016/j.apenergy.2020.115027, https://doi.org/10.1016/j.apenergy.2020.115027
 
-Alhamwi et. al, *Modelling urban street lighting infrastructure using open source data*, to be submitted to IEEE Access, (2020).
+- Alhamwi et. al, *Modelling urban street lighting infrastructure using open source data*, to be submitted to IEEE Access, (2020).
 
 
 License
