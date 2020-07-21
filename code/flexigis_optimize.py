@@ -175,10 +175,10 @@ def check_results_dataframe(energysystem_data):
     electricity_bus = views.node(results, 'electricity')
     custom_storage = views.node(results, 'storage')
     elect_bus = electricity_bus['sequences']
-    print('**electricity sequence head(5) **')
+    print('** electricity sequence head(5) **')
     print(elect_bus.head(5))
     storage_ = custom_storage['sequences']
-    print('** Storage sequence head(5) **')
+    print('** storage sequence head(5) **')
     print(storage_.head(5))
     my_results = electricity_bus['scalars']
 

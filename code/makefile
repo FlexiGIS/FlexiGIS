@@ -170,9 +170,11 @@ abstract_data:
 #=================================================================================#
 weather_data:
 	@echo "\n *** Getting ERA5 weather data from Climate Data Store (CDS) ***"
-	@if [ "$(region)" = "True" ]; then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
+	@if [ "$(region)" = "True" ];\
+	then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
 	else \
-	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region); fi
+	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region);\
+	fi
 	@echo "INFO: see ../data/01_raw_input_data, for output netcdf"
 
 

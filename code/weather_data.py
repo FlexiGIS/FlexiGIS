@@ -27,7 +27,8 @@ def get_data(start_date, end_date, lat, lon, target_file, region=True):
     if region is True:
         lon = [float(x) for x in list(lon.split(","))]
         lat = [float(x) for x in list(lat.split(","))]
-    else:
+
+    elif region is False:
         lon = float(lon)
         lat = float(lat)
 
