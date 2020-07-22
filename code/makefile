@@ -170,13 +170,13 @@ abstract_data:
 #=================================================================================#
 weather_data:
 	@echo "\n *** Getting ERA5 weather data from Climate Data Store (CDS) ***"
-	@if [ "$(region)" = "True" ];\
+	@ echo "weather data region checker: $(region)"
+	@if [ "$(region)" -eq 1 ];\
 	then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
 	else \
-	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region);\
+	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region); \
 	fi
 	@echo "INFO: see ../data/01_raw_input_data, for output netcdf"
-
 
 #=================================================================================#
 #              GENERATE WIND AND SOLAR POWER PARAMETER IN FEEDINLIB FORMAT        #

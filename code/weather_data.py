@@ -21,17 +21,19 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     level=logging.DEBUG)
 
 
-def get_data(start_date, end_date, lat, lon, target_file, region=True):
+def get_data(start_date, end_date, lat, lon, target_file, region=1):
     """Get meteorological data from CDS using feedlib.era5 interface."""
-    print(" This may take some time to finish downloading")
-    if region is True:
+    print("Download might take some time to finish.")
+
+    if region == 1:
         lon = [float(x) for x in list(lon.split(","))]
         lat = [float(x) for x in list(lat.split(","))]
 
-    elif region is False:
+    else:
         lon = float(lon)
         lat = float(lat)
 
+    print("weather data locations lon: {}, lat: {}".format(lon, lat))
     era5.\
         get_era5_data_from_datespan_and_position(variable="feedinlib",
                                                  start_date=start_date,
@@ -39,6 +41,7 @@ def get_data(start_date, end_date, lat, lon, target_file, region=True):
                                                  latitude=lat,
                                                  longitude=lon,
                                                  target_file=target_file)
+
     data_meta = xr.open_dataset(target_file)
     logging.info("ERA5 weather data download done.")
     print(data_meta)
@@ -51,4 +54,4 @@ if __name__ == "__main__":
     target_file = sys.argv[3]
     start_date, end_date = sys.argv[4], sys.argv[5]
     region = sys.argv[6]
-    get_data(start_date, end_date, lat, lon, target_file, region=region)
+    get_data(start_date, end_date, lat, lon, target_file, region=int(region))
