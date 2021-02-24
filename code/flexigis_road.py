@@ -88,8 +88,10 @@ class Roads:
                                    isin(self.highway_feature)]
         self.new_data_ = self.dataset.set_index([self.ways_column])
         self._width_ = dict(zip(self.highway_feature, self.width))
+        check_features_ = set(dataset.index.unique()).intersection(self.highway_feature)
+        features_width = {k:self._width_[k] for k in check_features_}
         # compute area and save data to csv
-        new_data = compute_area(self.new_data_, self._width_)
+        new_data = compute_area(self.new_data_, features_width)
         logging.info("Highway area calculation done!")
         data_to_file(new_data, self.destination+self.ways_column)
         # data_to_csv(new_data, self.destination+self.ways_column+".csv")
@@ -111,8 +113,10 @@ class Roads:
                                    isin(self.highway_feature2)]
         self.new_data_ = self.dataset.set_index([self.ways_column])
         self._width_ = dict(zip(self.highway_feature, self.width))
+        check_features_ = set(dataset.index.unique()).intersection(self.highway_feature)
+        features_width = {k:self._width_[k] for k in check_features_}
         # compute area and save data to csv
-        new_data = compute_area(self.new_data_, self._width_)
+        new_data = compute_area(self.new_data_, features_width)
         logging.info("csv file of highway properties generated.")
         data_to_file(new_data, self.destination+self.table)
 
