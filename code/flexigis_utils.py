@@ -6,6 +6,7 @@ import os
 import pandas as pd
 import geopandas as gpd
 import glob
+import numpy as np
 from natsort import natsorted
 from shapely import wkt
 from geopandas import GeoDataFrame
@@ -23,16 +24,17 @@ def compute_area(dataset, width):
     :return: dataframe containing an "area" attribute
     :rtype: DataFrame
     """
-    Area = []
+    #Area = []
+    dataset['area'] = np.nan
     for key, value in width.items():
-        area = dataset.loc[key]["length"]*value
-        Area.append(area)
+        dataset.loc[key,'area'] = dataset.loc[key]["length"]*value
+        #Area.append(area)
 
-    if isinstance(Area[0], pd.Series) is True:
-        Area = pd.concat(Area)
-        dataset["area"] = Area.values
-    else:
-        dataset["area"] = Area
+    #if isinstance(Area[0], pd.Series) is True:
+    #    Area = pd.concat(Area)
+    #    dataset["area"] = Area.values
+    #else:
+    #    dataset["area"] = Area
 
     dataset_new = dataset.reset_index()
     return dataset_new

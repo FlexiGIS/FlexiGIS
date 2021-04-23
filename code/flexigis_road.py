@@ -80,21 +80,23 @@ class Roads:
         :param DataFrame dataset: highway dataset
         :return: csv containing highway attributes (eg. OSM_id, length, area)
         """
-        self.highway_feature = ['motorway', 'primary',
+        self.highway_feature = {'motorway', 'primary',
                                 'residential', 'secondary',
-                                'tertiary', 'trunk', 'unclassified']
+                                'tertiary', 'trunk', 'unclassified'}
         self.width = [11.5, 6.5, 5.5, 7.5, 6.5, 7.5, 6.5]
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
+        self.highway_width_ = dict(zip(self.highway_feature, self.width))
+
         self.new_data_ = self.dataset.set_index([self.ways_column])
-        self._width_ = dict(zip(self.highway_feature, self.width))
-        check_features_ = set(dataset.index.unique()).intersection(self.highway_feature)
-        features_width = {k:self._width_[k] for k in check_features_}
-        # compute area and save data to csv
-        new_data = compute_area(self.new_data_, features_width)
+        
+        check_features_ = set(self.new_data_.index.unique()).intersection(self.highway_feature)
+        roads_width = {k:self.highway_width_[k] for k in check_features_}
+        # compute area and save data to shapefile
+        new_data = compute_area(self.new_data_, roads_width)
         logging.info("Highway area calculation done!")
         data_to_file(new_data, self.destination+self.ways_column)
-        # data_to_csv(new_data, self.destination+self.ways_column+".csv")
+        
 
     def get_road_features2(self, dataset):
         """Get Additional OSM Highway features, eg. motor_link, living_street.
@@ -102,21 +104,21 @@ class Roads:
         :param DataFrame dataset: highway dataset
         :return: csv containing highway attributes (eg. OSM_id, length, area)
         """
-        self.highway_feature2 = ['living_street', 'motorway', 'pedestrian',
+        self.highway_feature2 = {'living_street', 'motorway', 'pedestrian',
                                  'primary', 'secondary', 'service', 'tertiary',
                                  'trunk', 'motorway_link', 'primary_link',
                                  'secondary_link', 'tertiary_link',
-                                 'trunk_link']
+                                 'trunk_link'}
         self.width = [7.5, 15.50, 7.5, 10.5, 9.5, 7.5, 9.5, 9.5, 6.5, 6.5,
                       6.5, 6.5, 6.5]
         self.dataset = dataset.loc[dataset[self.ways_column].
                                    isin(self.highway_feature2)]
         self.new_data_ = self.dataset.set_index([self.ways_column])
-        self._width_ = dict(zip(self.highway_feature, self.width))
-        check_features_ = set(dataset.index.unique()).intersection(self.highway_feature)
-        features_width = {k:self._width_[k] for k in check_features_}
+        self.highway_width_ = dict(zip(self.highway_feature, self.width))
+        check_features_ = set(self.new_data_.index.unique()).intersection(self.highway_feature)
+        roads_width = {k:self.highway_width_[k] for k in check_features_}
         # compute area and save data to csv
-        new_data = compute_area(self.new_data_, features_width)
+        new_data = compute_area(self.new_data_, roads_width)
         logging.info("csv file of highway properties generated.")
         data_to_file(new_data, self.destination+self.table)
 
