@@ -158,14 +158,18 @@ FlexiGIS is licensed under the [BSD-3-Clause](https://opensource.org/licenses/BS
 
 The OpenStreetMap (OSM) data is available under the Open Database License (ODbL). A description of the ODbL license is available [here](http://opendatacommons.org/licenses/odbl). OpenStreetMap cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit [here](http://www.openstreetmap.org/copyright).
 
+## Acknowledgment
+
+This open source tool is currently supported by e-shape.
+[e-shape](https://e-shape.eu/)-  EuroGEO Showcases: Applications powered by Europe. This project receives funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement 820852 within a pilot study on [High photovoltaic penetration at urban scale](https://e-shape.eu/index.php/showcases/pilot3-2-high-photovoltaic-penetration-at-urban-scale)
+!(e-shape.png)
+
 ## Contact
 
 Author: Alaa Alhamwi alaa.alhamwi@dlr.de
-
-Project maintainer: Chinonso Unaichi chinonso.unaichi@dlr.de
 
 Organisation: German Aerospace Center ([DLR](https://www.dlr.de/ve/)) - Institute of Networked Energy Systems, department for Energy system Analysis(ESY).
 
 ## Project Team
 
-Dr. Wided Medjroubi (project leader), Dr. Alaa Alhamwi (FlexiGIS main author), MSc. Chinonso C. Unaichi
+Dr. Wided Medjroubi (project leader) and Dr. Alaa Alhamwi (FlexiGIS main author)
