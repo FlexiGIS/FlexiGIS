@@ -160,10 +160,10 @@ The OpenStreetMap (OSM) data is available under the Open Database License (ODbL)
 
 ## Acknowledgments
 
-This open source tool is currently supported by e-shape.
-[e-shape](https://e-shape.eu/)-  EuroGEO Showcases: Applications powered by Europe. This project receives funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement 820852 within a pilot study on [High photovoltaic penetration at urban scale](https://e-shape.eu/index.php/showcases/pilot3-2-high-photovoltaic-penetration-at-urban-scale)
+The main author of FlexiGIS acknowledges the financial support provided by the [Heinrich Boell Foundation](https://www.boell.de/en) through a PhD scholarship.
+This open source tool is currently supported by [e-shape](https://e-shape.eu/)-  EuroGEO Showcases: Applications powered by Europe. This project receives funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement 820852 within a pilot study on [High photovoltaic penetration at urban scale](https://e-shape.eu/index.php/showcases/pilot3-2-high-photovoltaic-penetration-at-urban-scale)
 
-<img src="https://github.com/FlexiGIS/FlexiGIS/blob/master/e-shape.png" width=15% height=15%>
+<img src="hhttps://raw.githubusercontent.com/FlexiGIS/FlexiGIS/master/HBF_Logo.png" width=15% height=15%> <img src="https://github.com/FlexiGIS/FlexiGIS/blob/master/e-shape.png" width=15% height=15%>
 
 ## Contact
 
