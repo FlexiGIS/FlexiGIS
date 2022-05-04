@@ -162,7 +162,8 @@ The OpenStreetMap (OSM) data is available under the Open Database License (ODbL)
 
 This open source tool is currently supported by e-shape.
 [e-shape](https://e-shape.eu/)-  EuroGEO Showcases: Applications powered by Europe. This project receives funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement 820852 within a pilot study on [High photovoltaic penetration at urban scale](https://e-shape.eu/index.php/showcases/pilot3-2-high-photovoltaic-penetration-at-urban-scale)
-![e-shape](e-shape.png)
+
+![e-shape](e-shape.png | width = 10)
 
 ## Contact
 
