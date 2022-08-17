@@ -167,14 +167,20 @@ def all_building_categories(df, data_building, data_landuse, main_destination,
 
     print("INFO: Extracting building and landuse intersects")
 
+    # Landuse categories of interest
+    classifications = [
+        "commercial", "retail", "residential", "farmland", "farmyard",
+        "industrial"
+    ]
+
     for building_type in features_building:
         # print("getting intersects for %s" % building_type)
         _building_type_ = get_polygons(data_building, str(building_type))
         intersects = get_intersects(_building_type_, data_landuse)
+        if intersects.empty:
+            continue
+
         mask_intersects = mask_landuse_data(data_landuse, intersects)
-        # Landuse categories of interest
-        classifications = ["commercial", "retail", "residential", "farmland",
-                           "farmyard", "industrial"]
         for category in classifications:
             if category in mask_intersects.index:
                 _category_ = get_features(mask_intersects, intersects,
