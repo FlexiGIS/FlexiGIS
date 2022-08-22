@@ -1,7 +1,7 @@
 ###################################################################################
 #   FlexiGIS			                                                          #
 #                                                                                 #
-#   Copyright "2020" "DLR VE"                                                     #
+#   Copyright "2022" "DLR VE"                                                     #
 #										                                          #
 #   Licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License"  #
 #                                                                                 #
