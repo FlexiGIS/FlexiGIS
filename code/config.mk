@@ -91,13 +91,13 @@ end_date:= 2015-12-31
 region:= 1 #set region to 1 or 0, if you wish to download weather for a region or for single location
 
 # For single coordinate or location single location (e.g single location in Oldenburg)
-lon_single_location:=13.10
-lat_single_location:=52.15
+lon_single_location:=8.15
+lat_single_location:=53.20
 
 # For download of weather data for a region (e.g: Berlin region)
 # Longitude 'west'-'East' and Latitude 'North'-'South'
-lon_region:= 13.1,13.6
-lat_region:= 52.3,52.7
+lon_region:= 8.1,8.31
+lat_region:= 53.08,53.21
 
 turbine_name:= E-101/3050
 hub_height:= 135
