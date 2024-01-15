@@ -173,5 +173,4 @@ Author: Alaa Alhamwi alaa.alhamwi@dlr.de
 Organisation: German Aerospace Center ([DLR](https://www.dlr.de/ve/)) - Institute of Networked Energy Systems, department for Energy system Analysis(ESY).
 
 ## Project Team
-
-Dr. Wided Medjroubi (project leader) and Dr. Alaa Alhamwi (FlexiGIS main author)
+Dr. Alaa Alhamwi (FlexiGIS main author), Dr. Wided Medjroubi (project leader) and Chinonso Unaichi (developer)
